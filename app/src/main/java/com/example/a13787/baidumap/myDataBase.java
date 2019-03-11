@@ -3,8 +3,9 @@ package com.example.a13787.baidumap;
 import java.io.Serializable;
 
 
-public class myDataBase implements Serializable
+public class MyDataBase implements Serializable
 {
+    private boolean clickable;
     private double Longtitude;
     private double Latitude;
     private String Username;
@@ -112,5 +113,13 @@ public class myDataBase implements Serializable
 
     public void setSex(String sex) {
         Sex = sex;
+    }
+
+    public boolean isClickable() {
+        return clickable;
+    }
+
+    public void setClickable(boolean clickable) {
+        this.clickable = clickable;
     }
 }

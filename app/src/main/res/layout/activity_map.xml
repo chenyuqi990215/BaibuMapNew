@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:id="@+id/info_time"
-             />
+            />
 
         <TextView
             android:layout_marginLeft="10dp"
@@ -56,5 +56,5 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:id="@+id/info_department" />
-        </LinearLayout>
     </LinearLayout>
+</LinearLayout>
