@@ -11,10 +11,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,12 +38,15 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.example.a13787.baidumap.view.SlideMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapActivity extends BaseActivity
 {
+    private SlideMenu slideMenu = null;
+    private Button button = null;
     private Marker markerOnMap = null;
     private MyDataBase eventOnMap = null;
     public LocationClient mLocationClient;
@@ -58,6 +63,8 @@ public class MapActivity extends BaseActivity
     @Override
     protected void initView()
     {
+        slideMenu = (SlideMenu) findViewById(R.id.slideMenu);
+        button = (Button) findViewById(R.id.slide_enter);
         mLocationClient=new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListener());
         mapView=(MapView)findViewById(R.id.bmapView);
@@ -91,6 +98,14 @@ public class MapActivity extends BaseActivity
 				startActivityForResult(intent, 1);
 			}
 		)};*/
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    slideMenu.switchMenu();
+                }
+            });
             baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener()
             {
                 @Override
@@ -177,7 +192,7 @@ public class MapActivity extends BaseActivity
     @Override
     protected int initLayout()
     {
-        return R.layout.activity_map;
+        return R.layout.activity_main;
     }
     @Override
     protected void initData()
