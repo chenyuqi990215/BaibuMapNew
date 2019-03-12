@@ -22,7 +22,7 @@ public class GuideActivity extends BaseActivity
 {
 
     private ViewPager mViewPager;
-    private int[] mImageIds = new int[]{R.drawable.iv_ydy1, R.drawable.iv_ydy2, R.drawable.iv_ydy3};
+    private int[] mImageIds = new int[]{R.drawable.guide_0, R.drawable.guide_1, R.drawable.guide_2, R.drawable.guide_3, R.drawable.guide_4};
     private ArrayList<ImageView> mImageViewList;
     private LinearLayout llContainer;
     private ImageView ivRedPoint;

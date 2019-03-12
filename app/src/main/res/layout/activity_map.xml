@@ -4,15 +4,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:background="#ffffff">
+        <Button
+            android:layout_marginLeft="10dp"
+            android:id="@+id/slide_enter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_btn"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Morning Call"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:textSize="30dp"/>
+    </LinearLayout>
     <com.baidu.mapapi.map.MapView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/bmapView"
         android:clickable="true"
         android:layout_weight="0.03" />
-
-
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/add"
+        android:background="@drawable/add"
+        android:layout_marginTop="-120dp"
+        android:layout_gravity="center_horizontal"/>
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/layout_infotop"
@@ -21,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="-550dp"
+        android:layout_marginTop="-430dp"
         android:layout_gravity="center_vertical"
         android:layout_height="90dp">
 
@@ -58,13 +84,4 @@
             android:textSize="15sp"
             android:id="@+id/info_department" />
     </LinearLayout>
-    <Button
-        android:layout_marginLeft="10dp"
-        android:id="@+id/slide_enter"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/button_btn"
-        android:layout_marginTop="-600dp"
-        />
-
 </LinearLayout>
