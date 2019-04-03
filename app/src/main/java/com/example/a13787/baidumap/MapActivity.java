@@ -94,9 +94,9 @@ public class MapActivity extends BaseActivity
 			@Override
 			public void onClick(View v)
 			{
-                baiduMap.clear();   //清除marker
-				//Intent intent = new Intent(MapActivity.this,AddActivity.class);
-				//startActivityForResult(intent, 1);
+                //baiduMap.clear();   //清除marker
+				Intent intent = new Intent(MapActivity.this,MapSearch.class);
+				startActivityForResult(intent, 1);
 			}
 		});
             button.setOnClickListener(new View.OnClickListener()
