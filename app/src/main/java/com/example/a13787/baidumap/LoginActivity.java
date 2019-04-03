@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,7 +26,6 @@ public class LoginActivity extends BaseActivity
     private MyDatabaseHelper dbHelp = new MyDatabaseHelper(this,"Userinfo.db",null,4);
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
     private View mLoginFormView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,15 +46,18 @@ public class LoginActivity extends BaseActivity
         {
             if (password.equals(result))
             {
+
                 Toast.makeText(LoginActivity.this,"Accepted",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent("com.example.a13787.morningcall.FORCE_OFFLINE");
                 setUserEmail(email);
                 intent.putExtra("Email", userEmail);
                 intent.putExtra("IP", userIP);
                 sendBroadcast(intent);
+                Log.d("Broadcast", "send");
                 //into main activity
                 Intent intoMain = new Intent(LoginActivity.this,MapActivity.class);
                 startActivity(intoMain);
+                finish();
             }
             else
             {
@@ -62,40 +65,6 @@ public class LoginActivity extends BaseActivity
             }
         }
 
-    }
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show)
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2)
-        {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter()
-            {
-                @Override
-                public void onAnimationEnd(Animator animation)
-                {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter()
-            {
-                @Override
-                public void onAnimationEnd(Animator animation)
-                {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        }
-        else
-        {
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
     }
     @Override
     protected void initView()
@@ -136,7 +105,6 @@ public class LoginActivity extends BaseActivity
             }
         });
         mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
     }
     @Override
     protected int initLayout()

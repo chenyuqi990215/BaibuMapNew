@@ -88,16 +88,17 @@ public class MapActivity extends BaseActivity
             requestLocation();
             initData();   //模拟数据
             //对"+"按钮的监听button_add
-		/*Button button_add=(Button)findViewById(R.id.button_add);
+		Button button_add=(Button)findViewById(R.id.button_add);
 		button_add.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				Intent intent = new Intent(MapActivity.this,AddActivity.class);
-				startActivityForResult(intent, 1);
+                baiduMap.clear();   //清除marker
+				//Intent intent = new Intent(MapActivity.this,AddActivity.class);
+				//startActivityForResult(intent, 1);
 			}
-		)};*/
+		});
             button.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -198,8 +199,8 @@ public class MapActivity extends BaseActivity
     protected void initData()
     {
         MyDataBase mydataBase= new MyDataBase();
-        mydataBase.setLongtitude(121.40658068154808);
-        mydataBase.setLatitude(31.228386048773345);
+        mydataBase.setLongtitude(121.413326);
+        mydataBase.setLatitude(31.234196);
         mydataBase.setUsername("cyq");
         mydataBase.setSchoolName("ECNU");
         mydataBase.setDepartment("SE");
@@ -208,13 +209,13 @@ public class MapActivity extends BaseActivity
         mydataBase.setTitle("Prepare for exam");
         mydataBase.setLocation("ecnu library");
         mydataBase.setInfo("I want to study for my comming Examination.");
-        mydataBase.setStartTime("2019.3.9 15:00");
-        mydataBase.setEndTime("2019.3.9 17:00");
+        mydataBase.setStartTime("2019.3.15 15:00");
+        mydataBase.setEndTime("2019.3.15 17:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
         mydataBase= new MyDataBase();
-        mydataBase.setLongtitude(121.40440721093566);
-        mydataBase.setLatitude(31.228679705989208);
+        mydataBase.setLongtitude(121.411511);
+        mydataBase.setLatitude(31.234907);
         mydataBase.setUsername("cyq");
         mydataBase.setSchoolName("ECNU");
         mydataBase.setDepartment("SE");
@@ -223,13 +224,28 @@ public class MapActivity extends BaseActivity
         mydataBase.setTitle("Running");
         mydataBase.setLocation("ecnu playground");
         mydataBase.setInfo("I want to run for an hour.");
-        mydataBase.setStartTime("2019.3.9 18:00");
-        mydataBase.setEndTime("2019.3.9 19:00");
+        mydataBase.setStartTime("2019.3.15 18:00");
+        mydataBase.setEndTime("2019.3.15 19:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
         mydataBase= new MyDataBase();
-        mydataBase.setLongtitude(121.40319750967011);
-        mydataBase.setLatitude(31.230346081244303);
+        mydataBase.setLongtitude(121.411991);
+        mydataBase.setLatitude(31.23632);
+        mydataBase.setUsername("cyq");
+        mydataBase.setSchoolName("ECNU");
+        mydataBase.setDepartment("SE");
+        mydataBase.setClickable(true);
+        mydataBase.setType("sport");
+        mydataBase.setTitle("Badminton");
+        mydataBase.setLocation("ecnu activity center");
+        mydataBase.setInfo("I want to run for an hour.");
+        mydataBase.setStartTime("2019.3.15 18:00");
+        mydataBase.setEndTime("2019.3.15 19:00");
+        mydataBase.setSex("all");
+        updateOverlay(mydataBase);
+        mydataBase= new MyDataBase();
+        mydataBase.setLongtitude(121.409952);
+        mydataBase.setLatitude(31.236264);
         mydataBase.setUsername("cyq");
         mydataBase.setSchoolName("ECNU");
         mydataBase.setDepartment("SE");
@@ -238,13 +254,13 @@ public class MapActivity extends BaseActivity
         mydataBase.setTitle("Breakfast");
         mydataBase.setLocation("ecnu Hexi canteen");
         mydataBase.setInfo("I hope to have breakfast everyday.");
-        mydataBase.setStartTime("2019.3.9 6:00");
-        mydataBase.setEndTime("2019.3.9 8:00");
+        mydataBase.setStartTime("2019.3.15 6:00");
+        mydataBase.setEndTime("2019.3.15 8:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
         mydataBase = new MyDataBase();
-        mydataBase.setLongtitude(121.40449750967011);
-        mydataBase.setLatitude(31.231446081244303);
+        mydataBase.setLongtitude(121.410079);
+        mydataBase.setLatitude(31.235576);
         mydataBase.setUsername("cyq");
         mydataBase.setSchoolName("ECNU");
         mydataBase.setDepartment("SE");
@@ -253,8 +269,8 @@ public class MapActivity extends BaseActivity
         mydataBase.setTitle("PlayUNO");
         mydataBase.setLocation("ecnu Fifth dorm");
         mydataBase.setInfo("Let's play UNO.");
-        mydataBase.setStartTime("2019.3.9 20:00");
-        mydataBase.setEndTime("2019.3.9 22:00");
+        mydataBase.setStartTime("2019.3.15 20:00");
+        mydataBase.setEndTime("2019.3.15 22:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
     }

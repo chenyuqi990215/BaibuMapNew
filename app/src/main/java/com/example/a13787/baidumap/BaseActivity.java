@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Window;
 
 import com.baidu.mapapi.SDKInitializer;
 
@@ -55,6 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity
         setUserIP(ip);
         Log.d("IpAddress", ip);
         ActivityCollector.addActivity(this);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(initLayout());
         initView();
     }
@@ -121,6 +123,7 @@ public abstract class BaseActivity extends AppCompatActivity
             }
             else if (enableForceOffLineReceiverTest == true)
             {
+                Log.d("Broadcast", "receive");
                 String curEmail = intent.getStringExtra("Email");
                 String curIP = intent.getStringExtra("IP");
                 Log.d("curEmail", curEmail);

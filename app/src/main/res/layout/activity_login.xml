@@ -5,54 +5,52 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="@drawable/background"
+    android:background="#ffffff"
     tools:context="com.example.a13787.baidumap.LoginActivity">
-
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:visibility="gone" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/login_header"/>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/login_portraint"
+        android:layout_marginTop="10dp"/>
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="198dp"
+            android:background="@drawable/login_background"
             android:orientation="vertical"
-            android:layout_marginTop="100dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_gravity="center_horizontal">
             
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:gravity="center_horizontal"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp"
-                android:alpha="0.7"
-                android:background="@drawable/time">
+                android:layout_marginTop="20dp">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/email"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@drawable/login_email"
                     />
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="40dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_margin="20dp"
-
-                        android:layout_marginTop="20dip"
+                        android:layout_marginTop="18dp"
                         android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:dropDownVerticalOffset="10dp"
@@ -66,24 +64,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:gravity="center_horizontal"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
-                android:alpha="0.7"
-                android:background="@drawable/time">
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="30dp">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/llll"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@drawable/login_password"
                     />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="40dp"
                     >
 
                     <EditText
@@ -103,35 +98,37 @@
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/email_sign_in_button"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="70dp"
-                android:layout_marginRight="70dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/button_backgorund"
-                android:alpha="0.7"
-                android:layout_marginTop="16dp"
-                android:text="login"
-                android:textSize="20dp"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:elevation="0dp" />
-            <TextView
-                android:id="@+id/attempt_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="register"
-                android:textSize="16dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:textColor="#0000ff"/>
-            <View
-                android:layout_width="50dp"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="#0000ff"
-                />
+
         </LinearLayout>
+    <Button
+        android:id="@+id/email_sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/login_mybutton"
+        android:layout_marginTop="16dp"
+        android:text="login"
+        android:textColor="#8078e0"
+        android:textSize="20dp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:elevation="0dp" />
+    <TextView
+        android:id="@+id/attempt_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="register"
+        android:textSize="18dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="#8078e0"/>
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="55dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="#8078e0"
+        />
 </LinearLayout>
