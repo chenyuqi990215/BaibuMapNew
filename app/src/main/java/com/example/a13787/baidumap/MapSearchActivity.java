@@ -90,6 +90,9 @@ public class MapSearchActivity extends AppCompatActivity
                 BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_start_big);
                 SearchDataBase temp = new SearchDataBase();
                 temp.setClickable(false);
+                temp.setKey(searchDataBase.getKey());
+                temp.setLatitude(searchDataBase.getLatitude());
+                temp.setLongitude(searchDataBase.getLongitude());
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("SearchDataBase",temp);
                 OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
