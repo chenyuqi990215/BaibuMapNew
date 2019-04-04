@@ -58,6 +58,7 @@ public class MapSearchActivity extends AppCompatActivity
     private BaiduMap baiduMap;
     private SearchDataBase searchOnMap = null;
     private boolean isFirstLocate = true;
+    private SearchDataBase curSearchData = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -97,12 +98,29 @@ public class MapSearchActivity extends AppCompatActivity
 
             }
         });
-
+        final Button buttonConfirm = (Button) findViewById(R.id.search_confirm);
+        buttonConfirm.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                if (buttonConfirm.getVisibility() == View.GONE)
+                    return;
+                if (curSearchData == null)
+                    return;
+                Log.d("Confirm Key",curSearchData.getKey());
+                Log.d("Confirm longitude",curSearchData.getLongitude()+"");
+                Log.d("Confirm latitude",curSearchData.getLatitude()+"");
+            }
+        });
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker)
             {
                 final SearchDataBase searchDataBase = (SearchDataBase) marker.getExtraInfo().get("SearchDataBase");
+                curSearchData = new SearchDataBase();
+                curSearchData.setLongitude(searchDataBase.getLongitude());
+                curSearchData.setLatitude(searchDataBase.getLatitude());
+                curSearchData.setKey(searchDataBase.getKey());
                 if (searchDataBase.isClickable() == false)
                     return true;
                 if (searchOnMap!=null)
