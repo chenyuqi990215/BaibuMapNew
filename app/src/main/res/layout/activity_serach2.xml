@@ -31,39 +31,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_header"
-        android:layout_margin="20dp">
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:id="@+id/search_city"
-            android:hint="城市"
-            android:gravity="center"
-            android:layout_weight="4"
-            android:textSize="30dp" />
+        android:layout_margin="10dp">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/search_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:hint="城市"
+                android:textSize="15dp"
+                android:inputType="text"
+                android:maxLines="1"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:text="市"
             android:gravity="center"
-            android:layout_weight="1"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:textColor="#8078e0"/>
-        <EditText
-            android:id="@+id/search_key"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:hint="地址"
-            android:gravity="center"
-            android:layout_weight="6"
-            android:textSize="30dp"/>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            >
+
+            <AutoCompleteTextView
+                android:id="@+id/search_key"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:hint="地址"
+                android:textSize="15dp"
+                android:inputType="text"
+                android:maxLines="1"
+                />
+
+        </android.support.design.widget.TextInputLayout>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:id="@+id/search_button"
-            android:layout_weight="3"
             android:gravity="center"
             android:text="搜索"
-            android:textSize="30dp"
+            android:textSize="20dp"
+            android:background="#eaedfe"
             android:textColor="#8078e0"/>
     </LinearLayout>
     <Button
@@ -75,7 +93,7 @@
         android:layout_marginBottom="30dp"
         android:layout_height="60dp"
         android:gravity="center"
-        android:background="@drawable/login_mybutton"
+        android:background="@drawable/shape_point3"
         android:layout_marginTop="16dp"
         android:text="确认"
         android:textColor="#8078e0"

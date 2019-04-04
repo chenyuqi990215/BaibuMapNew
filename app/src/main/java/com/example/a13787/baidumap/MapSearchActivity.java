@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -64,7 +65,7 @@ public class MapSearchActivity extends AppCompatActivity
     {
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_serach2);
         mLocationClient=new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListener());
         mapView=(MapView)findViewById(R.id.bmapView2);
@@ -77,8 +78,8 @@ public class MapSearchActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                EditText textCity = (EditText) findViewById(R.id.search_city);
-                EditText textKey = (EditText) findViewById(R.id.search_key);
+                AutoCompleteTextView textCity = (AutoCompleteTextView) findViewById(R.id.search_city);
+                AutoCompleteTextView textKey = (AutoCompleteTextView) findViewById(R.id.search_key);
                 if (textCity.getText().toString().length() == 0)
                 {
                     Toast.makeText(MapSearchActivity.this,"Error: City cannot be null",Toast.LENGTH_SHORT).show();
