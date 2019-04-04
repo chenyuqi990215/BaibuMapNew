@@ -11,6 +11,7 @@ public class SearchDataBase implements Serializable
     private double Latitude;
     private double Longitude;
     private String key;
+    private boolean clickable;
 
     public double getLatitude() {
         return Latitude;
@@ -34,5 +35,13 @@ public class SearchDataBase implements Serializable
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public boolean isClickable() {
+        return clickable;
+    }
+
+    public void setClickable(boolean clickable) {
+        this.clickable = clickable;
     }
 }

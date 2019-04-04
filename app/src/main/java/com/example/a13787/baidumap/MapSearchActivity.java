@@ -52,7 +52,9 @@ public class MapSearchActivity extends AppCompatActivity
     private SuggestionSearch mSuggestionSearch;
     public LocationClient mLocationClient;
     private MapView mapView;
+    private Marker selectOnMap = null;
     private BaiduMap baiduMap;
+    private SearchDataBase searchOnMap = null;
     private boolean isFirstLocate = true;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,6 +73,30 @@ public class MapSearchActivity extends AppCompatActivity
         mSuggestionSearch.requestSuggestion(new SuggestionSearchOption()
                 .city("上海")
                 .keyword("华东师范大学理科大楼"));
+        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker)
+            {
+                final SearchDataBase searchDataBase = (SearchDataBase) marker.getExtraInfo().get("SearchDataBase");
+                if (searchDataBase.isClickable() == false)
+                    return true;
+                if (searchOnMap!=null)
+                    updateOverlay(searchOnMap);
+                if (selectOnMap!=null)
+                    selectOnMap.remove();
+                searchOnMap = searchDataBase;
+                marker.remove();
+                LatLng ll = new LatLng(searchDataBase.getLatitude(),searchDataBase.getLongitude());
+                BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_start_big);
+                SearchDataBase temp = new SearchDataBase();
+                temp.setClickable(false);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("SearchDataBase",temp);
+                OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
+                selectOnMap = (Marker) baiduMap.addOverlay(option);
+                return true;
+            }
+        });
     }
 
     OnGetSuggestionResultListener listenerSearch = new OnGetSuggestionResultListener() {
@@ -87,6 +113,7 @@ public class MapSearchActivity extends AppCompatActivity
                     searchDataBase.setLatitude(resl.get(i).getPt().latitude);
                     searchDataBase.setLongitude(resl.get(i).getPt().longitude);
                     searchDataBase.setKey(resl.get(i).getKey());
+                    searchDataBase.setClickable(true);
                     updateOverlay(searchDataBase);
                     Log.d("geolatitude", resl.get(i).getPt().latitude+"");
                     Log.d("geolongitude", resl.get(i).getPt().longitude+"");
