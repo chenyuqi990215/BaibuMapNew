@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -68,11 +70,34 @@ public class MapSearchActivity extends AppCompatActivity
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
         requestLocation();
-        mSuggestionSearch = SuggestionSearch.newInstance();
-        mSuggestionSearch.setOnGetSuggestionResultListener(listenerSearch);
-        mSuggestionSearch.requestSuggestion(new SuggestionSearchOption()
-                .city("上海")
-                .keyword("华东师范大学理科大楼"));
+        Button searchButton = (Button) findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                EditText textCity = (EditText) findViewById(R.id.search_city);
+                EditText textKey = (EditText) findViewById(R.id.search_key);
+                if (textCity.getText().toString().length() == 0)
+                {
+                    Toast.makeText(MapSearchActivity.this,"Error: City cannot be null",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (textKey.getText().toString().length() == 0)
+                {
+                    Toast.makeText(MapSearchActivity.this,"Error: Address cannot be null",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                mSuggestionSearch = SuggestionSearch.newInstance();
+                mSuggestionSearch.setOnGetSuggestionResultListener(listenerSearch);
+                mSuggestionSearch.requestSuggestion(new SuggestionSearchOption()
+                        .city(textCity.getText().toString())
+                        .keyword(textKey.getText().toString()));
+
+            }
+        });
+
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker)
@@ -97,6 +122,18 @@ public class MapSearchActivity extends AppCompatActivity
                 bundle.putSerializable("SearchDataBase",temp);
                 OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
                 selectOnMap = (Marker) baiduMap.addOverlay(option);
+                Button buttonConfirm = (Button) findViewById(R.id.search_confirm);
+                buttonConfirm.setVisibility(View.VISIBLE);
+                buttonConfirm.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Log.d("Confirm Key",searchDataBase.getKey());
+                        Log.d("Confirm longitude",searchDataBase.getLongitude()+"");
+                        Log.d("Confirm latitude",searchDataBase.getLatitude()+"");
+                    }
+                });
                 return true;
             }
         });
