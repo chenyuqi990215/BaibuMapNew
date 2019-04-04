@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:id="@+id/searchtop"
+        android:id="@+id/search_header"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal">
         <TextView
@@ -22,19 +22,20 @@
     <com.baidu.mapapi.map.MapView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/searchtop"
+        android:layout_below="@+id/search_header"
         android:id="@+id/bmapView2"
         android:clickable="true" />
     <LinearLayout
         android:orientation="horizontal"
-        android:background="@drawable/shape_point3"
+        android:background="@drawable/shape_point4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/searchtop"
+        android:layout_below="@id/search_header"
         android:layout_margin="20dp">
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:id="@+id/search_city"
             android:hint="城市"
             android:gravity="center"
             android:layout_weight="4"
@@ -48,6 +49,7 @@
             android:textSize="30dp"
             android:textColor="#8078e0"/>
         <EditText
+            android:id="@+id/search_key"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:hint="地址"
@@ -57,10 +59,28 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_weight="2"
+            android:id="@+id/search_button"
+            android:layout_weight="3"
             android:gravity="center"
             android:text="搜索"
             android:textSize="30dp"
             android:textColor="#8078e0"/>
     </LinearLayout>
+    <Button
+        android:id="@+id/search_confirm"
+        android:visibility="gone"
+        android:layout_width="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="@drawable/login_mybutton"
+        android:layout_marginTop="16dp"
+        android:text="确认"
+        android:textColor="#8078e0"
+        android:textSize="30dp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:elevation="0dp" />
 </RelativeLayout>
