@@ -153,7 +153,7 @@ public class MapSearchActivity extends AppCompatActivity
     {
         LatLng point = new LatLng(searchDataBase.getLatitude(), searchDataBase.getLongitude());
         //构建Marker图标
-        BitmapDescriptor bitmap = null;
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_start);
         Bundle bundle = new Bundle();
         bundle.putSerializable("SearchDataBase",searchDataBase);
         //构建MarkerOption，用于在地图上添加
