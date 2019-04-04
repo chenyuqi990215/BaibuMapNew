@@ -39,7 +39,7 @@
         <activity android:name=".GuideActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MapSearch"></activity>
+        <activity android:name=".MapSearchActivity"></activity>
     </application>
 
 </manifest>

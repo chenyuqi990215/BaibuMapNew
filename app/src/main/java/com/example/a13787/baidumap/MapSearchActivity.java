@@ -47,7 +47,7 @@ import com.example.a13787.baidumap.view.SlideMenu;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapSearch extends AppCompatActivity
+public class MapSearchActivity extends AppCompatActivity
 {
     private SuggestionSearch mSuggestionSearch;
     public LocationClient mLocationClient;

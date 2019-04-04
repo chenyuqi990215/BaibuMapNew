@@ -4,19 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.location.Location;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,7 +89,7 @@ public class MapActivity extends BaseActivity
 			public void onClick(View v)
 			{
                 //baiduMap.clear();   //清除marker
-				Intent intent = new Intent(MapActivity.this,MapSearch.class);
+				Intent intent = new Intent(MapActivity.this,MapSearchActivity.class);
 				startActivityForResult(intent, 1);
 			}
 		});
