@@ -42,7 +42,7 @@ public class MapActivity extends BaseActivity
     private SlideMenu slideMenu = null;
     private Button button = null;
     private Marker markerOnMap = null;
-    private MyDataBase eventOnMap = null;
+    private MapDataBase eventOnMap = null;
     public LocationClient mLocationClient;
     private MapView mapView;
     private BaiduMap baiduMap;
@@ -106,7 +106,7 @@ public class MapActivity extends BaseActivity
                 @Override
                 public boolean onMarkerClick(Marker marker)
                 {
-                    final MyDataBase mydataBase = (MyDataBase) marker.getExtraInfo().get("DataBase");
+                    final MapDataBase mydataBase = (MapDataBase) marker.getExtraInfo().get("MapDataBase");
                     if (mydataBase.isClickable()==false)
                         return true;
                     if (markerOnMap!=null)
@@ -128,10 +128,10 @@ public class MapActivity extends BaseActivity
                     if (mydataBase.getType().equals("study"))
                     {
                         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_study_mark);
-                        MyDataBase temp  = new MyDataBase();
+                        MapDataBase temp  = new MapDataBase();
                         temp.setClickable(false);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("DataBase",temp);
+                        bundle.putSerializable("MapDataBase",temp);
                         OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
                         markerOnMap = (Marker) baiduMap.addOverlay(option);
                         color="#ff0000";
@@ -139,10 +139,10 @@ public class MapActivity extends BaseActivity
                     else if (mydataBase.getType().equals("food"))
                     {
                         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_food_mark);
-                        MyDataBase temp  = new MyDataBase();
+                        MapDataBase temp  = new MapDataBase();
                         temp.setClickable(false);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("DataBase",temp);
+                        bundle.putSerializable("MapDataBase",temp);
                         OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
                         markerOnMap = (Marker) baiduMap.addOverlay(option);
                         color="#00ff00";
@@ -150,10 +150,10 @@ public class MapActivity extends BaseActivity
                     else if (mydataBase.getType().equals("sport"))
                     {
                         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_sport_mark);
-                        MyDataBase temp  = new MyDataBase();
+                        MapDataBase temp  = new MapDataBase();
                         temp.setClickable(false);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("DataBase",temp);
+                        bundle.putSerializable("MapDataBase",temp);
                         OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
                         markerOnMap = (Marker) baiduMap.addOverlay(option);
                         color="#0000ff";
@@ -161,10 +161,10 @@ public class MapActivity extends BaseActivity
                     else
                     {
                         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_enjoyment_mark);
-                        MyDataBase temp  = new MyDataBase();
+                        MapDataBase temp  = new MapDataBase();
                         temp.setClickable(false);
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("DataBase",temp);
+                        bundle.putSerializable("MapDataBase",temp);
                         OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
                         markerOnMap = (Marker) baiduMap.addOverlay(option);
                         color="#ff00ff";
@@ -192,7 +192,7 @@ public class MapActivity extends BaseActivity
     @Override
     protected void initData()
     {
-        MyDataBase mydataBase= new MyDataBase();
+        MapDataBase mydataBase= new MapDataBase();
         mydataBase.setLongtitude(121.413326);
         mydataBase.setLatitude(31.234196);
         mydataBase.setUsername("cyq");
@@ -207,7 +207,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setEndTime("2019.3.15 17:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
-        mydataBase= new MyDataBase();
+        mydataBase= new MapDataBase();
         mydataBase.setLongtitude(121.411511);
         mydataBase.setLatitude(31.234907);
         mydataBase.setUsername("cyq");
@@ -222,7 +222,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setEndTime("2019.3.15 19:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
-        mydataBase= new MyDataBase();
+        mydataBase= new MapDataBase();
         mydataBase.setLongtitude(121.411991);
         mydataBase.setLatitude(31.23632);
         mydataBase.setUsername("cyq");
@@ -237,7 +237,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setEndTime("2019.3.15 19:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
-        mydataBase= new MyDataBase();
+        mydataBase= new MapDataBase();
         mydataBase.setLongtitude(121.409952);
         mydataBase.setLatitude(31.236264);
         mydataBase.setUsername("cyq");
@@ -252,7 +252,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setEndTime("2019.3.15 8:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
-        mydataBase = new MyDataBase();
+        mydataBase = new MapDataBase();
         mydataBase.setLongtitude(121.410079);
         mydataBase.setLatitude(31.235576);
         mydataBase.setUsername("cyq");
@@ -276,24 +276,24 @@ public class MapActivity extends BaseActivity
             case 1:
                 if (resultCode==RESULT_OK)
                 {
-                    updateOverlay((MyDataBase) data.getSerializableExtra("DataBase"));
+                    updateOverlay((MapDataBase) data.getSerializableExtra("DataBase"));
                 }
         }
     }
-    private void updateOverlay(MyDataBase mydataBase)
+    private void updateOverlay(MapDataBase mapDataBase)
     {
-        LatLng point = new LatLng(mydataBase.getLatitude(), mydataBase.getLongtitude());
+        LatLng point = new LatLng(mapDataBase.getLatitude(), mapDataBase.getLongtitude());
         //构建Marker图标
         BitmapDescriptor bitmap = null;
-        if (mydataBase.getType().equals("study"))
+        if (mapDataBase.getType().equals("study"))
             bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_study);
-        else if (mydataBase.getType().equals("food"))
+        else if (mapDataBase.getType().equals("food"))
             bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_food);
-        else if (mydataBase.getType().equals("sport"))
+        else if (mapDataBase.getType().equals("sport"))
             bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_sport);
         else bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_enjoyment);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("DataBase",mydataBase);
+        bundle.putSerializable("MapDataBase",mapDataBase);
         //构建MarkerOption，用于在地图上添加
         MarkerOptions option = new MarkerOptions().position(point).extraInfo(bundle).icon(bitmap);
         //在地图上添加Marker，并显示

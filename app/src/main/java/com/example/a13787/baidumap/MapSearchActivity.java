@@ -54,7 +54,6 @@ public class MapSearchActivity extends AppCompatActivity
     private MapView mapView;
     private BaiduMap baiduMap;
     private boolean isFirstLocate = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -84,14 +83,13 @@ public class MapSearchActivity extends AppCompatActivity
                 List<SuggestionResult.SuggestionInfo> resl = res.getAllSuggestions();
                 for (int i = 0; i < resl.size(); i++)
                 {
-
+                    SearchDataBase searchDataBase = new SearchDataBase();
+                    searchDataBase.setLatitude(resl.get(i).getPt().latitude);
+                    searchDataBase.setLongitude(resl.get(i).getPt().longitude);
+                    searchDataBase.setKey(resl.get(i).getKey());
+                    updateOverlay(searchDataBase);
                     Log.d("geolatitude", resl.get(i).getPt().latitude+"");
                     Log.d("geolongitude", resl.get(i).getPt().longitude+"");
-                    BitmapDescriptor bitmap =BitmapDescriptorFactory.fromResource(R.drawable.ic_start);
-                    MarkerOptions option = new MarkerOptions().position(new LatLng(resl.get(i).getPt().latitude,resl.get(i).getPt().longitude)).icon(bitmap);
-                    //在地图上添加Marker，并显示
-                    Log.d("overlay", "add");
-                    baiduMap.addOverlay(option);
                 }
             }
             //获取在线建议检索结果
@@ -124,7 +122,19 @@ public class MapSearchActivity extends AppCompatActivity
         initLocation();
         mLocationClient.start();
     }
-
+    private void updateOverlay(SearchDataBase searchDataBase)
+    {
+        LatLng point = new LatLng(searchDataBase.getLatitude(), searchDataBase.getLongitude());
+        //构建Marker图标
+        BitmapDescriptor bitmap = null;
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("SearchDataBase",searchDataBase);
+        //构建MarkerOption，用于在地图上添加
+        MarkerOptions option = new MarkerOptions().position(point).extraInfo(bundle).icon(bitmap);
+        //在地图上添加Marker，并显示
+        Log.d("overlay", "add");
+        baiduMap.addOverlay(option);
+    }
     private void initLocation(){
         LocationClientOption option=new LocationClientOption();
         option.setCoorType("bd09ll");

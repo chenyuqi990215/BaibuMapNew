@@ -3,7 +3,7 @@ package com.example.a13787.baidumap;
 import java.io.Serializable;
 
 
-public class MyDataBase implements Serializable
+public class MapDataBase implements Serializable
 {
     private boolean clickable;
     private double Longtitude;
