@@ -7,19 +7,35 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FootprintActivity extends AppCompatActivity {
+public class FootprintActivity extends BaseActivity
+{
     private List<ActivityDataBase> activityList = new ArrayList<>();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_footprint);
-        initData();
+    }
+    @Override
+    protected void initListener()
+    {
+
+    }
+    @Override
+    protected int initLayout()
+    {
+        return R.layout.activity_footprint;
+    }
+    @Override
+    protected void initView()
+    {
         FootprintAdapter adapter = new FootprintAdapter(FootprintActivity.this,R.layout.layout_footprint,activityList); //创建ArrayAdapter方法
         ListView listView = (ListView) findViewById(R.id.footprint_listview);
         listView.setAdapter(adapter);//将创建的方法作为适配器传递给listview
     }
-    private void initData()
-    { //初始化类中所有数据
+    @Override
+    protected void initData()
+    {
+        // 初始化类中所有数据
         ActivityDataBase item1 = new ActivityDataBase();
         item1.setName("cyq");
         item1.setSchool("华东师范大学");

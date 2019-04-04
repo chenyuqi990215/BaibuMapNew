@@ -31,7 +31,7 @@ import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 
 import java.util.List;
 
-public class MapSearchActivity extends AppCompatActivity
+public class MapSearchActivity extends BaseActivity
 {
     private SuggestionSearch mSuggestionSearch;
     public LocationClient mLocationClient;
@@ -46,7 +46,15 @@ public class MapSearchActivity extends AppCompatActivity
     {
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_serach);
+    }
+    @Override
+    protected int initLayout()
+    {
+        return R.layout.activity_serach;
+    }
+    @Override
+    protected void initView()
+    {
         mLocationClient=new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListener());
         mapView=(MapView)findViewById(R.id.bmapView2);
@@ -138,7 +146,16 @@ public class MapSearchActivity extends AppCompatActivity
             }
         });
     }
+    @Override
+    protected void initListener()
+    {
 
+    }
+    @Override
+    protected void initData()
+    {
+
+    }
     OnGetSuggestionResultListener listenerSearch = new OnGetSuggestionResultListener() {
         public void onGetSuggestionResult(SuggestionResult res) {
             if (res == null || res.getAllSuggestions() == null) {
