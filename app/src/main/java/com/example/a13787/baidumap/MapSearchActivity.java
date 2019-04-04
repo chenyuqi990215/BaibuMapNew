@@ -174,8 +174,8 @@ public class MapSearchActivity extends AppCompatActivity
             baiduMap.animateMapStatus(update);
             isFirstLocate = false;
         }
-        Log.d("Latitude",""+location.getLatitude());
-        Log.d("Longitude",""+location.getLongitude());
+        ///Log.d("Latitude",""+location.getLatitude());
+        //Log.d("Longitude",""+location.getLongitude());
         MyLocationData.Builder locationBulider=new MyLocationData.Builder();
         locationBulider.latitude(location.getLatitude());
         locationBulider.longitude(location.getLongitude());
