@@ -62,6 +62,7 @@
             android:layout_height="60dp"
             >
 
+
             <AutoCompleteTextView
                 android:id="@+id/search_key"
                 android:layout_width="match_parent"
