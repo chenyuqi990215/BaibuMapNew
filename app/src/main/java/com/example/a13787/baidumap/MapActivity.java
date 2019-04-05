@@ -349,10 +349,20 @@ public class MapActivity extends BaseActivity
                 button.setText(mydataBase.getTitle());
                 button.setBackgroundColor(Color.parseColor("#e9eafd"));
                 button.setTextColor(Color.parseColor("#8078e0"));
-
                 button.setAllCaps(false);
                 InfoWindow mInfoWindow = new InfoWindow(button, ll, -170);
                 baiduMap.showInfoWindow(mInfoWindow);
+                button.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Intent intent = new Intent(MapActivity.this,JoinActivity.class);
+                        intent.putExtra("Activity",mydataBase);
+                        startActivity(intent);
+                    }
+                }
+                );
                 return true;
             }
         });

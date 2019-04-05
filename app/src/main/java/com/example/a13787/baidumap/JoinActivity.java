@@ -1,6 +1,9 @@
 package com.example.a13787.baidumap;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -63,7 +66,29 @@ public class JoinActivity extends BaseActivity {
     @Override
     protected void initListener()
     {
-
+        Button back = (Button) findViewById(R.id.join_back);
+        back.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(JoinActivity.this,MapActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        Button confirm = (Button) findViewById(R.id.join_confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(JoinActivity.this,MapActivity.class);
+                startActivity(intent);
+                final String useremail = userEmail;
+                //add user and activity into data;
+                finish();
+            }
+        });
     }
 }
 
