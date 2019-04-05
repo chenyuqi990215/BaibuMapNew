@@ -11,7 +11,7 @@ import android.widget.Toast;
  * Created by 13787 on 2019/3/11.
  */
 
-public class MyDatabaseHelper  extends SQLiteOpenHelper
+public class UserDatabaseHelper extends SQLiteOpenHelper
 {
     private static final String CREATE_USERINFO = "create table userinfo ("
             + "username char(100) unique, "
@@ -23,7 +23,7 @@ public class MyDatabaseHelper  extends SQLiteOpenHelper
             + "sex char(10) not null, "
             + "headportrait blob)";
     private Context mContext;
-    public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
+    public UserDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
     {
         super(context, name, factory, version);
         mContext=context;

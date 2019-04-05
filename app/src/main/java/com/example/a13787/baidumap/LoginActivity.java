@@ -1,15 +1,10 @@
 package com.example.a13787.baidumap;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -23,7 +18,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends BaseActivity
 {
-    private MyDatabaseHelper dbHelp = new MyDatabaseHelper(this,"Userinfo.db",null,4);
+    private UserDatabaseHelper dbHelp = new UserDatabaseHelper(this,"Userinfo.db",null,4);
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mLoginFormView;
