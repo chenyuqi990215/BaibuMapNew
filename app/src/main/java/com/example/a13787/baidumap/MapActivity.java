@@ -78,21 +78,33 @@ public class MapActivity extends BaseActivity
             String[] permissions=permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(MapActivity.this,permissions,1);
         }
-        else {
+        else
+        {
             requestLocation();
             initData();   //模拟数据
             //对"+"按钮的监听button_add
-		Button button_add=(Button)findViewById(R.id.button_add);
-		button_add.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-                //baiduMap.clear();   //清除marker
-				Intent intent = new Intent(MapActivity.this,MapSearchActivity.class);
-				startActivityForResult(intent, 1);
-			}
-		});
+            TextView footprint = (TextView) findViewById(R.id.menu_footprint);
+            footprint.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(MapActivity.this,FootprintActivity.class);
+                    intent.putExtra("UserEmail",userEmail);
+                    startActivity(intent);
+                }
+            });
+		    Button button_add=(Button)findViewById(R.id.button_add);
+		    button_add.setOnClickListener(new View.OnClickListener()
+		    {
+			    @Override
+			    public void onClick(View v)
+			    {
+                    //baiduMap.clear();   //清除marker
+                    Intent intent = new Intent(MapActivity.this,MapSearchActivity.class);
+                    startActivityForResult(intent, 1);
+		    	}
+		    });
             button.setOnClickListener(new View.OnClickListener()
             {
                 @Override

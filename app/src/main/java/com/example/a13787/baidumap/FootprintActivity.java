@@ -14,6 +14,7 @@ public class FootprintActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        initData();
     }
     @Override
     protected void initListener()

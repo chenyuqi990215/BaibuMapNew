@@ -25,24 +25,26 @@ public class FootprintAdapter extends ArrayAdapter<ActivityDataBase>
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     { //重写getView方法
-        ActivityDataBase fruit = getItem(position); //获取当前实例
+        ActivityDataBase cur = getItem(position); //获取当前实例
         View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false); //为此子项加载我么传入的布局
         TextView name = (TextView) view.findViewById(R.id.name); //获取实例的具体项目
         TextView content = (TextView) view.findViewById(R.id.content);
-        name.setText(fruit.getName());
-        content.setText(fruit.getContent());
+        name.setText(cur.getName());
+        content.setText(cur.getContent());
         TextView type = (TextView) view.findViewById(R.id.type);
-        type.setText(fruit.getType());
+        type.setText(cur.getType());
         TextView title = (TextView) view.findViewById(R.id.title);
-        title.setText(fruit.getTitle());
+        title.setText(cur.getTitle());
         TextView date = (TextView) view.findViewById(R.id.date);
-        date.setText(fruit.getDate());
+        date.setText(cur.getDate());
         TextView school = (TextView) view.findViewById(R.id.school);
-        school.setText(fruit.getSchool());
+        school.setText(cur.getSchool());
         TextView sex = (TextView) view.findViewById(R.id.sex);
-        sex.setText(fruit.getSex());
+        sex.setText(cur.getSex());
         TextView location = (TextView) view.findViewById(R.id.location);
-        location.setText(fruit.getLocation()); //设置显示的文字
-        return  view;
+        location.setText(cur.getLocation());
+        TextView department = (TextView) view.findViewById(R.id.department);
+        department.setText(cur.getDepartment());
+        return view;
     }
 }
