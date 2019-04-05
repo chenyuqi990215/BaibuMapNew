@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/footprint_name"
                 android:hint="Name"
                 android:textSize="20dp"
                 android:layout_marginTop="10dp"
@@ -38,7 +38,7 @@
                 android:gravity="center"
                 android:layout_weight="0.69">
                 <TextView
-                    android:id="@+id/school"
+                    android:id="@+id/footprint_school"
                     android:hint="School"
                     android:layout_width="match_parent"
                     android:layout_marginRight="2dp"
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
                 <TextView
-                    android:id="@+id/department"
+                    android:id="@+id/footprint_department"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:textColor="#606060"
@@ -64,7 +64,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
         <TextView
-            android:id="@+id/type"
+            android:id="@+id/footprint_type"
             android:text="Type"
             android:textColor="#8078e0"
             android:gravity="center"
@@ -74,7 +74,7 @@
 
         <TextView
             android:hint="Title"
-            android:id="@+id/title"
+            android:id="@+id/footprint_title"
             android:gravity="left|center_vertical"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -86,7 +86,7 @@
 
     <TextView
         android:layout_marginTop="5dp"
-        android:id="@+id/content"
+        android:id="@+id/footprint_content"
         android:hint="Content"
         android:textSize="20dp"
         android:textColor="#606060"
@@ -108,7 +108,7 @@
             android:background="@drawable/footprint_time"/>
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/footprint_date"
             android:hint="Date"
             android:textSize="15dp"
             android:textColor="#707070"
@@ -129,7 +129,7 @@
             android:layout_height="15dp"
             android:background="@drawable/footfrint_position"/>
         <TextView
-            android:id="@+id/location"
+            android:id="@+id/footprint_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Position"
@@ -150,7 +150,7 @@
             android:layout_height="15dp"
             android:background="@drawable/footprint_sex"/>
         <TextView
-            android:id="@+id/sex"
+            android:id="@+id/footprint_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Sex"

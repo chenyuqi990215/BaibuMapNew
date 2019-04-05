@@ -27,23 +27,23 @@ public class FootprintAdapter extends ArrayAdapter<ActivityDataBase>
     { //重写getView方法
         ActivityDataBase cur = getItem(position); //获取当前实例
         View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false); //为此子项加载我么传入的布局
-        TextView name = (TextView) view.findViewById(R.id.name); //获取实例的具体项目
-        TextView content = (TextView) view.findViewById(R.id.content);
+        TextView name = (TextView) view.findViewById(R.id.footprint_name); //获取实例的具体项目
+        TextView content = (TextView) view.findViewById(R.id.footprint_content);
         name.setText(cur.getName());
         content.setText(cur.getContent());
-        TextView type = (TextView) view.findViewById(R.id.type);
+        TextView type = (TextView) view.findViewById(R.id.footprint_type);
         type.setText(cur.getType());
-        TextView title = (TextView) view.findViewById(R.id.title);
+        TextView title = (TextView) view.findViewById(R.id.footprint_title);
         title.setText(cur.getTitle());
-        TextView date = (TextView) view.findViewById(R.id.date);
+        TextView date = (TextView) view.findViewById(R.id.footprint_date);
         date.setText(cur.getDate());
-        TextView school = (TextView) view.findViewById(R.id.school);
+        TextView school = (TextView) view.findViewById(R.id.footprint_school);
         school.setText(cur.getSchool());
-        TextView sex = (TextView) view.findViewById(R.id.sex);
+        TextView sex = (TextView) view.findViewById(R.id.footprint_sex);
         sex.setText(cur.getSex());
-        TextView location = (TextView) view.findViewById(R.id.location);
+        TextView location = (TextView) view.findViewById(R.id.footprint_location);
         location.setText(cur.getLocation());
-        TextView department = (TextView) view.findViewById(R.id.department);
+        TextView department = (TextView) view.findViewById(R.id.footprint_department);
         department.setText(cur.getDepartment());
         return view;
     }

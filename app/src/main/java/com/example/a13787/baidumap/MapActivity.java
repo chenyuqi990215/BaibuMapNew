@@ -347,6 +347,9 @@ public class MapActivity extends BaseActivity
                 baiduMap.hideInfoWindow();
                 Button button = new Button(getApplicationContext());
                 button.setText(mydataBase.getTitle());
+                button.setBackgroundColor(Color.parseColor("#e9eafd"));
+                button.setTextColor(Color.parseColor("#8078e0"));
+
                 button.setAllCaps(false);
                 InfoWindow mInfoWindow = new InfoWindow(button, ll, -170);
                 baiduMap.showInfoWindow(mInfoWindow);
