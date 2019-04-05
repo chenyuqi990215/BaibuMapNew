@@ -1,11 +1,15 @@
 package com.example.a13787.baidumap;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FootprintActivity extends BaseActivity
 {
@@ -32,6 +36,17 @@ public class FootprintActivity extends BaseActivity
         FootprintAdapter adapter = new FootprintAdapter(FootprintActivity.this,R.layout.layout_footprint,activityList); //创建ArrayAdapter方法
         ListView listView = (ListView) findViewById(R.id.footprint_listview);
         listView.setAdapter(adapter);//将创建的方法作为适配器传递给listview
+        Button back = (Button) findViewById(R.id.footprint_back);
+        back.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(FootprintActivity.this, MapActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     @Override
     protected void initData()

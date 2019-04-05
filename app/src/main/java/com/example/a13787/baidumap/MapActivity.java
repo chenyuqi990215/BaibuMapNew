@@ -32,7 +32,6 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
-import com.example.a13787.baidumap.view.SlideMenu;
 
 import java.util.ArrayList;
 import java.util.List;
