@@ -23,7 +23,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="jOFL7xPZeZlXETBTrb7romUG3Aq4gcZB" />
 
-        <activity android:name=".MapActivity">
+        <activity android:name=".GuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +36,7 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".GuideActivity" />
+        <activity android:name=".MapActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MapSearchActivity" />

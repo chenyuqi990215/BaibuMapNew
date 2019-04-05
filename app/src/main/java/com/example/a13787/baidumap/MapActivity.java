@@ -46,6 +46,7 @@ public class MapActivity extends BaseActivity
     private MapView mapView;
     private BaiduMap baiduMap;
     private boolean isFirstLocate = true;
+    private boolean isPermitted = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
@@ -81,118 +82,7 @@ public class MapActivity extends BaseActivity
         {
             requestLocation();
             initData();   //模拟数据
-            //对"+"按钮的监听button_add
-            TextView footprint = (TextView) findViewById(R.id.menu_footprint);
-            footprint.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent intent = new Intent(MapActivity.this,FootprintActivity.class);
-                    intent.putExtra("UserEmail",userEmail);
-                    startActivity(intent);
-                }
-            });
-		    Button button_add=(Button)findViewById(R.id.button_add);
-		    button_add.setOnClickListener(new View.OnClickListener()
-		    {
-			    @Override
-			    public void onClick(View v)
-			    {
-                    //baiduMap.clear();   //清除marker
-                    Intent intent = new Intent(MapActivity.this,MapSearchActivity.class);
-                    startActivityForResult(intent, 1);
-		    	}
-		    });
-            button.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    slideMenu.switchMenu();
-                }
-            });
-            baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener()
-            {
-                @Override
-                public boolean onMarkerClick(Marker marker)
-                {
-                    final MapDataBase mydataBase = (MapDataBase) marker.getExtraInfo().get("MapDataBase");
-                    if (mydataBase.isClickable()==false)
-                        return true;
-                    if (markerOnMap!=null)
-                        markerOnMap.remove();
-                    if (eventOnMap!=null)
-                        updateOverlay(eventOnMap);
-                    eventOnMap=mydataBase;
-                    marker.remove();
-                    LinearLayout layout=(LinearLayout)findViewById(R.id.layout_infotop);
-                    layout.setVisibility(View.VISIBLE);
-                    LatLng ll = new LatLng(mydataBase.getLatitude(),mydataBase.getLongtitude());
-                    TextView infoUsername = (TextView)findViewById(R.id.info_username);
-                    infoUsername.setText("Name: " + mydataBase.getUsername());
-                    TextView infoDepartment = (TextView)findViewById(R.id.info_department);
-                    infoDepartment.setText("Department: " + mydataBase.getDepartment());
-                    TextView infoTime = (TextView)findViewById(R.id.info_time);
-                    infoTime.setText("Time: " + mydataBase.getStartTime() + " - " + mydataBase.getEndTime());
-                    String color;
-                    if (mydataBase.getType().equals("study"))
-                    {
-                        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_study_mark);
-                        MapDataBase temp  = new MapDataBase();
-                        temp.setClickable(false);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("MapDataBase",temp);
-                        OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
-                        markerOnMap = (Marker) baiduMap.addOverlay(option);
-                        color="#ff0000";
-                    }
-                    else if (mydataBase.getType().equals("food"))
-                    {
-                        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_food_mark);
-                        MapDataBase temp  = new MapDataBase();
-                        temp.setClickable(false);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("MapDataBase",temp);
-                        OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
-                        markerOnMap = (Marker) baiduMap.addOverlay(option);
-                        color="#00ff00";
-                    }
-                    else if (mydataBase.getType().equals("sport"))
-                    {
-                        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_sport_mark);
-                        MapDataBase temp  = new MapDataBase();
-                        temp.setClickable(false);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("MapDataBase",temp);
-                        OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
-                        markerOnMap = (Marker) baiduMap.addOverlay(option);
-                        color="#0000ff";
-                    }
-                    else
-                    {
-                        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_enjoyment_mark);
-                        MapDataBase temp  = new MapDataBase();
-                        temp.setClickable(false);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("MapDataBase",temp);
-                        OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
-                        markerOnMap = (Marker) baiduMap.addOverlay(option);
-                        color="#ff00ff";
-                    }
-                    infoUsername.setTextColor(Color.parseColor(color));
-                    infoDepartment.setTextColor(Color.parseColor(color));
-                    infoTime.setTextColor(Color.parseColor(color));
-                    //Add InfoWindow
-                    baiduMap.hideInfoWindow();
-                    Button button = new Button(getApplicationContext());
-                    button.setText(mydataBase.getTitle());
-                    button.setAllCaps(false);
-                    InfoWindow mInfoWindow = new InfoWindow(button, ll, -170);
-                    baiduMap.showInfoWindow(mInfoWindow);
-                    return true;
-                }
-            });
+            isPermitted = true;
         }
     }
     @Override
@@ -351,7 +241,120 @@ public class MapActivity extends BaseActivity
     @Override
     protected void initListener()
     {
-
+        if (isPermitted == false)
+            return;
+        //对"+"按钮的监听button_add
+        TextView footprint = (TextView) findViewById(R.id.menu_footprint);
+        footprint.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MapActivity.this,FootprintActivity.class);
+                intent.putExtra("UserEmail",userEmail);
+                startActivity(intent);
+            }
+        });
+        Button button_add=(Button)findViewById(R.id.button_add);
+        button_add.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //baiduMap.clear();   //清除marker
+                Intent intent = new Intent(MapActivity.this,MapSearchActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                slideMenu.switchMenu();
+            }
+        });
+        baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener()
+        {
+            @Override
+            public boolean onMarkerClick(Marker marker)
+            {
+                final MapDataBase mydataBase = (MapDataBase) marker.getExtraInfo().get("MapDataBase");
+                if (mydataBase.isClickable()==false)
+                    return true;
+                if (markerOnMap!=null)
+                    markerOnMap.remove();
+                if (eventOnMap!=null)
+                    updateOverlay(eventOnMap);
+                eventOnMap=mydataBase;
+                marker.remove();
+                LinearLayout layout=(LinearLayout)findViewById(R.id.layout_infotop);
+                layout.setVisibility(View.VISIBLE);
+                LatLng ll = new LatLng(mydataBase.getLatitude(),mydataBase.getLongtitude());
+                TextView infoUsername = (TextView)findViewById(R.id.info_username);
+                infoUsername.setText("Name: " + mydataBase.getUsername());
+                TextView infoDepartment = (TextView)findViewById(R.id.info_department);
+                infoDepartment.setText("Department: " + mydataBase.getDepartment());
+                TextView infoTime = (TextView)findViewById(R.id.info_time);
+                infoTime.setText("Time: " + mydataBase.getStartTime() + " - " + mydataBase.getEndTime());
+                String color;
+                if (mydataBase.getType().equals("study"))
+                {
+                    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_study_mark);
+                    MapDataBase temp  = new MapDataBase();
+                    temp.setClickable(false);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("MapDataBase",temp);
+                    OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
+                    markerOnMap = (Marker) baiduMap.addOverlay(option);
+                    color="#ff0000";
+                }
+                else if (mydataBase.getType().equals("food"))
+                {
+                    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_food_mark);
+                    MapDataBase temp  = new MapDataBase();
+                    temp.setClickable(false);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("MapDataBase",temp);
+                    OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
+                    markerOnMap = (Marker) baiduMap.addOverlay(option);
+                    color="#00ff00";
+                }
+                else if (mydataBase.getType().equals("sport"))
+                {
+                    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_sport_mark);
+                    MapDataBase temp  = new MapDataBase();
+                    temp.setClickable(false);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("MapDataBase",temp);
+                    OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
+                    markerOnMap = (Marker) baiduMap.addOverlay(option);
+                    color="#0000ff";
+                }
+                else
+                {
+                    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_enjoyment_mark);
+                    MapDataBase temp  = new MapDataBase();
+                    temp.setClickable(false);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("MapDataBase",temp);
+                    OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
+                    markerOnMap = (Marker) baiduMap.addOverlay(option);
+                    color="#ff00ff";
+                }
+                infoUsername.setTextColor(Color.parseColor(color));
+                infoDepartment.setTextColor(Color.parseColor(color));
+                infoTime.setTextColor(Color.parseColor(color));
+                //Add InfoWindow
+                baiduMap.hideInfoWindow();
+                Button button = new Button(getApplicationContext());
+                button.setText(mydataBase.getTitle());
+                button.setAllCaps(false);
+                InfoWindow mInfoWindow = new InfoWindow(button, ll, -170);
+                baiduMap.showInfoWindow(mInfoWindow);
+                return true;
+            }
+        });
     }
     @Override
     protected void  onResume(){

@@ -68,35 +68,6 @@ public class GuideActivity extends BaseActivity
                 System.out.println("距离：" + mPaintDis);
             }
         });
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
-        {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-            {
-                int leftMargin = (int) (mPaintDis * positionOffset) + position * mPaintDis;
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ivRedPoint.getLayoutParams();
-                params.leftMargin = leftMargin;
-                ivRedPoint.setLayoutParams(params);
-            }
-            @Override
-            public void onPageSelected(int position)
-            {
-                System.out.println("position:" + position);
-                if (position == mImageViewList.size() - 1)
-                {
-                    start_btn.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    start_btn.setVisibility(View.GONE);
-                }
-            }
-            @Override
-            public void onPageScrollStateChanged(int state)
-            {
-                System.out.println("state:" + state);
-            }
-        });
     }
     class GuideAdapter extends PagerAdapter
     {
@@ -151,7 +122,35 @@ public class GuideActivity extends BaseActivity
     @Override
     protected void initListener()
     {
-
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
+        {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+            {
+                int leftMargin = (int) (mPaintDis * positionOffset) + position * mPaintDis;
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ivRedPoint.getLayoutParams();
+                params.leftMargin = leftMargin;
+                ivRedPoint.setLayoutParams(params);
+            }
+            @Override
+            public void onPageSelected(int position)
+            {
+                System.out.println("position:" + position);
+                if (position == mImageViewList.size() - 1)
+                {
+                    start_btn.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    start_btn.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onPageScrollStateChanged(int state)
+            {
+                System.out.println("state:" + state);
+            }
+        });
     }
 }
 

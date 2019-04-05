@@ -29,6 +29,15 @@ public class RegisterActivity extends BaseActivity
     protected void initView()
     {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+    @Override
+    protected int initLayout()
+    {
+        return R.layout.activity_register;
+    }
+    @Override
+    protected void initListener()
+    {
         EditText pass = (EditText) findViewById(R.id.register_password);
         pass.setTypeface(Typeface.DEFAULT);
         pass.setTransformationMethod(new PasswordTransformationMethod());
@@ -94,16 +103,6 @@ public class RegisterActivity extends BaseActivity
                 }
             }
         });
-    }
-    @Override
-    protected int initLayout()
-    {
-        return R.layout.activity_register;
-    }
-    @Override
-    protected void initListener()
-    {
-
     }
     @Override
     protected void initData()

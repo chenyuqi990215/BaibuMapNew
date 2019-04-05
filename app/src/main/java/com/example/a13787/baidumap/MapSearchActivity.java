@@ -61,6 +61,10 @@ public class MapSearchActivity extends BaseActivity
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
         requestLocation();
+    }
+    @Override
+    protected void initListener()
+    {
         Button searchButton = (Button) findViewById(R.id.search_button);
         searchButton.setOnClickListener(new View.OnClickListener()
         {
@@ -145,11 +149,6 @@ public class MapSearchActivity extends BaseActivity
                 return true;
             }
         });
-    }
-    @Override
-    protected void initListener()
-    {
-
     }
     @Override
     protected void initData()

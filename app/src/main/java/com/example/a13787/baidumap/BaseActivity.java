@@ -59,6 +59,7 @@ public abstract class BaseActivity extends AppCompatActivity
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(initLayout());
         initView();
+        initListener();
     }
     @Override
     protected void onResume()

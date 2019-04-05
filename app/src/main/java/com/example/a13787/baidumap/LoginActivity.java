@@ -71,6 +71,16 @@ public class LoginActivity extends BaseActivity
     {
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
+        mLoginFormView = findViewById(R.id.login_form);
+    }
+    @Override
+    protected int initLayout()
+    {
+        return R.layout.activity_login;
+    }
+    @Override
+    protected void initListener()
+    {
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
             @Override
@@ -104,17 +114,6 @@ public class LoginActivity extends BaseActivity
                 finish();
             }
         });
-        mLoginFormView = findViewById(R.id.login_form);
-    }
-    @Override
-    protected int initLayout()
-    {
-        return R.layout.activity_login;
-    }
-    @Override
-    protected void initListener()
-    {
-
     }
     @Override
     protected void initData()
