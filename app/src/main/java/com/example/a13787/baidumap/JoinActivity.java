@@ -42,7 +42,7 @@ public class JoinActivity extends BaseActivity {
         date.setText("2019.3.15 18:00 -- 19:00");
         TextView location = (TextView) findViewById(R.id.join_location);
         location.setText("playgound");
-        TextView sex = (TextView) findViewById(R.id.detail_sex);
+        TextView sex = (TextView) findViewById(R.id.join_sex);
         sex.setText("all");
     }
     @Override

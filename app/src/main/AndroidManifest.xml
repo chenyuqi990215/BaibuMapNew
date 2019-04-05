@@ -23,7 +23,7 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="jOFL7xPZeZlXETBTrb7romUG3Aq4gcZB" />
 
-        <activity android:name=".JoinActivity">
+        <activity android:name=".GuideActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,7 +41,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MapSearchActivity" />
         <activity android:name=".FootprintActivity" />
-        <activity android:name=".GuideActivity"></activity>
+        <activity android:name=".JoinActivity"></activity>
     </application>
 
 </manifest>
