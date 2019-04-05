@@ -13,11 +13,11 @@ import java.util.List;
  * Created by 13787 on 2019/4/4.
  */
 
-public class FootprintAdapter extends ArrayAdapter<ActivityDataBase>
+public class ActivityAdapter extends ArrayAdapter<ActivityDataBase>
 { //创建自定义适配器，继承自ArrayAdapter，并将泛型指定为fruit类
     private int resourceId;
 
-    public FootprintAdapter(Context context, int textViewResourceId, List<ActivityDataBase> objects)
+    public ActivityAdapter(Context context, int textViewResourceId, List<ActivityDataBase> objects)
     { //重写父类构造函数，获取相关布局
             super(context, textViewResourceId,objects);
             resourceId = textViewResourceId;
