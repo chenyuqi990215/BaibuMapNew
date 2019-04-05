@@ -10,7 +10,7 @@
         android:orientation="horizontal">
         <Button
             android:layout_marginLeft="10dp"
-            android:id="@+id/detail_back"
+            android:id="@+id/join_back"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_marginTop="-5dp"
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="My Footprint"
+            android:text="View Detail"
             android:textColor="#8078e0"
             android:gravity="center"
             android:textSize="30dp"/>
@@ -34,7 +34,7 @@
         android:layout_marginRight="30dp"
         android:weightSum="1">
         <ImageView
-            android:id="@+id/detail_header"
+            android:id="@+id/join_header"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="fill_vertical"
@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/detail_name"
+                android:id="@+id/join_name"
                 android:hint="Name"
                 android:textSize="20dp"
                 android:layout_marginTop="10dp"
@@ -61,7 +61,7 @@
                 android:gravity="center"
                 android:layout_weight="0.69">
                 <TextView
-                    android:id="@+id/detail_school"
+                    android:id="@+id/join_school"
                     android:hint="School"
                     android:layout_width="match_parent"
                     android:layout_marginRight="2dp"
@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
                 <TextView
-                    android:id="@+id/detail_department"
+                    android:id="@+id/join_department"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:textColor="#606060"
@@ -87,7 +87,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
         <TextView
-            android:id="@+id/detail_type"
+            android:id="@+id/join_type"
             android:text="Type"
             android:textColor="#8078e0"
             android:gravity="center"
@@ -97,7 +97,7 @@
 
         <TextView
             android:hint="Title"
-            android:id="@+id/detail_title"
+            android:id="@+id/join_title"
             android:gravity="left|center_vertical"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -109,7 +109,7 @@
 
     <TextView
         android:layout_marginTop="5dp"
-        android:id="@+id/detail_content"
+        android:id="@+id/join_content"
         android:hint="Content"
         android:textSize="20dp"
         android:textColor="#606060"
@@ -131,7 +131,7 @@
             android:background="@drawable/footprint_time"/>
 
         <TextView
-            android:id="@+id/detail_date"
+            android:id="@+id/join_date"
             android:hint="Date"
             android:textSize="15dp"
             android:textColor="#707070"
@@ -152,7 +152,7 @@
             android:layout_height="15dp"
             android:background="@drawable/footfrint_position"/>
         <TextView
-            android:id="@+id/detail_location"
+            android:id="@+id/join_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Position"
@@ -173,7 +173,7 @@
             android:layout_height="15dp"
             android:background="@drawable/footprint_sex"/>
         <TextView
-            android:id="@+id/detail_sex"
+            android:id="@+id/join_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Sex"
@@ -187,14 +187,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@drawable/detail_background"
+        android:background="@drawable/join_background"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:text="活动成员"
             android:textSize="20dp"
             android:textColor="#8078e0"
@@ -203,7 +203,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:id="@+id/list_View"
+            android:id="@+id/join_listview"
             android:divider="@null"
             >
         </ListView>
@@ -212,10 +212,11 @@
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/join_confirm"
         android:text="参与"
         android:gravity="center"
         android:textColor="#8078e0"
         android:layout_marginTop="20dp"
-        android:background="@drawable/detail_background2"/>
+        android:background="@drawable/join_background2"/>
 
 </LinearLayout>
