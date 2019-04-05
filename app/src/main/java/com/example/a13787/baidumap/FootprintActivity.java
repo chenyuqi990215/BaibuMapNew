@@ -23,7 +23,17 @@ public class FootprintActivity extends BaseActivity
     @Override
     protected void initListener()
     {
-
+        Button back = (Button) findViewById(R.id.footprint_back);
+        back.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(FootprintActivity.this, MapActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     @Override
     protected int initLayout()
@@ -36,17 +46,6 @@ public class FootprintActivity extends BaseActivity
         FootprintAdapter adapter = new FootprintAdapter(FootprintActivity.this,R.layout.layout_footprint,activityList); //创建ArrayAdapter方法
         ListView listView = (ListView) findViewById(R.id.footprint_listview);
         listView.setAdapter(adapter);//将创建的方法作为适配器传递给listview
-        Button back = (Button) findViewById(R.id.footprint_back);
-        back.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent=new Intent(FootprintActivity.this, MapActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
     @Override
     protected void initData()
