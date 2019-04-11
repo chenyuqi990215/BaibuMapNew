@@ -120,6 +120,7 @@ public class MapSearchActivity extends BaseActivity
             {
                 Intent intent = new Intent();
                 setResult(RESULT_CANCELED,intent);
+                finish();
             }
         });
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
@@ -152,16 +153,6 @@ public class MapSearchActivity extends BaseActivity
                 selectOnMap = (Marker) baiduMap.addOverlay(option);
                 Button buttonConfirm = (Button) findViewById(R.id.search_confirm);
                 buttonConfirm.setVisibility(View.VISIBLE);
-                buttonConfirm.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Log.d("Confirm Key",searchDataBase.getKey());
-                        Log.d("Confirm longitude",searchDataBase.getLongitude()+"");
-                        Log.d("Confirm latitude",searchDataBase.getLatitude()+"");
-                    }
-                });
                 return true;
             }
         });

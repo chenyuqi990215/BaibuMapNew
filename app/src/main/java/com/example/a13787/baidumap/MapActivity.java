@@ -77,7 +77,7 @@ public class MapActivity extends BaseActivity
             String[] permissions=permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(MapActivity.this,permissions,1);
         }
-        else
+        if (permissionList.isEmpty())
         {
             requestLocation();
             initData();   //模拟数据

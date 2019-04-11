@@ -41,8 +41,9 @@
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:background="@drawable/ic_title"
                     />
                 <TextView
@@ -51,12 +52,13 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动标题"
                     android:textColor="#8078e0"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     />
                 <EditText
                     android:id="@+id/add_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="15dp"
                     android:hint="请输入标题"
                     android:maxLines="1"/>
             </LinearLayout>
@@ -68,8 +70,9 @@
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:background="@drawable/ic_type"
                     />
 
@@ -79,7 +82,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动类型"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:id="@+id/textView" />
 
                 <RadioGroup
@@ -137,8 +140,9 @@
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:background="@drawable/ic_clock"
                     />
                 <TextView
@@ -147,52 +151,62 @@
                     android:textColor="#8078e0"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动时间"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     />
                 <EditText
                     android:id="@+id/add_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="15dp"
                     android:hint="请输入时间"
                     android:maxLines="1"/>
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/add_relative"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:orientation="horizontal">
+                android:layout_marginRight="20dp">
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
+                    android:id="@+id/add_ic"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/ic_location"
                     />
                 <TextView
+                    android:layout_toRightOf="@id/add_ic"
+                    android:id="@+id/add_text"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:textColor="#8078e0"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动地点"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     />
                 <TextView
+                    android:layout_toRightOf="@id/add_text"
                     android:id="@+id/add_location"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:hint="请选择地点"
-                    android:textSize="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="15dp"
                     android:gravity="center_vertical"
-                    android:maxLines="1"/>
+                    android:maxLines="3"/>
                 <ImageView
+                    android:layout_alignParentRight="true"
                     android:id="@+id/add_map"
+                    android:layout_marginTop="15dp"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:background="@drawable/ic_map"
                     />
-            </LinearLayout>
+            </RelativeLayout>
 
 
 
@@ -203,8 +217,9 @@
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:background="@drawable/ic_sex"
                     />
                 <TextView
@@ -213,7 +228,7 @@
                     android:textColor="#8078e0"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="邀约对象"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     />
                 <RadioGroup
                     android:id="@+id/add_sex"
@@ -262,8 +277,9 @@
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:background="@drawable/ic_content"
                     />
                 <TextView
@@ -272,13 +288,14 @@
                     android:textColor="#8078e0"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动描述"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     />
                 <EditText
                     android:id="@+id/add_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="请描述活动"
+                    android:textSize="15dp"
                     android:maxLines="2"/>
             </LinearLayout>
 
