@@ -1,6 +1,6 @@
 package com.example.a13787.baidumap;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +50,7 @@ public class MapSearchActivity extends BaseActivity
     @Override
     protected int initLayout()
     {
-        return R.layout.activity_serach;
+        return R.layout.activity_search;
     }
     @Override
     protected void initView()
@@ -104,6 +104,22 @@ public class MapSearchActivity extends BaseActivity
                 Log.d("Confirm Key",curSearchData.getKey());
                 Log.d("Confirm longitude",curSearchData.getLongitude()+"");
                 Log.d("Confirm latitude",curSearchData.getLatitude()+"");
+                Intent intent = new Intent();
+                intent.putExtra("location",curSearchData.getKey());
+                intent.putExtra("longitude",curSearchData.getLongitude());
+                intent.putExtra("latitude",curSearchData.getLatitude());
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+        });
+        final Button buttonBack = (Button) findViewById(R.id.search_back);
+        buttonBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent();
+                setResult(RESULT_CANCELED,intent);
             }
         });
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {

@@ -41,7 +41,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MapSearchActivity" />
         <activity android:name=".FootprintActivity" />
-        <activity android:name=".JoinActivity"></activity>
+        <activity android:name=".JoinActivity" />
+        <activity android:name=".AddActivity"></activity>
     </application>
 
 </manifest>
