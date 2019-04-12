@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e9eafd"
->
+    android:background="#e9eafd">
     <LinearLayout
+        android:id="@+id/map_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
         android:orientation="horizontal">
         <Button
             android:layout_marginLeft="10dp"
             android:id="@+id/slide_enter"
+            android:layout_gravity="center_vertical"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/button_btn"
@@ -27,27 +26,27 @@
             android:textSize="30dp"/>
     </LinearLayout>
     <com.baidu.mapapi.map.MapView
+        android:layout_below="@id/map_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/bmapView"
         android:clickable="true" />
     <Button
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/button_add"
         android:background="@drawable/add"
-        android:layout_marginTop="-55dp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_marginBottom="20dp"/>
     <LinearLayout
         android:visibility="gone"
+        android:layout_below="@id/map_top"
+        android:layout_margin="15dp"
         android:id="@+id/layout_infotop"
         android:background="@drawable/background_top"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="-550dp"
-        android:layout_gravity="center_vertical"
         android:layout_height="90dp">
 
         <TextView
@@ -59,9 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:id="@+id/info_time"
-            />
-
+            android:id="@+id/info_time"/>
         <TextView
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -71,7 +68,6 @@
             android:id="@+id/info_username"
             android:textSize="15sp"
             android:text="name: " />
-
         <TextView
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -83,4 +79,4 @@
             android:textSize="15sp"
             android:id="@+id/info_department" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
