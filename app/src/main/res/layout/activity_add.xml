@@ -65,7 +65,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
@@ -88,49 +88,27 @@
                 <RadioGroup
                     android:id="@+id/add_type"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:layout_marginTop="4dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="1">
-                            <RadioButton
-                                android:id="@+id/add_enjoyment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="娱乐"/>
-                            <RadioButton
-                                android:id="@+id/add_food"
-                                android:layout_marginLeft="40dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="美食"
-                                android:layout_weight="0.44" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <RadioButton
-                                android:id="@+id/add_sport"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="运动"/>
-                            <RadioButton
-                                android:layout_marginLeft="40dp"
-                                android:id="@+id/add_study"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="学习"
-                                />
-                        </LinearLayout>
-                    </LinearLayout>
+                    android:layout_height="130dp">
+                    <RadioButton
+                        android:id="@+id/add_enjoyment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="娱乐"/>
+                    <RadioButton
+                        android:id="@+id/add_food"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="美食" />
+                    <RadioButton
+                        android:id="@+id/add_sport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="运动"/>
+                    <RadioButton
+                        android:id="@+id/add_study"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="学习" />
                 </RadioGroup>
             </LinearLayout>
             <LinearLayout
@@ -212,7 +190,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
@@ -233,41 +211,22 @@
                 <RadioGroup
                     android:id="@+id/add_sex"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:layout_marginTop="4dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <RadioButton
-                                android:id="@+id/add_male"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="男性"/>
-                            <RadioButton
-                                android:id="@+id/add_female"
-                                android:layout_marginLeft="40dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="女性"
-                                />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_marginTop="5dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <RadioButton
-                                android:id="@+id/add_all"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="男女均可"/>
-                        </LinearLayout>
-                    </LinearLayout>
+                    android:layout_height="100dp">
+                    <RadioButton
+                        android:id="@+id/add_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="男性"/>
+                    <RadioButton
+                        android:id="@+id/add_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="女性" />
+                    <RadioButton
+                        android:id="@+id/add_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="男女均可"/>
                 </RadioGroup>
             </LinearLayout>
             <LinearLayout
