@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +47,8 @@ public class JoinActivity extends BaseActivity {
         location.setText("playgound");
         TextView sex = (TextView) findViewById(R.id.join_sex);
         sex.setText("all");
+        TextView title = (TextView) findViewById(R.id.join_title);
+        title.setText("run");
     }
     @Override
     protected void initData() { //初始化类中所有数据
