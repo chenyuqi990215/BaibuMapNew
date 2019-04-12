@@ -127,6 +127,7 @@ public class MapSearchActivity extends BaseActivity
             @Override
             public boolean onMarkerClick(Marker marker)
             {
+                Log.d("Detect", "Marker click");
                 final SearchDataBase searchDataBase = (SearchDataBase) marker.getExtraInfo().get("SearchDataBase");
                 curSearchData = new SearchDataBase();
                 curSearchData.setLongitude(searchDataBase.getLongitude());
@@ -164,11 +165,16 @@ public class MapSearchActivity extends BaseActivity
     }
     OnGetSuggestionResultListener listenerSearch = new OnGetSuggestionResultListener() {
         public void onGetSuggestionResult(SuggestionResult res) {
+            baiduMap.clear();
+            searchOnMap = null;
+            curSearchData = null;
+            selectOnMap = null;
+            Button buttonconfirm = (Button) findViewById(R.id.search_confirm);
+            buttonconfirm.setVisibility(View.GONE);
             if (res == null || res.getAllSuggestions() == null) {
                 Log.d("error","error");
                 return;
             } else {
-                baiduMap.clear();
                 List<SuggestionResult.SuggestionInfo> resl = res.getAllSuggestions();
                 for (int i = 0; i < resl.size(); i++)
                 {
