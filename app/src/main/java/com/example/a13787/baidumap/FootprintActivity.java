@@ -41,7 +41,7 @@ public class FootprintActivity extends BaseActivity
     @Override
     protected void initView()
     {
-        ActivityAdapter adapter = new ActivityAdapter(FootprintActivity.this,R.layout.layout_footprint,activityList); //创建ArrayAdapter方法
+        ActivityAdapter adapter = new ActivityAdapter(FootprintActivity.this,R.layout.layout_activity,activityList); //创建ArrayAdapter方法
         ListView listView = (ListView) findViewById(R.id.footprint_listview);
         listView.setAdapter(adapter);//将创建的方法作为适配器传递给listview
     }

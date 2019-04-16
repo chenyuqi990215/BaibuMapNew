@@ -239,8 +239,6 @@ public class MapActivity extends BaseActivity
     @Override
     protected void initListener()
     {
-        if (isPermitted == false)
-            return;
         //对"+"按钮的监听button_add
         TextView footprint = (TextView) findViewById(R.id.menu_footprint);
         footprint.setOnClickListener(new View.OnClickListener()
@@ -249,6 +247,17 @@ public class MapActivity extends BaseActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MapActivity.this,FootprintActivity.class);
+                intent.putExtra("UserEmail",userEmail);
+                startActivity(intent);
+            }
+        });
+        TextView me = (TextView) findViewById(R.id.menu_me);
+        me.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MapActivity.this,InfoActivity.class);
                 intent.putExtra("UserEmail",userEmail);
                 startActivity(intent);
             }

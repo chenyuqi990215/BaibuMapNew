@@ -43,7 +43,8 @@
         <activity android:name=".FootprintActivity" />
         <activity android:name=".JoinActivity" />
         <activity android:name=".AddActivity" />
-        <activity android:name=".InfoActivity"></activity>
+        <activity android:name=".InfoActivity" />
+        <activity android:name=".ParticipateActivity"></activity>
     </application>
 
 </manifest>
