@@ -34,10 +34,10 @@
     <Button
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:id="@+id/button_add"
-        android:background="@drawable/add"
+        android:background="@drawable/icon_add"
         android:layout_marginBottom="20dp"/>
     <LinearLayout
         android:visibility="gone"

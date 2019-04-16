@@ -44,14 +44,14 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:background="@drawable/ic_title"
+                    android:background="@drawable/icon_tag"
                     />
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动标题"
-                    android:textColor="#8078e0"
+                    android:textColor="#101010"
                     android:textSize="15dp"
                     />
                 <EditText
@@ -73,12 +73,12 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:background="@drawable/ic_type"
+                    android:background="@drawable/icon_clip"
                     />
 
                 <TextView
                     android:layout_width="100dp"
-                    android:textColor="#8078e0"
+                    android:textColor="#101010"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动类型"
@@ -121,12 +121,12 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:background="@drawable/ic_clock"
+                    android:background="@drawable/icon_clock"
                     />
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:textColor="#8078e0"
+                    android:textColor="#101010"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动时间"
                     android:textSize="15dp"
@@ -152,14 +152,14 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="15dp"
-                    android:background="@drawable/ic_location"
+                    android:background="@drawable/icon_house"
                     />
                 <TextView
                     android:layout_toRightOf="@id/add_ic"
                     android:id="@+id/add_text"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:textColor="#8078e0"
+                    android:textColor="#101010"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动地点"
                     android:textSize="15dp"
@@ -182,7 +182,7 @@
                     android:layout_height="40dp"
                     android:layout_marginRight="10dp"
                     android:layout_gravity="center_vertical|center_horizontal"
-                    android:background="@drawable/ic_map"
+                    android:background="@drawable/icon_place"
                     />
             </RelativeLayout>
 
@@ -198,12 +198,12 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:background="@drawable/ic_sex"
+                    android:background="@drawable/icon_depart"
                     />
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:textColor="#8078e0"
+                    android:textColor="#101010"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="邀约对象"
                     android:textSize="15dp"
@@ -239,12 +239,12 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:background="@drawable/ic_content"
+                    android:background="@drawable/icon_chat"
                     />
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:textColor="#8078e0"
+                    android:textColor="#101010"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="活动描述"
                     android:textSize="15dp"
