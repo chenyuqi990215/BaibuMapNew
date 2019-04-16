@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/login_header"
+        android:id="@+id/imageView5" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_portraint"
+        android:id="@+id/info_portraint" />
+    <TextView
+        android:id="@+id/info_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="姓名"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/icon_nickname"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:id="@+id/info_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#101010"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="昵称"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/icon_tag"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/info_sex"
+            android:textSize="20dp"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:textColor="#101010"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="性别"
+            />
+        <TextView
+            android:id="@+id/info_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#101010"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="年龄"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/icon_birth"
+            android:layout_marginLeft="20dp"
+            />
+
+        <TextView
+            android:id="@+id/info_birth"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#101010"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="生日（yyyy-mm-dd）"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/icon_house"
+            android:layout_marginLeft="20dp"
+            />
+
+        <TextView
+            android:id="@+id/info_school"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#101010"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="学校"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/icon_depart"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/info_depart"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#101010"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:text="院系"
+            />
+
+
+
+    </LinearLayout>
+</LinearLayout>

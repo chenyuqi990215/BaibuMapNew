@@ -7,10 +7,13 @@
     android:orientation="vertical"
     android:background="#ffffff"
     tools:context="com.example.a13787.baidumap.LoginActivity">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/login_header"/>
+        android:background="@drawable/login_header"
+        android:id="@+id/imageView5" />
+
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"

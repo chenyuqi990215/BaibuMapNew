@@ -9,8 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 public class InfoActivity extends BaseActivity {
 
     @Override
@@ -86,7 +84,7 @@ public class InfoActivity extends BaseActivity {
         department.setText("软件工程");
         final TextView sex = (TextView) findViewById(R.id.info_sex);
         sex.setText("男");
-        final TextView age = (TextView) findViewById(R.id.info_year);
+        final TextView age = (TextView) findViewById(R.id.info_age);
         age.setText("secret");
         age.setOnClickListener(new View.OnClickListener()
         {
@@ -122,6 +120,6 @@ public class InfoActivity extends BaseActivity {
     @Override
     protected int initLayout()
     {
-        return R.id.activity_info;
+        return R.layout.activity_info;
     }
 }
