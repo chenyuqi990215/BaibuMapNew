@@ -262,6 +262,17 @@ public class MapActivity extends BaseActivity
                 startActivity(intent);
             }
         });
+        TextView activity = (TextView) findViewById(R.id.menu_activity);
+        activity.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MapActivity.this,ParticipateActivity.class);
+                intent.putExtra("UserEmail",userEmail);
+                startActivity(intent);
+            }
+        });
         Button button_add=(Button)findViewById(R.id.button_add);
         button_add.setOnClickListener(new View.OnClickListener()
         {
