@@ -4,17 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@drawable/login_header"
-        android:id="@+id/imageView5" />
+        android:background="@drawable/login_header" />
+
+    <Button
+        android:id="@+id/info_back"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="-85dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back"/>
 
     <ImageView
         android:layout_width="70dp"
-        android:layout_height="72dp"
+        android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="65dp"
         android:background="@drawable/login_portraint"
         android:id="@+id/info_portraint" />
     <TextView

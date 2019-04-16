@@ -1,10 +1,12 @@
 package com.example.a13787.baidumap;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,11 @@ public class InfoActivity extends BaseActivity {
     }
     @Override
     protected void initView()
+    {
+
+    }
+    @Override
+    protected void initListener()
     {
         final TextView username = (TextView) findViewById(R.id.info_user);
         username.setText("cyq");
@@ -111,11 +118,17 @@ public class InfoActivity extends BaseActivity {
                         .setNegativeButton("取消",null).show();
             }
         });
-    }
-    @Override
-    protected void initListener()
-    {
-
+        Button back = (Button) findViewById(R.id.info_back);
+        back.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(InfoActivity.this,MapActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     @Override
     protected int initLayout()
