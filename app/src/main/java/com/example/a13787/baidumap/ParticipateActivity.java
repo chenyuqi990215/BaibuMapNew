@@ -21,6 +21,7 @@ public class ParticipateActivity extends BaseActivity
     private boolean button_join = false;
     private ListView listView = null;
     private ActivityAdapter adapter = null;
+    private boolean first = true;
     private List<ActivityDataBase> activityList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,14 +51,7 @@ public class ParticipateActivity extends BaseActivity
             {
                 button_me = true;
                 button_join = false;
-                ImageView imageView = (ImageView) findViewById(R.id.participate_icon_my);
-                imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.icon_love));
-                imageView = (ImageView) findViewById(R.id.participate_icon_join);
-                imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.icon_star_unclick));
-                TextView textView = (TextView) findViewById(R.id.participate_text_my);
-                textView.setTextColor(Color.parseColor("#8078e0"));
-                textView = (TextView) findViewById(R.id.participate_text_join);
-                textView.setTextColor(Color.parseColor("#c8c8c8"));
+                initView();
                 initData();
             }
         });
@@ -69,14 +63,7 @@ public class ParticipateActivity extends BaseActivity
             {
                 button_me = false;
                 button_join = true;
-                ImageView imageView = (ImageView) findViewById(R.id.participate_icon_join);
-                imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.icon_star));
-                imageView = (ImageView) findViewById(R.id.participate_icon_my);
-                imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.icon_love_unclick));
-                TextView textView = (TextView) findViewById(R.id.participate_text_join);
-                textView.setTextColor(Color.parseColor("#8078e0"));
-                textView = (TextView) findViewById(R.id.participate_text_my);
-                textView.setTextColor(Color.parseColor("#c8c8c8"));
+                initView();
                 initData();
             }
         });
@@ -89,9 +76,35 @@ public class ParticipateActivity extends BaseActivity
     @Override
     protected void initView()
     {
-        adapter = new ActivityAdapter(ParticipateActivity.this,R.layout.layout_activity,activityList); //创建ArrayAdapter方法
-        listView = (ListView) findViewById(R.id.participate_listview);
-        listView.setAdapter(adapter);//将创建的方法作为适配器传递给listview
+        if (first == true)
+        {
+            adapter = new ActivityAdapter(ParticipateActivity.this,R.layout.layout_activity,activityList); //创建ArrayAdapter方法
+            listView = (ListView) findViewById(R.id.participate_listview);
+            listView.setAdapter(adapter);//将创建的方法作为适配器传递给listview
+            first = false;
+        }
+        if (button_me == true)
+        {
+            ImageView imageView = (ImageView) findViewById(R.id.participate_icon_my);
+            imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_love));
+            imageView = (ImageView) findViewById(R.id.participate_icon_join);
+            imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_star_unclick));
+            TextView textView = (TextView) findViewById(R.id.participate_text_my);
+            textView.setTextColor(Color.parseColor("#8078e0"));
+            textView = (TextView) findViewById(R.id.participate_text_join);
+            textView.setTextColor(Color.parseColor("#c8c8c8"));
+        }
+        else if (button_join)
+        {
+            ImageView imageView = (ImageView) findViewById(R.id.participate_icon_join);
+            imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_star));
+            imageView = (ImageView) findViewById(R.id.participate_icon_my);
+            imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_love_unclick));
+            TextView textView = (TextView) findViewById(R.id.participate_text_join);
+            textView.setTextColor(Color.parseColor("#8078e0"));
+            textView = (TextView) findViewById(R.id.participate_text_my);
+            textView.setTextColor(Color.parseColor("#c8c8c8"));
+        }
     }
     @Override
     protected void initData()
@@ -99,6 +112,7 @@ public class ParticipateActivity extends BaseActivity
         // 初始化类中所有数据
         if (button_me == true)
         {
+            activityList.clear();
             ActivityDataBase item1 = new ActivityDataBase();
             item1.setName("cyq");
             item1.setSchool("华东师范大学");
@@ -125,6 +139,7 @@ public class ParticipateActivity extends BaseActivity
         }
         else if (button_join)
         {
+            activityList.clear();
             ActivityDataBase item3 = new ActivityDataBase();
             item3.setName("cyq");
             item3.setSchool("华东师范大学");
