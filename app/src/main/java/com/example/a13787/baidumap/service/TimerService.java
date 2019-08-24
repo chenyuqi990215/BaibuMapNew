@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.activity.MapActivity;
+import com.example.a13787.baidumap.activity.ParticipateActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -42,7 +43,7 @@ public class TimerService extends Service {
                         int importance = NotificationManager.IMPORTANCE_HIGH;
                         NotificationChannel mChannel = new NotificationChannel(id, name, importance);
                         mNotificationManager.createNotificationChannel(mChannel);
-                        Intent notificationIntent = new Intent(TimerService.this,MapActivity.class);//点击跳转位置
+                        Intent notificationIntent = new Intent(TimerService.this,ParticipateActivity.class);//点击跳转位置
                         PendingIntent contentIntent = PendingIntent.getActivity(TimerService.this,0,notificationIntent,0);
                         Notification notification = new Notification.Builder(TimerService.this,id)
                                 .setContentIntent(contentIntent)
@@ -57,13 +58,13 @@ public class TimerService extends Service {
                     else
                     {
                         NotificationManager mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-                        Intent notificationIntent = new Intent(TimerService.this,MapActivity.class);//点击跳转位置
+                        Intent notificationIntent = new Intent(TimerService.this,ParticipateActivity.class);//点击跳转位置
                         PendingIntent contentIntent = PendingIntent.getActivity(TimerService.this,0,notificationIntent,0);
                         Notification.Builder builder = new Notification.Builder(TimerService.this)
                                 .setContentIntent(contentIntent)
                                 .setSmallIcon(R.mipmap.ic_launcher)
-                                .setContentText("Text") //下拉通知啦内容
-                                .setContentTitle("Title")//下拉通知栏标题
+                                .setContentText("提醒") //下拉通知啦内容
+                                .setContentTitle("你有一个活动即将开始，请点击查看")//下拉通知栏标题
                                 .setAutoCancel(true);
                         Notification notification = builder.build();
                         mNotificationManager.notify((int)System.currentTimeMillis(),notification);
