@@ -1,10 +1,12 @@
 package com.example.a13787.baidumap.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by 13787 on 2019/4/4.
  */
 
-public class ActivityDataBase
+public class ActivityDataBase implements Serializable
 {
     private int id;
     private String name;
