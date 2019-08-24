@@ -45,7 +45,12 @@
         <activity android:name=".activity.AddActivity" />
         <activity android:name=".activity.InfoActivity" />
         <activity android:name=".activity.ParticipateActivity" />
-        <activity android:name=".activity.RouteActivity"></activity>
+        <activity android:name=".activity.RouteActivity" />
+
+        <service
+            android:name=".service.TimerService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
