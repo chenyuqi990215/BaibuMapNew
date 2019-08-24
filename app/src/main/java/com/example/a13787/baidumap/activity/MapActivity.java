@@ -155,18 +155,6 @@ public class MapActivity extends BaseActivity
         mapUtil.updateOverlay(mydataBase,0);
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        switch (requestCode)
-        {
-            case 1:
-                if (resultCode==RESULT_OK)
-                {
-                    mapUtil.updateOverlay((MapDataBase) data.getSerializableExtra("DataBase"),0);
-                }
-        }
-    }
-    @Override
     protected void initListener()
     {
         //对"+"按钮的监听button_add
