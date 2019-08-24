@@ -48,10 +48,8 @@ public class MapActivity extends BaseActivity
     private Marker markerOnMap = null;
     private MapDataBase eventOnMap = null;
     private MapUtil mapUtil;
-    //private LocationClient mLocationClient;
     private MapView mapView;
     private BaiduMap baiduMap;
-    //private boolean isFirstLocate = true;
     private boolean isPermitted = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +61,6 @@ public class MapActivity extends BaseActivity
     {
         slideMenu = (SlideMenu) findViewById(R.id.slideMenu);
         button = (Button) findViewById(R.id.slide_enter);
-        //mLocationClient=new LocationClient(getApplicationContext());
-        //mLocationClient.registerLocationListener(new MyLocationListener());
         mapView=(MapView)findViewById(R.id.bmapView);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
@@ -110,7 +106,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setContent("I want to study for my comming Examination.");
         mydataBase.setDate("2019.3.15 15:00 - 17:00");
         mydataBase.setSex("all");
-        updateOverlay(mydataBase);
+        mapUtil.updateOverlay(mydataBase,0);
         mydataBase= new MapDataBase();
         mydataBase.setLongitude(121.411511);
         mydataBase.setLatitude(31.234907);
@@ -124,7 +120,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setContent("I want to run for an hour.");
         mydataBase.setDate("2019.3.15 18:00 - 19:00");
         mydataBase.setSex("all");
-        updateOverlay(mydataBase);
+        mapUtil.updateOverlay(mydataBase,0);
         mydataBase= new MapDataBase();
         mydataBase.setLongitude(121.411991);
         mydataBase.setLatitude(31.23632);
@@ -138,7 +134,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setContent("I want to run for an hour.");
         mydataBase.setDate("2019.3.15 18:00 - 19:00");
         mydataBase.setSex("all");
-        updateOverlay(mydataBase);
+        mapUtil.updateOverlay(mydataBase,0);
         mydataBase= new MapDataBase();
         mydataBase.setLongitude(121.409952);
         mydataBase.setLatitude(31.236264);
@@ -152,7 +148,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setContent("I hope to have breakfast everyday.");
         mydataBase.setDate("2019.3.15 6:00 - 8:00");
         mydataBase.setSex("all");
-        updateOverlay(mydataBase);
+        mapUtil.updateOverlay(mydataBase,0);
         mydataBase = new MapDataBase();
         mydataBase.setLongitude(121.410079);
         mydataBase.setLatitude(31.235576);
@@ -166,7 +162,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setContent("Let's play UNO.");
         mydataBase.setDate("2019.3.15 20:00 - 22:00");
         mydataBase.setSex("all");
-        updateOverlay(mydataBase);
+        mapUtil.updateOverlay(mydataBase,0);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -176,67 +172,10 @@ public class MapActivity extends BaseActivity
             case 1:
                 if (resultCode==RESULT_OK)
                 {
-                    updateOverlay((MapDataBase) data.getSerializableExtra("DataBase"));
+                    mapUtil.updateOverlay((MapDataBase) data.getSerializableExtra("DataBase"),0);
                 }
         }
     }
-    private void updateOverlay(MapDataBase mapDataBase)
-    {
-        LatLng point = new LatLng(mapDataBase.getLatitude(), mapDataBase.getLongitude());
-        //构建Marker图标
-        BitmapDescriptor bitmap = null;
-        if (mapDataBase.getType().equals("study"))
-            bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_study);
-        else if (mapDataBase.getType().equals("food"))
-            bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_food);
-        else if (mapDataBase.getType().equals("sport"))
-            bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_sport);
-        else bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_enjoyment);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("MapDataBase",mapDataBase);
-        //构建MarkerOption，用于在地图上添加
-        MarkerOptions option = new MarkerOptions().position(point).extraInfo(bundle).icon(bitmap);
-        //在地图上添加Marker，并显示
-        Log.d("overlay", "add");
-        baiduMap.addOverlay(option);
-    }
-    /*private void navigateTo(BDLocation location)
-    {
-        if (isFirstLocate)
-        {
-            LatLng ll = new LatLng(location.getLatitude(),location.getLongitude());
-            MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
-            baiduMap.animateMapStatus(update);
-            update = MapStatusUpdateFactory.zoomTo(16f);
-            baiduMap.animateMapStatus(update);
-            isFirstLocate = false;
-        }
-        //Log.d("Latitude",""+location.getLatitude());
-        //Log.d("Longitude",""+location.getLongitude());
-        MyLocationData.Builder locationBulider=new MyLocationData.Builder();
-        locationBulider.latitude(location.getLatitude());
-        locationBulider.longitude(location.getLongitude());
-        MyLocationData locationData=locationBulider.build();
-        baiduMap.setMyLocationData(locationData);
-
-    }*/
-
-    /*private void requestLocation()
-    {
-        initLocation();
-        mLocationClient.start();
-    }
-
-    private void initLocation(){
-        LocationClientOption option=new LocationClientOption();
-        option.setCoorType("bd09ll");
-        option.setIsNeedAddress(true);
-        option.setOpenGps(true);
-        option.setScanSpan(1000);
-        option.setIsNeedLocationPoiList(true);
-        option.setPriority(LocationClientOption.GpsFirst);
-        mLocationClient.setLocOption(option);
-    }*/
     @Override
     protected void initListener()
     {
@@ -300,7 +239,7 @@ public class MapActivity extends BaseActivity
                 if (markerOnMap!=null)
                     markerOnMap.remove();
                 if (eventOnMap!=null)
-                    updateOverlay(eventOnMap);
+                    mapUtil.updateOverlay(eventOnMap,0);
                 eventOnMap=mydataBase;
                 marker.remove();
                 LinearLayout layout=(LinearLayout)findViewById(R.id.layout_infotop);
@@ -315,46 +254,34 @@ public class MapActivity extends BaseActivity
                 String color;
                 if (mydataBase.getType().equals("study"))
                 {
-                    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_study_mark);
                     MapDataBase temp  = new MapDataBase();
                     temp.setClickable(false);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("MapDataBase",temp);
-                    OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
-                    markerOnMap = (Marker) baiduMap.addOverlay(option);
+                    temp.setType("study");
+                    mapUtil.updateOverlay(temp,1);
                     color="#ff0000";
                 }
                 else if (mydataBase.getType().equals("food"))
                 {
-                    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_food_mark);
                     MapDataBase temp  = new MapDataBase();
                     temp.setClickable(false);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("MapDataBase",temp);
-                    OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
-                    markerOnMap = (Marker) baiduMap.addOverlay(option);
+                    temp.setType("food");
+                    mapUtil.updateOverlay(temp,1);
                     color="#00ff00";
                 }
                 else if (mydataBase.getType().equals("sport"))
                 {
-                    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_sport_mark);
                     MapDataBase temp  = new MapDataBase();
                     temp.setClickable(false);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("MapDataBase",temp);
-                    OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
-                    markerOnMap = (Marker) baiduMap.addOverlay(option);
+                    temp.setType("sport");
+                    mapUtil.updateOverlay(temp,1);
                     color="#0000ff";
                 }
                 else
                 {
-                    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_enjoyment_mark);
                     MapDataBase temp  = new MapDataBase();
                     temp.setClickable(false);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("MapDataBase",temp);
-                    OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
-                    markerOnMap = (Marker) baiduMap.addOverlay(option);
+                    temp.setType("enjoyment");
+                    mapUtil.updateOverlay(temp,1);
                     color="#ff00ff";
                 }
                 infoUsername.setTextColor(Color.parseColor(color));
@@ -432,15 +359,4 @@ public class MapActivity extends BaseActivity
             default:
         }
     }
-    /*public class MyLocationListener implements BDLocationListener
-    {
-        @Override
-        public void onReceiveLocation(final BDLocation location)
-        {
-            if (location.getLocType() == BDLocation.TypeGpsLocation || location.getLocType()==BDLocation.TypeNetWorkLocation){
-                navigateTo(location);
-
-            }
-        }
-    }*/
 }
