@@ -158,16 +158,6 @@
             android:textColor="#707070"
             android:layout_marginLeft="20dp"/>
     </LinearLayout>
-    <TextView
-        android:id="@+id/footprint_go"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="去那里"
-        android:textColor="#8078e0"
-        android:textSize="20dp"
-        android:layout_gravity="end"
-        android:layout_marginRight="50dp"
-        />
     <ImageView
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"

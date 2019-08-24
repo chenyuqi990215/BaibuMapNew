@@ -1,12 +1,15 @@
 package com.example.a13787.baidumap.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -14,6 +17,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.BikingRouteLine;
 import com.baidu.mapapi.search.route.BikingRoutePlanOption;
 import com.baidu.mapapi.search.route.BikingRouteResult;
@@ -39,8 +43,11 @@ public class RoutineActivity extends BaseActivity
     private RoutePlanSearch mSearch;
     private MapView mMapView = null;
     private MapUtil mapUtil;
-    BikingRouteOverlay overlay;
-    BaiduMap baiduMap;
+    private BikingRouteOverlay overlay;
+    private BaiduMap baiduMap;
+    private Button guide;
+    private double latitude;
+    private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,6 +65,9 @@ public class RoutineActivity extends BaseActivity
             String[] permissions=permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(RoutineActivity.this,permissions,1);
         }
+        Intent intent = getIntent();
+        latitude = intent.getDoubleExtra("Latitude",0);
+        longitude = intent.getDoubleExtra("Longitude",0);
     }
 
     @Override
@@ -70,7 +80,8 @@ public class RoutineActivity extends BaseActivity
         baiduMap.setMyLocationEnabled(true);
         mapUtil = new MapUtil(baiduMap,RoutineActivity.this);
         mapUtil.requestLocation();
-        setElement();
+        guide = (Button)findViewById(R.id.routine_guide);
+        //setElement();
     }
 
     @Override
@@ -87,10 +98,9 @@ public class RoutineActivity extends BaseActivity
 
     private void setElement()
     {
-        PlanNode stNode = PlanNode.withLocation(new LatLng(31.235576,121.410079));
-        PlanNode enNode = PlanNode.withLocation(new LatLng(31.286563,121.518233));
-        //PlanNode stNode = PlanNode.withCityNameAndPlaceName("北京", "西二旗地铁站");
-        //PlanNode enNode = PlanNode.withCityNameAndPlaceName("北京", "百度科技园");
+        BDLocation location = mapUtil.getMyLocation();
+        PlanNode stNode = PlanNode.withLocation(new LatLng(location.getLatitude(),location.getLongitude()));
+        PlanNode enNode = PlanNode.withLocation(new LatLng(latitude,longitude));
         boolean tmp = mSearch.bikingSearch((new BikingRoutePlanOption())
                                 .from(stNode)
                                 .to(enNode));
@@ -100,7 +110,12 @@ public class RoutineActivity extends BaseActivity
     @Override
     public void initListener()
     {
-
+        guide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setElement();
+            }
+        });
     }
 
     OnGetRoutePlanResultListener listener = new OnGetRoutePlanResultListener() {
@@ -139,11 +154,11 @@ public class RoutineActivity extends BaseActivity
 
         public void onGetBikingRouteResult(BikingRouteResult result)
         {
-            //Log.d("routine",result.getSuggestAddrInfo().toString());
+            Log.d("routine",result.error+"");
             if (result != null)
             {
                 List<BikingRouteLine> routeLineList = result.getRouteLines();
-                //Log.d("routine",routeLineList.size()+"");
+                Log.d("routine",routeLineList.size()+"");
                 if (routeLineList != null && !routeLineList.isEmpty() && routeLineList.size() != 0)
                 {
                     overlay.removeFromMap();

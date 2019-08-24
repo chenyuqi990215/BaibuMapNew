@@ -18,6 +18,8 @@ import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.route.BikingRouteLine;
+import com.example.a13787.baidumap.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class BikingRouteOverlay extends OverlayManager
             return null;
         }
         List<OverlayOptions> overlayList = new ArrayList<OverlayOptions>();
-        if (mRouteLine.getAllStep() != null && mRouteLine.getAllStep().size() > 0)
+        /*if (mRouteLine.getAllStep() != null && mRouteLine.getAllStep().size() > 0)
         {
             for (BikingRouteLine.BikingStep step : mRouteLine.getAllStep())
             {
@@ -75,7 +77,7 @@ public class BikingRouteOverlay extends OverlayManager
                             .fromAssetWithDpi("Icon_line_node.png")));
                 }
             }
-        }
+        }*/   //missing Icon_line_node.png
         // starting
         if (mRouteLine.getStarting() != null)
         {
@@ -83,7 +85,7 @@ public class BikingRouteOverlay extends OverlayManager
                     .position(mRouteLine.getStarting().getLocation())
             .icon(getStartMarker() != null ? getStartMarker() :
                     BitmapDescriptorFactory
-                    .fromAssetWithDpi("Icon_start.png")).zIndex(10));
+                    .fromResource(R.drawable.icon_st)).zIndex(10));
         }
         // terminal
         if (mRouteLine.getTerminal() != null)
@@ -93,8 +95,7 @@ public class BikingRouteOverlay extends OverlayManager
                     .position(mRouteLine.getTerminal().getLocation())
             .icon(getTerminalMarker() != null ? getTerminalMarker() :
                     BitmapDescriptorFactory
-                    .fromAssetWithDpi("Icon_end.png"))
-            .zIndex(10));
+                    .fromResource(R.drawable.icon_en)).zIndex(10));
         }
         // poly line list
         if (mRouteLine.getAllStep() != null && mRouteLine.getAllStep().size() > 0)
