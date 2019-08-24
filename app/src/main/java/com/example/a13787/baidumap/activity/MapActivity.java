@@ -62,6 +62,9 @@ public class MapActivity extends BaseActivity
         if(ContextCompat.checkSelfPermission(MapActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
+        if(ContextCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
         if(!permissionList.isEmpty()){
             String[] permissions=permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(MapActivity.this,permissions,1);

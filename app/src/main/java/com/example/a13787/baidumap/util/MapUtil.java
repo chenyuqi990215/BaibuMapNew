@@ -45,6 +45,8 @@ public class MapUtil
         {
             if (location.getLocType() == BDLocation.TypeGpsLocation || location.getLocType()==BDLocation.TypeNetWorkLocation)
             {
+                Log.d("latitude",location.getLatitude()+"");
+                Log.d("longitude",location.getLongitude()+"");
                 navigateTo(location);
             }
         }
