@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a13787.baidumap.MapActivity">
+    tools:context="com.example.a13787.baidumap.activity.MapActivity">
     <com.example.a13787.baidumap.SlideMenu
         android:id="@+id/slideMenu"
         android:layout_width="match_parent"

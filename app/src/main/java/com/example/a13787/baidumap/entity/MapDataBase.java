@@ -1,11 +1,11 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.entity;
 
-/**
- * Created by 13787 on 2019/4/4.
- */
+import java.io.Serializable;
 
-public class ActivityDataBase
+
+public class MapDataBase implements Serializable
 {
+    private boolean clickable;
     private String name;
     private String school;
     private String type;
@@ -15,8 +15,29 @@ public class ActivityDataBase
     private String location;
     private String sex;
     private String department;
-    private double Longitude;
-    private double Latitude;
+    private double longitude;
+    private double latitude;
+
+    public MapDataBase()
+    {
+        setClickable(true);
+    }
+
+    public boolean isClickable() {
+        return clickable;
+    }
+
+    public void setClickable(boolean clickable) {
+        this.clickable = clickable;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getSchool() {
         return school;
@@ -74,14 +95,6 @@ public class ActivityDataBase
         this.sex = sex;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDepartment() {
         return department;
     }
@@ -91,18 +104,18 @@ public class ActivityDataBase
     }
 
     public double getLongitude() {
-        return Longitude;
+        return longitude;
     }
 
     public void setLongitude(double longitude) {
-        Longitude = longitude;
+        this.longitude = longitude;
     }
 
     public double getLatitude() {
-        return Latitude;
+        return latitude;
     }
 
     public void setLatitude(double latitude) {
-        Latitude = latitude;
+        this.latitude = latitude;
     }
 }

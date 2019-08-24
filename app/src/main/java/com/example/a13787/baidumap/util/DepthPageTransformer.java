@@ -1,4 +1,4 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.util;
 
 import android.annotation.SuppressLint;
 import android.support.v4.view.ViewPager;

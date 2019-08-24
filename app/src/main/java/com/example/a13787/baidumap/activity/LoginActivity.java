@@ -1,8 +1,7 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -11,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.RegisterActivity;
+import com.example.a13787.baidumap.util.BaseActivity;
+import com.example.a13787.baidumap.util.UserDatabaseHelper;
 
 /**
  * Created by 13787 on 2019/3/11.
@@ -21,7 +25,8 @@ public class LoginActivity extends BaseActivity
     private UserDatabaseHelper dbHelp = new UserDatabaseHelper(this,"Userinfo.db",null,4);
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mLoginFormView;
+    private Button mEmailSignInButton;
+    private TextView mAttempRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -39,15 +44,7 @@ public class LoginActivity extends BaseActivity
         {
             if (password.equals(result))
             {
-
                 Toast.makeText(LoginActivity.this,"Accepted",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent("com.example.a13787.morningcall.FORCE_OFFLINE");
-                setUserEmail(email);
-                intent.putExtra("Email", userEmail);
-                intent.putExtra("IP", userIP);
-                sendBroadcast(intent);
-                Log.d("Broadcast", "send");
-                //into main activity
                 Intent intoMain = new Intent(LoginActivity.this,MapActivity.class);
                 startActivity(intoMain);
                 finish();
@@ -64,7 +61,8 @@ public class LoginActivity extends BaseActivity
     {
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
-        mLoginFormView = findViewById(R.id.login_form);
+        mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mAttempRegister = (TextView) findViewById(R.id.attempt_register);
     }
     @Override
     protected int initLayout()
@@ -87,7 +85,6 @@ public class LoginActivity extends BaseActivity
                 return false;
             }
         });
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -96,7 +93,6 @@ public class LoginActivity extends BaseActivity
                 attemptLogin();
             }
         });
-        TextView mAttempRegister = (TextView) findViewById(R.id.attempt_register);
         mAttempRegister.setOnClickListener(new View.OnClickListener()
         {
             @Override

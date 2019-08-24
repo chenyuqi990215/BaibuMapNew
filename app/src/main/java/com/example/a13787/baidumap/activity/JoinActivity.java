@@ -1,4 +1,4 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,29 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.a13787.baidumap.adapter.JoinAdapter;
+import com.example.a13787.baidumap.entity.JoinDataBase;
+import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.util.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class JoinActivity extends BaseActivity {
+
+    private ListView listView;
+    private TextView name;
+    private TextView school;
+    private TextView department;
+    private TextView type;
+    private JoinAdapter adapter;
+    TextView content;
+    TextView date;
+    TextView location;
+    TextView sex;
+    TextView title;
+    Button back;
+    Button confirm;
 
     private List<JoinDataBase> joinList = new ArrayList<>();
     @Override
@@ -28,30 +45,32 @@ public class JoinActivity extends BaseActivity {
     @Override
     protected void initView()
     {
-        JoinAdapter adapter = new JoinAdapter(JoinActivity.this,R.layout.layout_person,joinList); //创建ArrayAdapter方法
-        ListView listView = (ListView) findViewById(R.id.join_listview);
-        listView.setAdapter(adapter);//将创建的方法作为适配器传递给listview
-        TextView name = (TextView) findViewById(R.id.join_name);
-        name.setText("cyq");
-        TextView school = (TextView) findViewById(R.id.join_school);
-        school.setText("华东师范大学");
-        TextView department = (TextView) findViewById(R.id.join_department);
-        department.setText("软件工程");
-        TextView type = (TextView) findViewById(R.id.join_type);
-        type.setText("Sport");
-        TextView content = (TextView) findViewById(R.id.join_content);
-        content.setText("I want to run in the afternoon");
-        TextView date = (TextView) findViewById(R.id.join_date);
-        date.setText("2019.3.15 18:00 -- 19:00");
-        TextView location = (TextView) findViewById(R.id.join_location);
-        location.setText("playgound");
-        TextView sex = (TextView) findViewById(R.id.join_sex);
-        sex.setText("all");
-        TextView title = (TextView) findViewById(R.id.join_title);
-        title.setText("run");
+        back = (Button) findViewById(R.id.join_back);
+        confirm = (Button) findViewById(R.id.join_confirm);
+        adapter = new JoinAdapter(JoinActivity.this,R.layout.layout_person,joinList);
+        listView = (ListView) findViewById(R.id.join_listview);
+        listView.setAdapter(adapter);
+        name = (TextView) findViewById(R.id.join_name);
+        school = (TextView) findViewById(R.id.join_school);
+        department = (TextView) findViewById(R.id.join_department);
+        type = (TextView) findViewById(R.id.join_type);
+        content = (TextView) findViewById(R.id.join_content);
+        date = (TextView) findViewById(R.id.join_date);
+        location = (TextView) findViewById(R.id.join_location);
+        sex = (TextView) findViewById(R.id.join_sex);
+        title = (TextView) findViewById(R.id.join_title);
     }
     @Override
     protected void initData() { //初始化类中所有数据
+        name.setText("cyq");
+        school.setText("华东师范大学");
+        department.setText("软件工程");
+        type.setText("Sport");
+        content.setText("I want to run in the afternoon");
+        date.setText("2019.3.15 18:00 -- 19:00");
+        location.setText("playgound");
+        sex.setText("all");
+        title.setText("run");
         JoinDataBase item1 = new JoinDataBase();
         item1.setName("cyq");
         item1.setSchool("华东师范大学");
@@ -71,7 +90,6 @@ public class JoinActivity extends BaseActivity {
     @Override
     protected void initListener()
     {
-        Button back = (Button) findViewById(R.id.join_back);
         back.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -82,14 +100,12 @@ public class JoinActivity extends BaseActivity {
                 finish();
             }
         });
-        Button confirm = (Button) findViewById(R.id.join_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 Intent intent=new Intent(JoinActivity.this,MapActivity.class);
                 startActivity(intent);
-                final String useremail = userEmail;
                 //add user and activity into data;
                 finish();
             }

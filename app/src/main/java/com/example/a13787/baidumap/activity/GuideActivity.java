@@ -1,20 +1,22 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import com.example.a13787.baidumap.util.DepthPageTransformer;
+import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.util.BaseActivity;
 
 import java.util.ArrayList;
 
@@ -63,7 +65,6 @@ public class GuideActivity extends BaseActivity
             {
                 ivRedPoint.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 mPaintDis = llContainer.getChildAt(1).getLeft() - llContainer.getChildAt(0).getLeft();
-                System.out.println("距离：" + mPaintDis);
             }
         });
     }

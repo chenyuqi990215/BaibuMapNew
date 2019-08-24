@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.a13787.baidumap.activity.LoginActivity;
+import com.example.a13787.baidumap.util.BaseActivity;
+import com.example.a13787.baidumap.util.UserDatabaseHelper;
+
 public class RegisterActivity extends BaseActivity
 {
     private UserDatabaseHelper dbHelp = new UserDatabaseHelper(this,"Userinfo.db",null,4);  //update on 2019.3.1

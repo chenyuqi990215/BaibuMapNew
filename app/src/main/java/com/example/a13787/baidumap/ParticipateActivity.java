@@ -3,7 +3,6 @@ package com.example.a13787.baidumap;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +10,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.a13787.baidumap.activity.MapActivity;
+import com.example.a13787.baidumap.adapter.ActivityAdapter;
+import com.example.a13787.baidumap.entity.ActivityDataBase;
+import com.example.a13787.baidumap.util.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;

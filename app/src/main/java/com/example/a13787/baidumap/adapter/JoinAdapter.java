@@ -1,12 +1,14 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.adapter;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.a13787.baidumap.entity.JoinDataBase;
+import com.example.a13787.baidumap.R;
 
 import java.util.List;
 

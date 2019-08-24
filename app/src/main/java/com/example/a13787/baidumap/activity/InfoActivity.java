@@ -1,9 +1,8 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class InfoActivity extends BaseActivity {
+import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.util.BaseActivity;
+
+public class InfoActivity extends BaseActivity
+{
+    private TextView username;
+    private TextView nickname;
+    private TextView school;
+    private TextView birth;
+    private TextView department;
+    private TextView sex;
+    private TextView age;
+    private Button back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,19 +31,24 @@ public class InfoActivity extends BaseActivity {
     @Override
     protected void initData()
     {
-        //search
+        //search from database by username
     }
     @Override
     protected void initView()
     {
-
+        username = (TextView) findViewById(R.id.info_user);
+        nickname = (TextView) findViewById(R.id.info_nickname);
+        birth = (TextView) findViewById(R.id.info_birth);
+        school = (TextView) findViewById(R.id.info_school);
+        department = (TextView) findViewById(R.id.info_depart);
+        sex = (TextView) findViewById(R.id.info_sex);
+        age = (TextView) findViewById(R.id.info_age);
+        back = (Button) findViewById(R.id.info_back);
     }
     @Override
     protected void initListener()
     {
-        final TextView username = (TextView) findViewById(R.id.info_user);
         username.setText("cyq");
-        final TextView nickname = (TextView) findViewById(R.id.info_nickname);
         nickname.setText("not known");
         nickname.setOnClickListener(new View.OnClickListener()
         {
@@ -58,7 +74,6 @@ public class InfoActivity extends BaseActivity {
                         .setNegativeButton("取消",null).show();
             }
         });
-        final TextView birth = (TextView) findViewById(R.id.info_birth);
         birth.setText("secret");
         birth.setOnClickListener(new View.OnClickListener()
         {
@@ -85,13 +100,9 @@ public class InfoActivity extends BaseActivity {
                         .setNegativeButton("取消",null).show();
             }
         });
-        final TextView school = (TextView) findViewById(R.id.info_school);
         school.setText("华东师范大学");
-        final TextView department = (TextView) findViewById(R.id.info_depart);
         department.setText("软件工程");
-        final TextView sex = (TextView) findViewById(R.id.info_sex);
         sex.setText("男");
-        final TextView age = (TextView) findViewById(R.id.info_age);
         age.setText("secret");
         age.setOnClickListener(new View.OnClickListener()
         {
@@ -118,7 +129,6 @@ public class InfoActivity extends BaseActivity {
                         .setNegativeButton("取消",null).show();
             }
         });
-        Button back = (Button) findViewById(R.id.info_back);
         back.setOnClickListener(new View.OnClickListener()
         {
             @Override

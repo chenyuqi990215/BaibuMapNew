@@ -1,4 +1,4 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.util;
 
 import android.app.Activity;
 

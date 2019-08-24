@@ -1,4 +1,4 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,12 +6,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.adapter.ActivityAdapter;
+import com.example.a13787.baidumap.entity.ActivityDataBase;
+import com.example.a13787.baidumap.util.BaseActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class FootprintActivity extends BaseActivity
 {
     private List<ActivityDataBase> activityList = new ArrayList<>();
+    private Button back;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -21,7 +27,6 @@ public class FootprintActivity extends BaseActivity
     @Override
     protected void initListener()
     {
-        Button back = (Button) findViewById(R.id.footprint_back);
         back.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -41,9 +46,10 @@ public class FootprintActivity extends BaseActivity
     @Override
     protected void initView()
     {
-        ActivityAdapter adapter = new ActivityAdapter(FootprintActivity.this,R.layout.layout_activity,activityList); //创建ArrayAdapter方法
+        back = (Button) findViewById(R.id.footprint_back);
+        ActivityAdapter adapter = new ActivityAdapter(FootprintActivity.this,R.layout.layout_activity,activityList);
         ListView listView = (ListView) findViewById(R.id.footprint_listview);
-        listView.setAdapter(adapter);//将创建的方法作为适配器传递给listview
+        listView.setAdapter(adapter);
     }
     @Override
     protected void initData()

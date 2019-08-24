@@ -1,4 +1,4 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -9,8 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +31,12 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.example.a13787.baidumap.ParticipateActivity;
+import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.SlideMenu;
+import com.example.a13787.baidumap.entity.MapDataBase;
+import com.example.a13787.baidumap.util.BaseActivity;
+import com.example.a13787.baidumap.util.MapUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +47,11 @@ public class MapActivity extends BaseActivity
     private Button button = null;
     private Marker markerOnMap = null;
     private MapDataBase eventOnMap = null;
-    public LocationClient mLocationClient;
+    private MapUtil mapUtil;
+    //private LocationClient mLocationClient;
     private MapView mapView;
     private BaiduMap baiduMap;
-    private boolean isFirstLocate = true;
+    //private boolean isFirstLocate = true;
     private boolean isPermitted = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +63,12 @@ public class MapActivity extends BaseActivity
     {
         slideMenu = (SlideMenu) findViewById(R.id.slideMenu);
         button = (Button) findViewById(R.id.slide_enter);
-        mLocationClient=new LocationClient(getApplicationContext());
-        mLocationClient.registerLocationListener(new MyLocationListener());
+        //mLocationClient=new LocationClient(getApplicationContext());
+        //mLocationClient.registerLocationListener(new MyLocationListener());
         mapView=(MapView)findViewById(R.id.bmapView);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
+        mapUtil = new MapUtil(baiduMap,MapActivity.this);
         List<String> permissionList=new ArrayList<>();
         if(ContextCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -78,7 +84,7 @@ public class MapActivity extends BaseActivity
             ActivityCompat.requestPermissions(MapActivity.this,permissions,1);
         }
         else{
-            requestLocation();
+            mapUtil.requestLocation();
             initData();   //模拟数据
             isPermitted = true;
         }
@@ -92,78 +98,73 @@ public class MapActivity extends BaseActivity
     protected void initData()
     {
         MapDataBase mydataBase= new MapDataBase();
-        mydataBase.setLongtitude(121.413326);
+        mydataBase.setLongitude(121.413326);
         mydataBase.setLatitude(31.234196);
-        mydataBase.setUsername("cyq");
-        mydataBase.setSchoolName("ECNU");
+        mydataBase.setName("cyq");
+        mydataBase.setSchool("ECNU");
         mydataBase.setDepartment("SE");
         mydataBase.setClickable(true);
         mydataBase.setType("study");
         mydataBase.setTitle("Prepare for exam");
         mydataBase.setLocation("ecnu library");
-        mydataBase.setInfo("I want to study for my comming Examination.");
-        mydataBase.setStartTime("2019.3.15 15:00");
-        mydataBase.setEndTime("2019.3.15 17:00");
+        mydataBase.setContent("I want to study for my comming Examination.");
+        mydataBase.setDate("2019.3.15 15:00 - 17:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
         mydataBase= new MapDataBase();
-        mydataBase.setLongtitude(121.411511);
+        mydataBase.setLongitude(121.411511);
         mydataBase.setLatitude(31.234907);
-        mydataBase.setUsername("cyq");
-        mydataBase.setSchoolName("ECNU");
+        mydataBase.setName("cyq");
+        mydataBase.setSchool("ECNU");
         mydataBase.setDepartment("SE");
         mydataBase.setClickable(true);
         mydataBase.setType("sport");
         mydataBase.setTitle("Running");
         mydataBase.setLocation("ecnu playground");
-        mydataBase.setInfo("I want to run for an hour.");
-        mydataBase.setStartTime("2019.3.15 18:00");
-        mydataBase.setEndTime("2019.3.15 19:00");
+        mydataBase.setContent("I want to run for an hour.");
+        mydataBase.setDate("2019.3.15 18:00 - 19:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
         mydataBase= new MapDataBase();
-        mydataBase.setLongtitude(121.411991);
+        mydataBase.setLongitude(121.411991);
         mydataBase.setLatitude(31.23632);
-        mydataBase.setUsername("cyq");
-        mydataBase.setSchoolName("ECNU");
+        mydataBase.setName("cyq");
+        mydataBase.setSchool("ECNU");
         mydataBase.setDepartment("SE");
         mydataBase.setClickable(true);
         mydataBase.setType("sport");
         mydataBase.setTitle("Badminton");
         mydataBase.setLocation("ecnu activity center");
-        mydataBase.setInfo("I want to run for an hour.");
-        mydataBase.setStartTime("2019.3.15 18:00");
-        mydataBase.setEndTime("2019.3.15 19:00");
+        mydataBase.setContent("I want to run for an hour.");
+        mydataBase.setDate("2019.3.15 18:00 - 19:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
         mydataBase= new MapDataBase();
-        mydataBase.setLongtitude(121.409952);
+        mydataBase.setLongitude(121.409952);
         mydataBase.setLatitude(31.236264);
-        mydataBase.setUsername("cyq");
-        mydataBase.setSchoolName("ECNU");
+        mydataBase.setName("cyq");
+        mydataBase.setSchool("ECNU");
         mydataBase.setDepartment("SE");
         mydataBase.setClickable(true);
         mydataBase.setType("food");
         mydataBase.setTitle("Breakfast");
         mydataBase.setLocation("ecnu Hexi canteen");
-        mydataBase.setInfo("I hope to have breakfast everyday.");
-        mydataBase.setStartTime("2019.3.15 6:00");
-        mydataBase.setEndTime("2019.3.15 8:00");
+        mydataBase.setContent("I hope to have breakfast everyday.");
+        mydataBase.setDate("2019.3.15 6:00 - 8:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
         mydataBase = new MapDataBase();
-        mydataBase.setLongtitude(121.410079);
+        mydataBase.setLongitude(121.410079);
         mydataBase.setLatitude(31.235576);
-        mydataBase.setUsername("cyq");
-        mydataBase.setSchoolName("ECNU");
+        mydataBase.setName("cyq");
+        mydataBase.setSchool("ECNU");
         mydataBase.setDepartment("SE");
         mydataBase.setClickable(true);
         mydataBase.setType("enjoyment");
         mydataBase.setTitle("PlayUNO");
         mydataBase.setLocation("ecnu Fifth dorm");
-        mydataBase.setInfo("Let's play UNO.");
-        mydataBase.setStartTime("2019.3.15 20:00");
-        mydataBase.setEndTime("2019.3.15 22:00");
+        mydataBase.setContent("Let's play UNO.");
+        mydataBase.setDate("2019.3.15 20:00 - 22:00");
         mydataBase.setSex("all");
         updateOverlay(mydataBase);
     }
@@ -181,7 +182,7 @@ public class MapActivity extends BaseActivity
     }
     private void updateOverlay(MapDataBase mapDataBase)
     {
-        LatLng point = new LatLng(mapDataBase.getLatitude(), mapDataBase.getLongtitude());
+        LatLng point = new LatLng(mapDataBase.getLatitude(), mapDataBase.getLongitude());
         //构建Marker图标
         BitmapDescriptor bitmap = null;
         if (mapDataBase.getType().equals("study"))
@@ -199,7 +200,7 @@ public class MapActivity extends BaseActivity
         Log.d("overlay", "add");
         baiduMap.addOverlay(option);
     }
-    private void navigateTo(BDLocation location)
+    /*private void navigateTo(BDLocation location)
     {
         if (isFirstLocate)
         {
@@ -218,9 +219,9 @@ public class MapActivity extends BaseActivity
         MyLocationData locationData=locationBulider.build();
         baiduMap.setMyLocationData(locationData);
 
-    }
+    }*/
 
-    private void requestLocation()
+    /*private void requestLocation()
     {
         initLocation();
         mLocationClient.start();
@@ -235,7 +236,7 @@ public class MapActivity extends BaseActivity
         option.setIsNeedLocationPoiList(true);
         option.setPriority(LocationClientOption.GpsFirst);
         mLocationClient.setLocOption(option);
-    }
+    }*/
     @Override
     protected void initListener()
     {
@@ -247,7 +248,6 @@ public class MapActivity extends BaseActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MapActivity.this,FootprintActivity.class);
-                intent.putExtra("UserEmail",userEmail);
                 startActivity(intent);
             }
         });
@@ -258,7 +258,6 @@ public class MapActivity extends BaseActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MapActivity.this,InfoActivity.class);
-                intent.putExtra("UserEmail",userEmail);
                 startActivity(intent);
             }
         });
@@ -269,7 +268,6 @@ public class MapActivity extends BaseActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MapActivity.this,ParticipateActivity.class);
-                intent.putExtra("UserEmail",userEmail);
                 startActivity(intent);
             }
         });
@@ -307,13 +305,13 @@ public class MapActivity extends BaseActivity
                 marker.remove();
                 LinearLayout layout=(LinearLayout)findViewById(R.id.layout_infotop);
                 layout.setVisibility(View.VISIBLE);
-                LatLng ll = new LatLng(mydataBase.getLatitude(),mydataBase.getLongtitude());
+                LatLng ll = new LatLng(mydataBase.getLatitude(),mydataBase.getLongitude());
                 TextView infoUsername = (TextView)findViewById(R.id.info_username);
-                infoUsername.setText("Name: " + mydataBase.getUsername());
+                infoUsername.setText("Name: " + mydataBase.getName());
                 TextView infoDepartment = (TextView)findViewById(R.id.info_department);
                 infoDepartment.setText("Department: " + mydataBase.getDepartment());
                 TextView infoTime = (TextView)findViewById(R.id.info_time);
-                infoTime.setText("Time: " + mydataBase.getStartTime() + " - " + mydataBase.getEndTime());
+                infoTime.setText("Time: " + mydataBase.getDate());
                 String color;
                 if (mydataBase.getType().equals("study"))
                 {
@@ -399,7 +397,8 @@ public class MapActivity extends BaseActivity
     @Override
     protected void  onDestroy(){
         super.onDestroy();
-        mLocationClient.stop();
+        //mLocationClient.stop();
+        mapUtil.onDestory();
         mapView.onDestroy();
         baiduMap.setMyLocationEnabled(false);
     }
@@ -420,7 +419,7 @@ public class MapActivity extends BaseActivity
                             return;
                         }
                     }
-                    requestLocation();
+                    mapUtil.requestLocation();
                     initData();   //模拟数据
                     isPermitted = true;
                 }
@@ -433,7 +432,7 @@ public class MapActivity extends BaseActivity
             default:
         }
     }
-    public class MyLocationListener implements BDLocationListener
+    /*public class MyLocationListener implements BDLocationListener
     {
         @Override
         public void onReceiveLocation(final BDLocation location)
@@ -443,5 +442,5 @@ public class MapActivity extends BaseActivity
 
             }
         }
-    }
+    }*/
 }

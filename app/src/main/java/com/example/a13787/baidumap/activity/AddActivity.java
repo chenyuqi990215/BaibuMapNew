@@ -1,24 +1,27 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.mapapi.model.LatLng;
-
-import org.w3c.dom.Text;
+import com.example.a13787.baidumap.entity.ActivityDataBase;
+import com.example.a13787.baidumap.MapSearchActivity;
+import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.util.BaseActivity;
 
 public class AddActivity extends BaseActivity
 {
     private ActivityDataBase activityDataBase = null;
+    private Button confirm;
+    private Button back;
+    private ImageView imageView;
     private LatLng ll = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,7 +31,9 @@ public class AddActivity extends BaseActivity
     @Override
     protected void initView()
     {
-
+        confirm = (Button) findViewById(R.id.add_confirm);
+        imageView = (ImageView) findViewById(R.id.add_map);
+        back = (Button) findViewById(R.id.add_back);
     }
     @Override
     protected void initData()
@@ -38,7 +43,6 @@ public class AddActivity extends BaseActivity
     @Override
     protected void initListener()
     {
-        Button confirm = (Button) findViewById(R.id.add_confirm);
         confirm.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -55,7 +59,7 @@ public class AddActivity extends BaseActivity
                 }
                 activityDataBase.setTitle(tmp);
                 final EditText content = (EditText) findViewById(R.id.add_content);
-                tmp = title.getText().toString();
+                tmp = content.getText().toString();
                 if (tmp.length() == 0)
                 {
                     Toast.makeText(AddActivity.this,new String("Error: Content cannot be null"),Toast.LENGTH_SHORT).show();
@@ -120,13 +124,14 @@ public class AddActivity extends BaseActivity
                     default:
                         activityDataBase.setSex("all");
                 }
+
                 //submit data to database
+
                 Intent intent = new Intent(AddActivity.this,MapActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
-        ImageView imageView = (ImageView) findViewById(R.id.add_map);
         imageView.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -137,7 +142,6 @@ public class AddActivity extends BaseActivity
 
             }
         });
-        Button back = (Button) findViewById(R.id.add_back);
         back.setOnClickListener(new View.OnClickListener()
         {
             @Override
