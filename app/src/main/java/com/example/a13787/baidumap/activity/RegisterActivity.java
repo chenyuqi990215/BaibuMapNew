@@ -1,4 +1,4 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -12,22 +12,41 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.a13787.baidumap.activity.LoginActivity;
+import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.UserDatabaseHelper;
 
 public class RegisterActivity extends BaseActivity
 {
     private UserDatabaseHelper dbHelp = new UserDatabaseHelper(this,"Userinfo.db",null,4);  //update on 2019.3.1
+    private RadioGroup sex;
+    private EditText userName;
+    private EditText email;
+    private EditText password;
+    private EditText check;
+    private EditText tel;
+    private EditText schoolName;
+    private EditText studid;
+    private Button btn_register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
     @Override
     protected void initView()
     {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        sex = (RadioGroup) findViewById(R.id.register_sex);
+        userName = (EditText) findViewById(R.id.register_username);
+        email = (EditText) findViewById(R.id.register_email);
+        password = (EditText) findViewById(R.id.register_password);
+        check = (EditText) findViewById(R.id.register_confirm);
+        tel = (EditText) findViewById(R.id.register_tel);
+        schoolName = (EditText) findViewById(R.id.register_schoolname);
+        studid = (EditText) findViewById(R.id.register_studid);
+        btn_register = (Button) findViewById(R.id.email_sign_in_button);
     }
     @Override
     protected int initLayout()
@@ -43,15 +62,6 @@ public class RegisterActivity extends BaseActivity
         pass = (EditText) findViewById(R.id.register_confirm);
         pass.setTypeface(Typeface.DEFAULT);
         pass.setTransformationMethod(new PasswordTransformationMethod());
-        final RadioGroup sex = (RadioGroup) findViewById(R.id.register_sex);
-        final EditText userName = (EditText) findViewById(R.id.register_username);
-        final EditText email = (EditText) findViewById(R.id.register_email);
-        final EditText password = (EditText) findViewById(R.id.register_password);
-        final EditText check = (EditText) findViewById(R.id.register_confirm);
-        final EditText tel = (EditText) findViewById(R.id.register_tel);
-        final EditText schoolName = (EditText) findViewById(R.id.register_schoolname);
-        final EditText studid = (EditText) findViewById(R.id.register_studid);
-        Button btn_register = (Button) findViewById(R.id.email_sign_in_button);
         btn_register.setOnClickListener(new View.OnClickListener()
         {
             @Override

@@ -1,4 +1,4 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.a13787.baidumap.activity.MapActivity;
+import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.adapter.ActivityAdapter;
 import com.example.a13787.baidumap.entity.ActivityDataBase;
 import com.example.a13787.baidumap.util.BaseActivity;
@@ -27,6 +27,10 @@ public class ParticipateActivity extends BaseActivity
     private ActivityAdapter adapter = null;
     private boolean first = true;
     private List<ActivityDataBase> activityList = new ArrayList<>();
+    private Button back;
+    private LinearLayout layout_my;
+    private LinearLayout layout_join;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,7 +40,6 @@ public class ParticipateActivity extends BaseActivity
     @Override
     protected void initListener()
     {
-        Button back = (Button) findViewById(R.id.participate_back);
         back.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -47,7 +50,6 @@ public class ParticipateActivity extends BaseActivity
                 finish();
             }
         });
-        LinearLayout layout_my = (LinearLayout) findViewById(R.id.participate_my);
         layout_my.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -59,7 +61,6 @@ public class ParticipateActivity extends BaseActivity
                 initData();
             }
         });
-        LinearLayout layout_join = (LinearLayout) findViewById(R.id.participate_join);
         layout_join.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -80,6 +81,9 @@ public class ParticipateActivity extends BaseActivity
     @Override
     protected void initView()
     {
+        back = (Button) findViewById(R.id.participate_back);
+        layout_my = (LinearLayout) findViewById(R.id.participate_my);
+        layout_join = (LinearLayout) findViewById(R.id.participate_join);
         if (first == true)
         {
             adapter = new ActivityAdapter(ParticipateActivity.this,R.layout.layout_activity,activityList); //创建ArrayAdapter方法

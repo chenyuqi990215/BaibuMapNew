@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a13787.baidumap.R;
-import com.example.a13787.baidumap.RegisterActivity;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.UserDatabaseHelper;
 

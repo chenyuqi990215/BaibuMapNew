@@ -1,4 +1,4 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,39 +8,30 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
+import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.entity.SearchDataBase;
 import com.example.a13787.baidumap.util.BaseActivity;
+import com.example.a13787.baidumap.util.MapUtil;
 
 import java.util.List;
 
 public class MapSearchActivity extends BaseActivity
 {
     private SuggestionSearch mSuggestionSearch;
-    public LocationClient mLocationClient;
+    private MapUtil mapUtil;
     private MapView mapView;
     private Marker selectOnMap = null;
     private BaiduMap baiduMap;
     private SearchDataBase searchOnMap = null;
-    private boolean isFirstLocate = true;
     private SearchDataBase curSearchData = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,12 +47,11 @@ public class MapSearchActivity extends BaseActivity
     @Override
     protected void initView()
     {
-        mLocationClient=new LocationClient(getApplicationContext());
-        mLocationClient.registerLocationListener(new MyLocationListener());
+        mapUtil = new MapUtil(baiduMap,MapSearchActivity.this);
         mapView=(MapView)findViewById(R.id.bmapView2);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
-        requestLocation();
+        mapUtil.requestLocation();
     }
     @Override
     protected void initListener()
@@ -137,22 +127,18 @@ public class MapSearchActivity extends BaseActivity
                 if (searchDataBase.isClickable() == false)
                     return true;
                 if (searchOnMap!=null)
-                    updateOverlay(searchOnMap);
+                    mapUtil.updateOverlay(searchOnMap,0);
                 if (selectOnMap!=null)
                     selectOnMap.remove();
                 searchOnMap = searchDataBase;
                 marker.remove();
                 LatLng ll = new LatLng(searchDataBase.getLatitude(),searchDataBase.getLongitude());
-                BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_start_big);
                 SearchDataBase temp = new SearchDataBase();
                 temp.setClickable(false);
                 temp.setKey(searchDataBase.getKey());
                 temp.setLatitude(searchDataBase.getLatitude());
                 temp.setLongitude(searchDataBase.getLongitude());
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("SearchDataBase",temp);
-                OverlayOptions option = new MarkerOptions().position(ll).extraInfo(bundle).icon(bitmap);
-                selectOnMap = (Marker) baiduMap.addOverlay(option);
+                selectOnMap = mapUtil.updateOverlay(temp,1);
                 Button buttonConfirm = (Button) findViewById(R.id.search_confirm);
                 buttonConfirm.setVisibility(View.VISIBLE);
                 return true;
@@ -184,101 +170,31 @@ public class MapSearchActivity extends BaseActivity
                     searchDataBase.setLongitude(resl.get(i).getPt().longitude);
                     searchDataBase.setKey(resl.get(i).getKey());
                     searchDataBase.setClickable(true);
-                    updateOverlay(searchDataBase);
-                    Log.d("geolatitude", resl.get(i).getPt().latitude+"");
-                    Log.d("geolongitude", resl.get(i).getPt().longitude+"");
+                    mapUtil.updateOverlay(searchDataBase,0);
                 }
             }
             //获取在线建议检索结果
         }
     };
 
-    private void navigateTo(BDLocation location)
-    {
-        if (isFirstLocate)
-        {
-            LatLng ll = new LatLng(location.getLatitude(),location.getLongitude());
-            MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
-            baiduMap.animateMapStatus(update);
-            update = MapStatusUpdateFactory.zoomTo(16f);
-            baiduMap.animateMapStatus(update);
-            isFirstLocate = false;
-        }
-        ///Log.d("Latitude",""+location.getLatitude());
-        //Log.d("Longitude",""+location.getLongitude());
-        MyLocationData.Builder locationBulider=new MyLocationData.Builder();
-        locationBulider.latitude(location.getLatitude());
-        locationBulider.longitude(location.getLongitude());
-        MyLocationData locationData=locationBulider.build();
-        baiduMap.setMyLocationData(locationData);
-
-    }
-
-    private void requestLocation()
-    {
-        initLocation();
-        mLocationClient.start();
-    }
-    private void updateOverlay(SearchDataBase searchDataBase)
-    {
-        LatLng point = new LatLng(searchDataBase.getLatitude(), searchDataBase.getLongitude());
-        //构建Marker图标
-        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_start);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("SearchDataBase",searchDataBase);
-        //构建MarkerOption，用于在地图上添加
-        MarkerOptions option = new MarkerOptions().position(point).extraInfo(bundle).icon(bitmap);
-        //在地图上添加Marker，并显示
-        Log.d("overlay", "add");
-        baiduMap.addOverlay(option);
-    }
-    private void initLocation(){
-        LocationClientOption option=new LocationClientOption();
-        option.setCoorType("bd09ll");
-        option.setIsNeedAddress(true);
-        option.setOpenGps(true);
-        option.setScanSpan(1000);
-        option.setIsNeedLocationPoiList(true);
-        option.setPriority(LocationClientOption.GpsFirst);
-        mLocationClient.setLocOption(option);
-    }
-    public class MyLocationListener implements BDLocationListener
-    {
-        @Override
-        public void onReceiveLocation(final BDLocation location)
-        {
-            if (location.getLocType() == BDLocation.TypeGpsLocation || location.getLocType()==BDLocation.TypeNetWorkLocation){
-                navigateTo(location);
-
-            }
-        }
-    }
-
-
     @Override
     protected void onDestroy() {
         mSuggestionSearch.destroy();
-        //	mMapView.onDestroy();
+        mapUtil.onDestory();
+        mapView.onDestroy();
         super.onDestroy();
-        //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-
-
     }
 
     @Override
     protected void onResume() {
-        //   	mMapView.onResume();
+        mapView.onResume();
         super.onResume();
-        //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
-
     }
 
     @Override
     protected void onPause() {
-        // 	mMapView.onPause();
+        mapView.onPause();
         super.onPause();
-        //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
-        ;
     }
 }
 

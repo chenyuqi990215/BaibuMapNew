@@ -1,4 +1,4 @@
-package com.example.a13787.baidumap;
+package com.example.a13787.baidumap.util;
 
 /**
  * Created by 13787 on 2019/3/11.

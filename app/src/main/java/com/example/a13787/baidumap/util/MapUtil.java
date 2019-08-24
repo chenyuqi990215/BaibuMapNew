@@ -1,11 +1,7 @@
 package com.example.a13787.baidumap.util;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
@@ -17,15 +13,13 @@ import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.example.a13787.baidumap.R;
-import com.example.a13787.baidumap.activity.MapActivity;
+import com.example.a13787.baidumap.entity.SearchDataBase;
 import com.example.a13787.baidumap.entity.MapDataBase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by 13787 on 2019/8/24.
@@ -66,7 +60,7 @@ public class MapUtil
         mLocationClient.stop();
     }
 
-    public void updateOverlay(MapDataBase mapDataBase,int op)
+    public Marker updateOverlay(MapDataBase mapDataBase,int op)
     {
         BitmapDescriptor bitmap = null;
         if (op == 0)
@@ -94,7 +88,25 @@ public class MapUtil
         Bundle bundle = new Bundle();
         bundle.putSerializable("MapDataBase",mapDataBase);
         MarkerOptions option = new MarkerOptions().position(point).extraInfo(bundle).icon(bitmap);
-        baiduMap.addOverlay(option);
+        return (Marker)baiduMap.addOverlay(option);
+    }
+
+    public Marker updateOverlay(SearchDataBase searchDataBase,int op)
+    {
+        LatLng point = new LatLng(searchDataBase.getLatitude(), searchDataBase.getLongitude());
+        //构建Marker图标
+        BitmapDescriptor bitmap = null;
+        if (op == 0)
+            bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_start);
+        else
+            bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_start_big);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("SearchDataBase",searchDataBase);
+        //构建MarkerOption，用于在地图上添加
+        MarkerOptions option = new MarkerOptions().position(point).extraInfo(bundle).icon(bitmap);
+        //在地图上添加Marker，并显示
+        Log.d("overlay", "add");
+        return (Marker)baiduMap.addOverlay(option);
     }
 
     public void clearOverlay()

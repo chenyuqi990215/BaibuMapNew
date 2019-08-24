@@ -7,33 +7,20 @@ import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
-import com.example.a13787.baidumap.ParticipateActivity;
 import com.example.a13787.baidumap.R;
-import com.example.a13787.baidumap.SlideMenu;
+import com.example.a13787.baidumap.util.SlideMenu;
 import com.example.a13787.baidumap.entity.MapDataBase;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.MapUtil;
@@ -324,7 +311,6 @@ public class MapActivity extends BaseActivity
     @Override
     protected void  onDestroy(){
         super.onDestroy();
-        //mLocationClient.stop();
         mapUtil.onDestory();
         mapView.onDestroy();
         baiduMap.setMyLocationEnabled(false);

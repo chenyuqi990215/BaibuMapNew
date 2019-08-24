@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.model.LatLng;
 import com.example.a13787.baidumap.entity.ActivityDataBase;
-import com.example.a13787.baidumap.MapSearchActivity;
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.util.BaseActivity;
 
