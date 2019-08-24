@@ -299,17 +299,17 @@ public class MapActivity extends BaseActivity
         });
     }
     @Override
-    protected void  onResume(){
+    protected void onResume(){
         super.onResume();
         mapView.onResume();
     }
     @Override
-    protected void  onPause(){
+    protected void onPause(){
         super.onPause();
         mapView.onPause();
     }
     @Override
-    protected void  onDestroy(){
+    protected void onDestroy(){
         super.onDestroy();
         mapUtil.onDestory();
         mapView.onDestroy();

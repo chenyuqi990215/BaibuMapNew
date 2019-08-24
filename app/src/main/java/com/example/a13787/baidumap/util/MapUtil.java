@@ -31,7 +31,7 @@ public class MapUtil
     private boolean isFirstLocate = true;
     private BaiduMap baiduMap;
     private Context context;
-
+    private  BDLocation location;
     public MapUtil(BaiduMap baiduMap,Context context)
     {
         this.baiduMap=baiduMap;
@@ -43,9 +43,9 @@ public class MapUtil
         @Override
         public void onReceiveLocation(final BDLocation location)
         {
-            if (location.getLocType() == BDLocation.TypeGpsLocation || location.getLocType()==BDLocation.TypeNetWorkLocation){
+            if (location.getLocType() == BDLocation.TypeGpsLocation || location.getLocType()==BDLocation.TypeNetWorkLocation)
+            {
                 navigateTo(location);
-
             }
         }
     }
@@ -109,11 +109,6 @@ public class MapUtil
         return (Marker)baiduMap.addOverlay(option);
     }
 
-    public void clearOverlay()
-    {
-        baiduMap.clear();
-    }
-
     private void initLocation(){
         mLocationClient=new LocationClient(context.getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListener());
@@ -127,8 +122,13 @@ public class MapUtil
         mLocationClient.setLocOption(option);
     }
 
+    public BDLocation getMyLocation()
+    {
+        return this.location;
+    }
     private void navigateTo(BDLocation location)
     {
+        this.location=location;
         if (isFirstLocate)
         {
             LatLng ll = new LatLng(location.getLatitude(),location.getLongitude());

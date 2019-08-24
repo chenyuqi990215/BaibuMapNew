@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 public class MapDataBase implements Serializable
 {
+    private int id;
     private boolean clickable;
     private String name;
     private String school;
@@ -117,5 +118,13 @@ public class MapDataBase implements Serializable
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

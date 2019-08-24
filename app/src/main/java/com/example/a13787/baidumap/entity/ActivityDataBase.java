@@ -6,6 +6,7 @@ package com.example.a13787.baidumap.entity;
 
 public class ActivityDataBase
 {
+    private int id;
     private String name;
     private String school;
     private String type;
@@ -104,5 +105,13 @@ public class ActivityDataBase
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
