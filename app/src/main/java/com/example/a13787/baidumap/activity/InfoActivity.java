@@ -253,7 +253,6 @@ public class InfoActivity extends BaseActivity
 
     private String getImagePath(Uri uri, String selection){
         String path = null;
-        //閫氳繃Uri鍜宻eletion鏉ヨ幏鍙栫湡鏄殑鍥剧墖璺緞
         Cursor cursor = getContentResolver().query(uri,null,selection,null,null);
         if(cursor != null){
             if(cursor.moveToFirst()){
@@ -268,6 +267,7 @@ public class InfoActivity extends BaseActivity
         if(imagePath != null){
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
             bitmap = CircleImageView.work(bitmap);
+            //deal image
             protraint.setImageBitmap(bitmap);
             //upload to database
         }
