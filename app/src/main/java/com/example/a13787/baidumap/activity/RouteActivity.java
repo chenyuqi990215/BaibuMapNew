@@ -81,7 +81,6 @@ public class RouteActivity extends BaseActivity
         mapUtil.requestLocation();
         guide = (Button)findViewById(R.id.route_guide);
         back = (Button)findViewById(R.id.route_back);
-        //setElement();
     }
 
     @Override

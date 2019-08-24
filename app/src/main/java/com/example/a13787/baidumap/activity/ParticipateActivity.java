@@ -99,7 +99,8 @@ public class ParticipateActivity extends BaseActivity
                                 startActivity(intent);
                                 finish();
                             }
-                        });
+                        })
+                         .setNegativeButton("取消",null);
                 AlertDialog dialog=builder.create();
                 dialog.show();
             }

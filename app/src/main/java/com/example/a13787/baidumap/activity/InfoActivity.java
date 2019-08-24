@@ -1,17 +1,35 @@
 package com.example.a13787.baidumap.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.ContactsContract;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.util.BaseActivity;
+import com.example.a13787.baidumap.util.CircleImageView;
+
+import java.io.FileNotFoundException;
 
 public class InfoActivity extends BaseActivity
 {
@@ -23,6 +41,10 @@ public class InfoActivity extends BaseActivity
     private TextView sex;
     private TextView age;
     private Button back;
+    private ImageView protraint;
+    private TextView change;
+    public static final int CHOOSE_PHOTO = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +58,7 @@ public class InfoActivity extends BaseActivity
     @Override
     protected void initView()
     {
+
         username = (TextView) findViewById(R.id.info_user);
         nickname = (TextView) findViewById(R.id.info_nickname);
         birth = (TextView) findViewById(R.id.info_birth);
@@ -44,10 +67,26 @@ public class InfoActivity extends BaseActivity
         sex = (TextView) findViewById(R.id.info_sex);
         age = (TextView) findViewById(R.id.info_age);
         back = (Button) findViewById(R.id.info_back);
+        change = (TextView) findViewById(R.id.info_change);
+        protraint = (ImageView) findViewById(R.id.info_portraint);
     }
     @Override
     protected void initListener()
     {
+        change.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                if(ContextCompat.checkSelfPermission(InfoActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+                {
+                    ActivityCompat.requestPermissions(InfoActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE },1);
+                }
+                else
+                {
+                    openAlbum();
+                }
+            }
+        });
         username.setText("cyq");
         nickname.setText("not known");
         nickname.setOnClickListener(new View.OnClickListener()
@@ -145,4 +184,103 @@ public class InfoActivity extends BaseActivity
     {
         return R.layout.activity_info;
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        switch(requestCode){
+            case 1:
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    openAlbum();
+                }else{
+                    Toast.makeText(this,"You denied the permission", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        switch (requestCode)
+        {
+            case CHOOSE_PHOTO:
+                if(resultCode == RESULT_OK){
+                    if(Build.VERSION.SDK_INT >= 19){
+                        handleImageOnKitKat(data);
+                    }
+                    else{
+                        handleImageBeforeKitKat(data);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @TargetApi(19)
+    private  void handleImageOnKitKat(Intent data){
+        String imagePath = null;
+        Uri uri = data.getData();
+        if(DocumentsContract.isDocumentUri(this,uri)){
+            String docId = DocumentsContract.getDocumentId(uri);
+            if("com.android.providers.media.documents".equals(uri.getAuthority())){
+                String id = docId.split(":")[1];
+                String selection = MediaStore.Images.Media._ID +"="+id;
+                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,selection);
+            }
+            else if("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
+                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(docId));
+                imagePath = getImagePath(contentUri, null);
+            }
+        }
+        else if("content".equalsIgnoreCase(uri.getScheme())){
+            //濡傛灉鏄痗ontent绫诲瀷鐨刄ri锛屽垯浣跨敤鏅€氭柟寮忓鐞?
+            imagePath = getImagePath(uri,null);
+        }
+        else if("file".equalsIgnoreCase(uri.getScheme())){
+            //濡傛灉鏄痜ile绫诲瀷鐨刄ri,鐩存帴鑾峰彇鍥剧墖璺緞鍗冲彲
+            imagePath = uri.getPath();
+        }
+        displayImage(imagePath);//鏍规嵁鍥剧墖璺緞鏄剧ず鍥剧墖
+    }
+
+    private void handleImageBeforeKitKat(Intent data){
+        Uri uri = data.getData();
+        String imagePath = getImagePath(uri, null);
+        displayImage(imagePath);
+    }
+
+    private String getImagePath(Uri uri, String selection){
+        String path = null;
+        //閫氳繃Uri鍜宻eletion鏉ヨ幏鍙栫湡鏄殑鍥剧墖璺緞
+        Cursor cursor = getContentResolver().query(uri,null,selection,null,null);
+        if(cursor != null){
+            if(cursor.moveToFirst()){
+                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+            }
+            cursor.close();
+        }
+        return path;
+    }
+
+    private void displayImage(String imagePath){
+        if(imagePath != null){
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+            bitmap = CircleImageView.work(bitmap);
+            protraint.setImageBitmap(bitmap);
+            //upload to database
+        }
+        else{
+            Toast.makeText(this,"failed to get image", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void openAlbum(){
+        Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        intent.setType("image/*''");
+        startActivityForResult(intent, CHOOSE_PHOTO);
+    }
+
+
 }
