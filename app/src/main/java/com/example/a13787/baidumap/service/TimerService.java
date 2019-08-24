@@ -48,8 +48,8 @@ public class TimerService extends Service {
                         Notification notification = new Notification.Builder(TimerService.this,id)
                                 .setContentIntent(contentIntent)
                                 .setContentTitle("Title")
-                                .setSmallIcon(R.mipmap.ic_launcher)
-                                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                                .setSmallIcon(R.mipmap.my_ic_launcher)
+                                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.my_ic_launcher))
                                 .setContentText("Test")
                                 .setAutoCancel(true)
                                 .build();
@@ -62,7 +62,8 @@ public class TimerService extends Service {
                         PendingIntent contentIntent = PendingIntent.getActivity(TimerService.this,0,notificationIntent,0);
                         Notification.Builder builder = new Notification.Builder(TimerService.this)
                                 .setContentIntent(contentIntent)
-                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setSmallIcon(R.mipmap.my_ic_launcher)
+                                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.my_ic_launcher))
                                 .setContentText("提醒") //下拉通知啦内容
                                 .setContentTitle("你有一个活动即将开始，请点击查看")//下拉通知栏标题
                                 .setAutoCancel(true);
