@@ -93,7 +93,7 @@ public class ParticipateActivity extends BaseActivity
                             {
                                 double latitude = activityDataBase.getLatitude();
                                 double longitude = activityDataBase.getLongitude();
-                                Intent intent = new Intent(ParticipateActivity.this,RoutineActivity.class);
+                                Intent intent = new Intent(ParticipateActivity.this,RouteActivity.class);
                                 intent.putExtra("Latitude",latitude);
                                 intent.putExtra("Longitude",longitude);
                                 startActivity(intent);
@@ -134,7 +134,7 @@ public class ParticipateActivity extends BaseActivity
             textView = (TextView) findViewById(R.id.participate_text_join);
             textView.setTextColor(Color.parseColor("#c8c8c8"));
         }
-        else if (button_join)
+        else if (button_join == true)
         {
             ImageView imageView = (ImageView) findViewById(R.id.participate_icon_join);
             imageView.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_star));

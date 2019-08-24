@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     android:background="#e9eafd">
     <LinearLayout
-        android:id="@+id/routine_header"
+        android:id="@+id/route_header"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#e9eafd"
         android:orientation="horizontal">
         <Button
             android:layout_marginLeft="10dp"
-            android:id="@+id/search_back"
+            android:id="@+id/route_back"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
@@ -29,11 +29,11 @@
     <com.baidu.mapapi.map.MapView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/routine_header"
+        android:layout_below="@id/route_header"
         android:id="@+id/bmapView3"
         android:clickable="true" />
     <Button
-        android:id="@+id/routine_guide"
+        android:id="@+id/route_guide"
         android:layout_width="200dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"

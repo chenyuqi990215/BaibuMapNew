@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +16,6 @@ import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.BikingRouteLine;
 import com.baidu.mapapi.search.route.BikingRoutePlanOption;
 import com.baidu.mapapi.search.route.BikingRouteResult;
@@ -37,7 +35,7 @@ import com.example.a13787.baidumap.util.MapUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoutineActivity extends BaseActivity
+public class RouteActivity extends BaseActivity
 {
 
     private RoutePlanSearch mSearch;
@@ -46,6 +44,7 @@ public class RoutineActivity extends BaseActivity
     private BikingRouteOverlay overlay;
     private BaiduMap baiduMap;
     private Button guide;
+    private Button back;
     private double latitude;
     private double longitude;
 
@@ -55,15 +54,15 @@ public class RoutineActivity extends BaseActivity
         SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         List<String> permissionList=new ArrayList<>();
-        if(ContextCompat.checkSelfPermission(RoutineActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+        if(ContextCompat.checkSelfPermission(RouteActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
-        if(ContextCompat.checkSelfPermission(RoutineActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+        if(ContextCompat.checkSelfPermission(RouteActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
         }
         if(!permissionList.isEmpty()){
             String[] permissions=permissionList.toArray(new String[permissionList.size()]);
-            ActivityCompat.requestPermissions(RoutineActivity.this,permissions,1);
+            ActivityCompat.requestPermissions(RouteActivity.this,permissions,1);
         }
         Intent intent = getIntent();
         latitude = intent.getDoubleExtra("Latitude",0);
@@ -78,16 +77,17 @@ public class RoutineActivity extends BaseActivity
         mMapView = (MapView) findViewById(R.id.bmapView3);
         baiduMap = mMapView.getMap();
         baiduMap.setMyLocationEnabled(true);
-        mapUtil = new MapUtil(baiduMap,RoutineActivity.this);
+        mapUtil = new MapUtil(baiduMap,RouteActivity.this);
         mapUtil.requestLocation();
-        guide = (Button)findViewById(R.id.routine_guide);
+        guide = (Button)findViewById(R.id.route_guide);
+        back = (Button)findViewById(R.id.route_back);
         //setElement();
     }
 
     @Override
     public int initLayout()
     {
-        return R.layout.activity_routine;
+        return R.layout.activity_route;
     }
 
     @Override
@@ -114,6 +114,16 @@ public class RoutineActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 setElement();
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(RouteActivity.this,ParticipateActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
