@@ -43,24 +43,17 @@
                     android:layout_marginLeft="40dp"
                     android:background="@drawable/login_email"
                     />
-                <android.support.design.widget.TextInputLayout
+
+                <AutoCompleteTextView
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="40dp">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_margin="20dp"
-                        android:layout_marginTop="18dp"
-                        android:hint="Email"
-                        android:inputType="textEmailAddress"
-                        android:dropDownVerticalOffset="10dp"
-                        android:maxLines="1"
-                         />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:layout_height="40dp"
+                    android:layout_margin="20dp"
+                    android:layout_marginTop="18dp"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:dropDownVerticalOffset="10dp"
+                    android:maxLines="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -76,27 +69,19 @@
                     android:background="@drawable/login_password"
                     />
 
-                <android.support.design.widget.TextInputLayout
+                <EditText
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="40dp"
-                    >
-
-                    <EditText
-                        android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
-                        android:layout_margin="20dp"
-                        android:hint="Password"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="textPassword"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_margin="20dp"
+                    android:hint="Password"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
 
 

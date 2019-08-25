@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -37,6 +38,7 @@ public class MapActivity extends BaseActivity
     private MapUtil mapUtil;
     private MapView mapView;
     private BaiduMap baiduMap;
+    private SwipeRefreshLayout refreshLayout;
     private boolean isPermitted = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class MapActivity extends BaseActivity
     @Override
     protected void initView()
     {
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.map_refresh);
         slideMenu = (SlideMenu) findViewById(R.id.slideMenu);
         button = (Button) findViewById(R.id.slide_enter);
         mapView=(MapView)findViewById(R.id.bmapView);
@@ -83,6 +86,7 @@ public class MapActivity extends BaseActivity
     @Override
     protected void initData()
     {
+        baiduMap.clear();
         MapDataBase mydataBase= new MapDataBase();
         mydataBase.setLongitude(121.413326);
         mydataBase.setLatitude(31.234196);
@@ -157,6 +161,16 @@ public class MapActivity extends BaseActivity
     @Override
     protected void initListener()
     {
+        //SwipeRefreshLayout设置
+        refreshLayout.setColorSchemeResources(R.color.colorPrimary);//设置下拉刷新进度条颜色
+        //下拉刷新监听
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+                refreshLayout.setRefreshing(false);
+            }
+        });
         //对"+"按钮的监听button_add
         TextView footprint = (TextView) findViewById(R.id.menu_footprint);
         footprint.setOnClickListener(new View.OnClickListener()

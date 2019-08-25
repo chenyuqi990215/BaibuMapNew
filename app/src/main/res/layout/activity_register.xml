@@ -41,24 +41,17 @@
                     android:textSize="20dp"
                     android:textColor="#0a0000"
                     />
-                <android.support.design.widget.TextInputLayout
+                <EditText
+                    android:id="@+id/register_username"
                     android:layout_width="match_parent"
-                    android:layout_marginRight="10dp"
                     android:layout_height="wrap_content"
-                    >
-                    <EditText
-                        android:id="@+id/register_username"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="username"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:hint="username"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,25 +108,17 @@
                     android:textSize="20dp"
                     android:textColor="#0a0000"
                     />
-                <android.support.design.widget.TextInputLayout
+                <EditText
+                    android:id="@+id/register_email"
                     android:layout_width="match_parent"
-                    android:layout_marginRight="10dp"
                     android:layout_height="wrap_content"
-                    >
-                    <EditText
-                        android:id="@+id/register_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="email"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
-                />
+                    android:hint="email"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -151,26 +136,18 @@
                     android:layout_marginTop="3dp"
                     android:text="Phone : "
                     android:textSize="20dp"
-                    android:textColor="#0a0000"
-                    />
-                <android.support.design.widget.TextInputLayout
+                    android:textColor="#0a0000" />
+                <EditText
+                    android:id="@+id/register_tel"
                     android:layout_width="match_parent"
-                    android:layout_marginRight="10dp"
                     android:layout_height="wrap_content"
-                    >
-                    <EditText
-                        android:id="@+id/register_tel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="telephone"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:hint="telephone"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -190,24 +167,17 @@
                     android:textSize="20dp"
                     android:textColor="#0a0000"
                     />
-                <android.support.design.widget.TextInputLayout
+                <EditText
+                    android:id="@+id/register_password"
                     android:layout_width="match_parent"
-                    android:layout_marginRight="10dp"
                     android:layout_height="wrap_content"
-                    >
-                    <EditText
-                        android:id="@+id/register_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="password"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="textPassword"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:hint="password"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -227,24 +197,17 @@
                     android:textSize="20dp"
                     android:textColor="#0a0000"
                     />
-                <android.support.design.widget.TextInputLayout
+                <EditText
+                    android:id="@+id/register_confirm"
                     android:layout_width="match_parent"
-                    android:layout_marginRight="10dp"
                     android:layout_height="wrap_content"
-                    >
-                    <EditText
-                        android:id="@+id/register_confirm"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="password"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="textPassword"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:hint="password"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -262,26 +225,18 @@
                     android:layout_marginTop="3dp"
                     android:text="School : "
                     android:textSize="20dp"
-                    android:textColor="#0a0000"
-                    />
-                <android.support.design.widget.TextInputLayout
+                    android:textColor="#0a0000" />
+                <EditText
+                    android:id="@+id/register_schoolname"
                     android:layout_width="match_parent"
-                    android:layout_marginRight="10dp"
                     android:layout_height="wrap_content"
-                    >
-                    <EditText
-                        android:id="@+id/register_schoolname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="school name"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:hint="school name"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -301,24 +256,17 @@
                     android:textSize="20dp"
                     android:textColor="#0a0000"
                     />
-                <android.support.design.widget.TextInputLayout
+                <EditText
+                    android:id="@+id/register_studid"
                     android:layout_width="match_parent"
-                    android:layout_marginRight="30dp"
                     android:layout_height="wrap_content"
-                    >
-                    <EditText
-                        android:id="@+id/register_studid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="student id"
-                        android:imeActionId="@+id/login"
-                        android:imeActionLabel="@string/action_sign_in_short"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                    android:hint="student id"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
             <Button
                 android:id="@+id/email_sign_in_button"

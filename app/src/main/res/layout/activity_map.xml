@@ -25,12 +25,20 @@
             android:gravity="center"
             android:textSize="30dp"/>
     </LinearLayout>
-    <com.baidu.mapapi.map.MapView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/map_refresh"
         android:layout_below="@id/map_top"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/bmapView"
-        android:clickable="true" />
+        android:layout_height="match_parent">
+
+        <com.baidu.mapapi.map.MapView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/bmapView"
+            android:clickable="true" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
     <Button
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
