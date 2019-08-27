@@ -1,12 +1,14 @@
 package com.example.a13787.baidumap.util;
 
+import com.alibaba.fastjson.JSON;
+
 import com.example.a13787.baidumap.entity.UserEntity;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by 13787 on 2019/8/27.
@@ -16,7 +18,10 @@ public class JsonUtil
 {
     public static String userToJson(UserEntity userEntity)
     {
-        JSONObject jsonObject = new JSONObject();
+        String jsonStr = com.alibaba.fastjson.JSONObject.toJSONString(userEntity);
+        return jsonStr;
+
+        /*JSONObject jsonObject = new JSONObject();
         try
         {
             jsonObject.put("age",userEntity.getAge());
@@ -40,13 +45,14 @@ public class JsonUtil
         finally
         {
             return jsonObject.toString();
-        }
+        }*/
     }
 
     public static UserEntity jsonToUser(JSONObject jsonObject)
     {
-        UserEntity userEntity = new UserEntity();
-        try
+        UserEntity userEntity = JSON.parseObject(JSON.toJSONString(jsonObject),UserEntity.class);
+        return userEntity;
+        /*try
         {
             userEntity.setAge(jsonObject.getInt("age"));
             userEntity.setBirth(jsonObject.getString("birth"));
@@ -69,7 +75,7 @@ public class JsonUtil
         finally
         {
             return userEntity;
-        }
+        }*/
     }
 
     public static ArrayList<UserEntity> jsonToUsers(String data)
