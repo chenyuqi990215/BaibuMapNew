@@ -23,12 +23,6 @@ public class JsonUtil
         return jsonStr;
     }
 
-    public static UserEntity jsonToUser(JSONObject jsonObject)
-    {
-        UserEntity userEntity = JSON.parseObject(JSON.toJSONString(jsonObject),UserEntity.class);
-        return userEntity;
-    }
-
     public static ArrayList<UserEntity> jsonToUsers(String data)
     {
         ArrayList<UserEntity> userEntities = JSON.parseObject(data, new TypeReference<ArrayList<UserEntity>>() {});
