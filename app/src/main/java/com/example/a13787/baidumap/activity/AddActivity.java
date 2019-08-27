@@ -11,13 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.mapapi.model.LatLng;
-import com.example.a13787.baidumap.entity.ActivityDataBase;
+import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.util.BaseActivity;
 
 public class AddActivity extends BaseActivity
 {
-    private ActivityDataBase activityDataBase = null;
+    private ActivityEntity activityEntity = null;
     private Button confirm;
     private Button back;
     private ImageView imageView;
@@ -47,7 +47,7 @@ public class AddActivity extends BaseActivity
             @Override
             public void onClick(View v)
             {
-                activityDataBase = new ActivityDataBase();
+                activityEntity = new ActivityEntity();
                 final EditText title = (EditText) findViewById(R.id.add_title);
                 String tmp;
                 tmp = title.getText().toString();
@@ -56,7 +56,7 @@ public class AddActivity extends BaseActivity
                     Toast.makeText(AddActivity.this,new String("Error: Title cannot be null"),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                activityDataBase.setTitle(tmp);
+                activityEntity.setTitle(tmp);
                 final EditText content = (EditText) findViewById(R.id.add_content);
                 tmp = content.getText().toString();
                 if (tmp.length() == 0)
@@ -64,7 +64,7 @@ public class AddActivity extends BaseActivity
                     Toast.makeText(AddActivity.this,new String("Error: Content cannot be null"),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                activityDataBase.setContent(tmp);
+                activityEntity.setContent(tmp);
                 final EditText time = (EditText) findViewById(R.id.add_time);
                 tmp = time.getText().toString();
                 if (tmp.length() == 0)
@@ -72,7 +72,7 @@ public class AddActivity extends BaseActivity
                     Toast.makeText(AddActivity.this,new String("Error: Time cannot be null"),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                activityDataBase.setDate(tmp);
+                activityEntity.setDate(tmp);
                 final TextView location = (TextView) findViewById(R.id.add_location);
                 tmp = location.getText().toString();
                 if (tmp.length() == 0)
@@ -85,23 +85,23 @@ public class AddActivity extends BaseActivity
                     Toast.makeText(AddActivity.this,new String("Error: Please select location"),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                activityDataBase.setLongitude(ll.longitude);
-                activityDataBase.setLatitude(ll.latitude);
+                activityEntity.setLongitude(ll.longitude);
+                activityEntity.setLatitude(ll.latitude);
                 final RadioGroup type = (RadioGroup) findViewById(R.id.add_type);
                 int typeCheck = type.getCheckedRadioButtonId();
                 switch (typeCheck)
                 {
                     case R.id.add_study:
-                        activityDataBase.setType("study");
+                        activityEntity.setType("study");
                         break;
                     case R.id.add_enjoyment:
-                        activityDataBase.setType("enjoyment");
+                        activityEntity.setType("enjoyment");
                         break;
                     case R.id.add_food:
-                        activityDataBase.setType("food");
+                        activityEntity.setType("food");
                         break;
                     case R.id.add_sport:
-                        activityDataBase.setType("sport");
+                        activityEntity.setType("sport");
                         break;
                     default:
                         Toast.makeText(AddActivity.this,new String("Error: Type cannot be null"),Toast.LENGTH_SHORT).show();
@@ -112,16 +112,16 @@ public class AddActivity extends BaseActivity
                 switch (sexChecked)
                 {
                     case R.id.add_male:
-                        activityDataBase.setSex("male only");
+                        activityEntity.setSex("male only");
                         break;
                     case R.id.add_female:
-                        activityDataBase.setSex("female only");
+                        activityEntity.setSex("female only");
                         break;
                     case R.id.add_all:
-                        activityDataBase.setSex("all");
+                        activityEntity.setSex("all");
                         break;
                     default:
-                        activityDataBase.setSex("all");
+                        activityEntity.setSex("all");
                 }
 
                 //submit data to database

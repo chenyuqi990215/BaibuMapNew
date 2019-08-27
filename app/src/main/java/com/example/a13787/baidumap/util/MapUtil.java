@@ -18,8 +18,8 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.example.a13787.baidumap.R;
-import com.example.a13787.baidumap.entity.SearchDataBase;
-import com.example.a13787.baidumap.entity.MapDataBase;
+import com.example.a13787.baidumap.entity.MapEntity;
+import com.example.a13787.baidumap.entity.SearchEntity;
 
 /**
  * Created by 13787 on 2019/8/24.
@@ -60,40 +60,40 @@ public class MapUtil
         mLocationClient.stop();
     }
 
-    public Marker updateOverlay(MapDataBase mapDataBase,int op)
+    public Marker updateOverlay(MapEntity mapEntity, int op)
     {
         BitmapDescriptor bitmap = null;
         if (op == 0)
         {
-            if (mapDataBase.getType().equals("study"))
+            if (mapEntity.getType().equals("study"))
                 bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_study);
-            else if (mapDataBase.getType().equals("food"))
+            else if (mapEntity.getType().equals("food"))
                 bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_food);
-            else if (mapDataBase.getType().equals("sport"))
+            else if (mapEntity.getType().equals("sport"))
                 bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_sport);
             else bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_enjoyment);
         }
         else
         {
-            if (mapDataBase.getType().equals("study"))
+            if (mapEntity.getType().equals("study"))
                 bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_study_mark);
-            else if (mapDataBase.getType().equals("food"))
+            else if (mapEntity.getType().equals("food"))
                 bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_food_mark);
-            else if (mapDataBase.getType().equals("sport"))
+            else if (mapEntity.getType().equals("sport"))
                 bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_sport_mark);
             else bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_enjoyment_mark);
         }
-        LatLng point = new LatLng(mapDataBase.getLatitude(), mapDataBase.getLongitude());
+        LatLng point = new LatLng(mapEntity.getLatitude(), mapEntity.getLongitude());
         //构建Marker图标
         Bundle bundle = new Bundle();
-        bundle.putSerializable("MapDataBase",mapDataBase);
+        bundle.putSerializable("MapEntity", mapEntity);
         MarkerOptions option = new MarkerOptions().position(point).extraInfo(bundle).icon(bitmap);
         return (Marker)baiduMap.addOverlay(option);
     }
 
-    public Marker updateOverlay(SearchDataBase searchDataBase,int op)
+    public Marker updateOverlay(SearchEntity searchEntity, int op)
     {
-        LatLng point = new LatLng(searchDataBase.getLatitude(), searchDataBase.getLongitude());
+        LatLng point = new LatLng(searchEntity.getLatitude(), searchEntity.getLongitude());
         //构建Marker图标
         BitmapDescriptor bitmap = null;
         if (op == 0)
@@ -101,7 +101,7 @@ public class MapUtil
         else
             bitmap = BitmapDescriptorFactory.fromResource(R.drawable.ic_start_big);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("SearchDataBase",searchDataBase);
+        bundle.putSerializable("SearchEntity", searchEntity);
         //构建MarkerOption，用于在地图上添加
         MarkerOptions option = new MarkerOptions().position(point).extraInfo(bundle).icon(bitmap);
         //在地图上添加Marker，并显示

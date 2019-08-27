@@ -45,7 +45,7 @@
                     android:id="@+id/register_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="username"
+                    android:hint="real name"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"

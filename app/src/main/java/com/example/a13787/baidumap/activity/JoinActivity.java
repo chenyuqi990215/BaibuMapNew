@@ -3,12 +3,13 @@ package com.example.a13787.baidumap.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.a13787.baidumap.adapter.JoinAdapter;
-import com.example.a13787.baidumap.entity.JoinDataBase;
+import com.example.a13787.baidumap.entity.JoinEntity;
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.util.BaseActivity;
 
@@ -31,7 +32,7 @@ public class JoinActivity extends BaseActivity {
     Button back;
     Button confirm;
 
-    private List<JoinDataBase> joinList = new ArrayList<>();
+    private List<JoinEntity> joinList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,17 +72,17 @@ public class JoinActivity extends BaseActivity {
         location.setText("playgound");
         sex.setText("all");
         title.setText("run");
-        JoinDataBase item1 = new JoinDataBase();
+        JoinEntity item1 = new JoinEntity();
         item1.setName("cyq");
         item1.setSchool("华东师范大学");
         item1.setDepartment("软件工程");
         joinList.add(item1);
-        JoinDataBase item2 = new JoinDataBase();
+        JoinEntity item2 = new JoinEntity();
         item2.setName("cyq");
         item2.setSchool("华东师范大学");
         item2.setDepartment("软件工程");
         joinList.add(item2);
-        JoinDataBase item3 = new JoinDataBase();
+        JoinEntity item3 = new JoinEntity();
         item3.setName("cyq");
         item3.setSchool("华东师范大学");
         item3.setDepartment("软件工程");
@@ -107,6 +108,16 @@ public class JoinActivity extends BaseActivity {
                 Intent intent=new Intent(JoinActivity.this,MapActivity.class);
                 startActivity(intent);
                 //add user and activity into data;
+                finish();
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+                String username=joinList.get(pos).getName();
+                Intent intent=new Intent(JoinActivity.this,InfoActivity.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
                 finish();
             }
         });

@@ -2,13 +2,11 @@ package com.example.a13787.baidumap.entity;
 
 import java.io.Serializable;
 
-/**
- * Created by 13787 on 2019/4/4.
- */
 
-public class ActivityDataBase implements Serializable
+public class MapEntity implements Serializable
 {
     private int id;
+    private boolean clickable;
     private String name;
     private String school;
     private String type;
@@ -20,6 +18,27 @@ public class ActivityDataBase implements Serializable
     private String department;
     private double longitude;
     private double latitude;
+
+    public MapEntity()
+    {
+        setClickable(true);
+    }
+
+    public boolean isClickable() {
+        return clickable;
+    }
+
+    public void setClickable(boolean clickable) {
+        this.clickable = clickable;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getSchool() {
         return school;
@@ -75,14 +94,6 @@ public class ActivityDataBase implements Serializable
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDepartment() {

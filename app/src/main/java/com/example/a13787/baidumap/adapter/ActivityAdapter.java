@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.a13787.baidumap.entity.ActivityDataBase;
+import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.R;
 
 import java.util.List;
@@ -16,11 +16,11 @@ import java.util.List;
  * Created by 13787 on 2019/4/4.
  */
 
-public class ActivityAdapter extends ArrayAdapter<ActivityDataBase>
+public class ActivityAdapter extends ArrayAdapter<ActivityEntity>
 { //创建自定义适配器，继承自ArrayAdapter，并将泛型指定为fruit类
     private int resourceId;
 
-    public ActivityAdapter(Context context, int textViewResourceId, List<ActivityDataBase> objects)
+    public ActivityAdapter(Context context, int textViewResourceId, List<ActivityEntity> objects)
     { //重写父类构造函数，获取相关布局
             super(context, textViewResourceId,objects);
             resourceId = textViewResourceId;
@@ -28,7 +28,7 @@ public class ActivityAdapter extends ArrayAdapter<ActivityDataBase>
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     { //重写getView方法
-        ActivityDataBase cur = getItem(position); //获取当前实例
+        ActivityEntity cur = getItem(position); //获取当前实例
         View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false); //为此子项加载我么传入的布局
         TextView name = (TextView) view.findViewById(R.id.footprint_name); //获取实例的具体项目
         TextView content = (TextView) view.findViewById(R.id.footprint_content);

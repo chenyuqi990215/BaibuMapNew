@@ -21,8 +21,8 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.model.LatLng;
 import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.entity.MapEntity;
 import com.example.a13787.baidumap.util.SlideMenu;
-import com.example.a13787.baidumap.entity.MapDataBase;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.MapUtil;
 
@@ -34,7 +34,7 @@ public class MapActivity extends BaseActivity
     private SlideMenu slideMenu = null;
     private Button button = null;
     private Marker markerOnMap = null;
-    private MapDataBase eventOnMap = null;
+    private MapEntity eventOnMap = null;
     private MapUtil mapUtil;
     private MapView mapView;
     private BaiduMap baiduMap;
@@ -87,7 +87,7 @@ public class MapActivity extends BaseActivity
     protected void initData()
     {
         baiduMap.clear();
-        MapDataBase mydataBase= new MapDataBase();
+        MapEntity mydataBase= new MapEntity();
         mydataBase.setLongitude(121.413326);
         mydataBase.setLatitude(31.234196);
         mydataBase.setName("cyq");
@@ -101,7 +101,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setDate("2019.3.15 15:00 - 17:00");
         mydataBase.setSex("all");
         mapUtil.updateOverlay(mydataBase,0);
-        mydataBase= new MapDataBase();
+        mydataBase= new MapEntity();
         mydataBase.setLongitude(121.411511);
         mydataBase.setLatitude(31.234907);
         mydataBase.setName("cyq");
@@ -115,7 +115,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setDate("2019.3.15 18:00 - 19:00");
         mydataBase.setSex("all");
         mapUtil.updateOverlay(mydataBase,0);
-        mydataBase= new MapDataBase();
+        mydataBase= new MapEntity();
         mydataBase.setLongitude(121.411991);
         mydataBase.setLatitude(31.23632);
         mydataBase.setName("cyq");
@@ -129,7 +129,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setDate("2019.3.15 18:00 - 19:00");
         mydataBase.setSex("all");
         mapUtil.updateOverlay(mydataBase,0);
-        mydataBase= new MapDataBase();
+        mydataBase= new MapEntity();
         mydataBase.setLongitude(121.409952);
         mydataBase.setLatitude(31.236264);
         mydataBase.setName("cyq");
@@ -143,7 +143,7 @@ public class MapActivity extends BaseActivity
         mydataBase.setDate("2019.3.15 6:00 - 8:00");
         mydataBase.setSex("all");
         mapUtil.updateOverlay(mydataBase,0);
-        mydataBase = new MapDataBase();
+        mydataBase = new MapEntity();
         mydataBase.setLongitude(121.410079);
         mydataBase.setLatitude(31.235576);
         mydataBase.setName("cyq");
@@ -225,7 +225,7 @@ public class MapActivity extends BaseActivity
             @Override
             public boolean onMarkerClick(Marker marker)
             {
-                final MapDataBase mydataBase = (MapDataBase) marker.getExtraInfo().get("MapDataBase");
+                final MapEntity mydataBase = (MapEntity) marker.getExtraInfo().get("MapEntity");
                 if (mydataBase.isClickable()==false)
                     return true;
                 if (markerOnMap!=null)
@@ -246,7 +246,7 @@ public class MapActivity extends BaseActivity
                 String color;
                 if (mydataBase.getType().equals("study"))
                 {
-                    MapDataBase temp  = new MapDataBase();
+                    MapEntity temp  = new MapEntity();
                     temp.setClickable(false);
                     temp.setType("study");
                     mapUtil.updateOverlay(temp,1);
@@ -254,7 +254,7 @@ public class MapActivity extends BaseActivity
                 }
                 else if (mydataBase.getType().equals("food"))
                 {
-                    MapDataBase temp  = new MapDataBase();
+                    MapEntity temp  = new MapEntity();
                     temp.setClickable(false);
                     temp.setType("food");
                     mapUtil.updateOverlay(temp,1);
@@ -262,7 +262,7 @@ public class MapActivity extends BaseActivity
                 }
                 else if (mydataBase.getType().equals("sport"))
                 {
-                    MapDataBase temp  = new MapDataBase();
+                    MapEntity temp  = new MapEntity();
                     temp.setClickable(false);
                     temp.setType("sport");
                     mapUtil.updateOverlay(temp,1);
@@ -270,7 +270,7 @@ public class MapActivity extends BaseActivity
                 }
                 else
                 {
-                    MapDataBase temp  = new MapDataBase();
+                    MapEntity temp  = new MapEntity();
                     temp.setClickable(false);
                     temp.setType("enjoyment");
                     mapUtil.updateOverlay(temp,1);
@@ -294,7 +294,7 @@ public class MapActivity extends BaseActivity
                     public void onClick(View v)
                     {
                         Intent intent = new Intent(MapActivity.this,JoinActivity.class);
-                        intent.putExtra("Activity",mydataBase);
+                        intent.putExtra("ActivityEntity",mydataBase);
                         startActivity(intent);
                     }
                 }

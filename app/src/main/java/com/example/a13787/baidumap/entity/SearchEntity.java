@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by 13787 on 2019/4/4.
  */
 
-public class SearchDataBase implements Serializable
+public class SearchEntity implements Serializable
 {
     private double Latitude;
     private double Longitude;

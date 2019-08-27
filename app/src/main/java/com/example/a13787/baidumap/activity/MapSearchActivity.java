@@ -18,7 +18,7 @@ import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.example.a13787.baidumap.R;
-import com.example.a13787.baidumap.entity.SearchDataBase;
+import com.example.a13787.baidumap.entity.SearchEntity;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.MapUtil;
 
@@ -31,8 +31,8 @@ public class MapSearchActivity extends BaseActivity
     private MapView mapView;
     private Marker selectOnMap = null;
     private BaiduMap baiduMap;
-    private SearchDataBase searchOnMap = null;
-    private SearchDataBase curSearchData = null;
+    private SearchEntity searchOnMap = null;
+    private SearchEntity curSearchData = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -119,25 +119,25 @@ public class MapSearchActivity extends BaseActivity
             public boolean onMarkerClick(Marker marker)
             {
                 Log.d("Detect", "Marker click");
-                final SearchDataBase searchDataBase = (SearchDataBase) marker.getExtraInfo().get("SearchDataBase");
-                curSearchData = new SearchDataBase();
-                curSearchData.setLongitude(searchDataBase.getLongitude());
-                curSearchData.setLatitude(searchDataBase.getLatitude());
-                curSearchData.setKey(searchDataBase.getKey());
-                if (searchDataBase.isClickable() == false)
+                final SearchEntity searchEntity = (SearchEntity) marker.getExtraInfo().get("SearchEntity");
+                curSearchData = new SearchEntity();
+                curSearchData.setLongitude(searchEntity.getLongitude());
+                curSearchData.setLatitude(searchEntity.getLatitude());
+                curSearchData.setKey(searchEntity.getKey());
+                if (searchEntity.isClickable() == false)
                     return true;
                 if (searchOnMap!=null)
                     mapUtil.updateOverlay(searchOnMap,0);
                 if (selectOnMap!=null)
                     selectOnMap.remove();
-                searchOnMap = searchDataBase;
+                searchOnMap = searchEntity;
                 marker.remove();
-                LatLng ll = new LatLng(searchDataBase.getLatitude(),searchDataBase.getLongitude());
-                SearchDataBase temp = new SearchDataBase();
+                LatLng ll = new LatLng(searchEntity.getLatitude(), searchEntity.getLongitude());
+                SearchEntity temp = new SearchEntity();
                 temp.setClickable(false);
-                temp.setKey(searchDataBase.getKey());
-                temp.setLatitude(searchDataBase.getLatitude());
-                temp.setLongitude(searchDataBase.getLongitude());
+                temp.setKey(searchEntity.getKey());
+                temp.setLatitude(searchEntity.getLatitude());
+                temp.setLongitude(searchEntity.getLongitude());
                 selectOnMap = mapUtil.updateOverlay(temp,1);
                 Button buttonConfirm = (Button) findViewById(R.id.search_confirm);
                 buttonConfirm.setVisibility(View.VISIBLE);
@@ -165,12 +165,12 @@ public class MapSearchActivity extends BaseActivity
                 List<SuggestionResult.SuggestionInfo> resl = res.getAllSuggestions();
                 for (int i = 0; i < resl.size(); i++)
                 {
-                    SearchDataBase searchDataBase = new SearchDataBase();
-                    searchDataBase.setLatitude(resl.get(i).getPt().latitude);
-                    searchDataBase.setLongitude(resl.get(i).getPt().longitude);
-                    searchDataBase.setKey(resl.get(i).getKey());
-                    searchDataBase.setClickable(true);
-                    mapUtil.updateOverlay(searchDataBase,0);
+                    SearchEntity searchEntity = new SearchEntity();
+                    searchEntity.setLatitude(resl.get(i).getPt().latitude);
+                    searchEntity.setLongitude(resl.get(i).getPt().longitude);
+                    searchEntity.setKey(resl.get(i).getKey());
+                    searchEntity.setClickable(true);
+                    mapUtil.updateOverlay(searchEntity,0);
                 }
             }
             //获取在线建议检索结果

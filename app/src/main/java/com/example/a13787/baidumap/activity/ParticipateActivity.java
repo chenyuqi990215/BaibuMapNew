@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.adapter.ActivityAdapter;
-import com.example.a13787.baidumap.entity.ActivityDataBase;
+import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.util.BaseActivity;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class ParticipateActivity extends BaseActivity
     private ListView listView = null;
     private ActivityAdapter adapter = null;
     private boolean first = true;
-    private List<ActivityDataBase> activityList = new ArrayList<>();
+    private List<ActivityEntity> activityList = new ArrayList<>();
     private Button back;
     private LinearLayout layout_my;
     private LinearLayout layout_join;
@@ -80,7 +80,7 @@ public class ParticipateActivity extends BaseActivity
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l)
             {
-                final ActivityDataBase activityDataBase = activityList.get(pos);
+                final ActivityEntity activityEntity = activityList.get(pos);
                 AlertDialog.Builder builder=new AlertDialog.Builder(ParticipateActivity.this)
                         .setTitle("提示：")
                         .setMessage("是否想要进入导航模式")
@@ -91,8 +91,8 @@ public class ParticipateActivity extends BaseActivity
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i)
                             {
-                                double latitude = activityDataBase.getLatitude();
-                                double longitude = activityDataBase.getLongitude();
+                                double latitude = activityEntity.getLatitude();
+                                double longitude = activityEntity.getLongitude();
                                 Intent intent = new Intent(ParticipateActivity.this,RouteActivity.class);
                                 intent.putExtra("Latitude",latitude);
                                 intent.putExtra("Longitude",longitude);
@@ -154,7 +154,7 @@ public class ParticipateActivity extends BaseActivity
         if (button_me == true)
         {
             activityList.clear();
-            ActivityDataBase item1 = new ActivityDataBase();
+            ActivityEntity item1 = new ActivityEntity();
             item1.setName("cyq");
             item1.setSchool("华东师范大学");
             item1.setDepartment("软件工程");
@@ -167,7 +167,7 @@ public class ParticipateActivity extends BaseActivity
             item1.setLatitude(31.234907);
             item1.setSex("all");
             activityList.add(item1);
-            ActivityDataBase item2 = new ActivityDataBase();
+            ActivityEntity item2 = new ActivityEntity();
             item2.setName("cyq");
             item2.setSchool("华东师范大学");
             item2.setDepartment("软件工程");
@@ -185,7 +185,7 @@ public class ParticipateActivity extends BaseActivity
         else if (button_join)
         {
             activityList.clear();
-            ActivityDataBase item3 = new ActivityDataBase();
+            ActivityEntity item3 = new ActivityEntity();
             item3.setName("cyq");
             item3.setSchool("华东师范大学");
             item3.setDepartment("软件工程");

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by 13787 on 2019/4/5.
  */
 
-public class JoinDataBase implements Serializable
+public class JoinEntity implements Serializable
 {
     private String name;
     private String school;

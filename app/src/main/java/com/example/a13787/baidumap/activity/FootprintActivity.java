@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.adapter.ActivityAdapter;
-import com.example.a13787.baidumap.entity.ActivityDataBase;
+import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.util.BaseActivity;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class FootprintActivity extends BaseActivity
 {
-    private List<ActivityDataBase> activityList = new ArrayList<>();
+    private List<ActivityEntity> activityList = new ArrayList<>();
     private Button back;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,7 +55,7 @@ public class FootprintActivity extends BaseActivity
     protected void initData()
     {
         // 初始化类中所有数据
-        ActivityDataBase item1 = new ActivityDataBase();
+        ActivityEntity item1 = new ActivityEntity();
         item1.setName("cyq");
         item1.setSchool("华东师范大学");
         item1.setDepartment("软件工程");
@@ -66,7 +66,7 @@ public class FootprintActivity extends BaseActivity
         item1.setLocation("playgound");
         item1.setSex("all");
         activityList.add(item1);
-        ActivityDataBase item2 = new ActivityDataBase();
+        ActivityEntity item2 = new ActivityEntity();
         item2.setName("cyq");
         item2.setSchool("华东师范大学");
         item2.setDepartment("软件工程");
@@ -77,7 +77,7 @@ public class FootprintActivity extends BaseActivity
         item2.setLocation("Hexi restaurant");
         item2.setSex("all");
         activityList.add(item2);
-        ActivityDataBase item3 = new ActivityDataBase();
+        ActivityEntity item3 = new ActivityEntity();
         item3.setName("cyq");
         item3.setSchool("华东师范大学");
         item3.setDepartment("软件工程");
