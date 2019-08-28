@@ -2,12 +2,13 @@ package com.example.a13787.baidumap.util;
 
 import com.alibaba.fastjson.JSON;
 
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.example.a13787.baidumap.entity.ActivityEntity;
+import com.example.a13787.baidumap.entity.AnnounceEntity;
 import com.example.a13787.baidumap.entity.UserEntity;
 
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class JsonUtil
 {
     public static String userToJson(UserEntity userEntity)
     {
-        String jsonStr = com.alibaba.fastjson.JSONObject.toJSONString(userEntity);
+        String jsonStr = JSONObject.toJSONString(userEntity);
         return jsonStr;
     }
 
@@ -34,4 +35,43 @@ public class JsonUtil
         UserEntity userEntity = JSON.parseObject(data, new TypeReference<UserEntity>() {});
         return userEntity;
     }
+
+    public static String activityToJson(ActivityEntity activityEntity)
+    {
+        String jsonStr = JSONObject.toJSONString(activityEntity);
+        return jsonStr;
+    }
+
+    public static ArrayList<ActivityEntity> jsonToActivities(String data)
+    {
+        ArrayList<ActivityEntity> activityEntities = JSON.parseObject(data, new TypeReference<ArrayList<ActivityEntity>>() {});
+        return activityEntities;
+    }
+
+    public static ActivityEntity jsonToActivity(String data)
+    {
+        ActivityEntity activityEntity = JSON.parseObject(data, new TypeReference<ActivityEntity>() {});
+        return activityEntity;
+    }
+
+    public static String announceToJson(AnnounceEntity announceEntity)
+    {
+        String jsonStr = JSONObject.toJSONString(announceEntity);
+        return jsonStr;
+    }
+
+    public static ArrayList<AnnounceEntity> jsonToAnnounces(String data)
+    {
+        ArrayList<AnnounceEntity> announceEntities = JSON.parseObject(data, new TypeReference<ArrayList<AnnounceEntity>>() {});
+        return announceEntities;
+    }
+
+    public static AnnounceEntity jsonToAnnounce(String data)
+    {
+        AnnounceEntity announceEntity = JSON.parseObject(data, new TypeReference<AnnounceEntity>() {});
+        return announceEntity;
+    }
+
+
+
 }
