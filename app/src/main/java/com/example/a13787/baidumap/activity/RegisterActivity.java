@@ -25,7 +25,7 @@ public class RegisterActivity extends BaseActivity
     private EditText check;
     private EditText tel;
     private EditText schoolName;
-    private EditText studid;
+    private EditText department;
     private Button btn_register;
     private UserEntity userEntity = new UserEntity();
 
@@ -45,7 +45,7 @@ public class RegisterActivity extends BaseActivity
         check = (EditText) findViewById(R.id.register_confirm);
         tel = (EditText) findViewById(R.id.register_tel);
         schoolName = (EditText) findViewById(R.id.register_schoolname);
-        studid = (EditText) findViewById(R.id.register_studid);
+        department = (EditText) findViewById(R.id.register_department);
         btn_register = (Button) findViewById(R.id.email_sign_in_button);
     }
     @Override
@@ -99,8 +99,8 @@ public class RegisterActivity extends BaseActivity
                     userEntity.setPhone(info);
                     info = schoolName.getText().toString();
                     userEntity.setSchool(info);
-                    info = studid.getText().toString();
-                    userEntity.setSchoolid(info);
+                    info = department.getText().toString();
+                    userEntity.setDepartment(info);
                     String result = GetData.attempRegister(userEntity);
                     Toast.makeText(RegisterActivity.this,result,Toast.LENGTH_SHORT).show();
                     if (result.equals("注册成功"))

@@ -82,7 +82,7 @@ public class InfoActivity extends BaseActivity
             _birth = "保密哦！";
         birth.setText(_birth);
         school.setText(userEntity.getSchool());
-        department.setText(userEntity.getSchoolid());
+        department.setText(userEntity.getDepartment());
         sex.setText(userEntity.getSex());
         int _age= userEntity.getAge();
         if (_age > 0)

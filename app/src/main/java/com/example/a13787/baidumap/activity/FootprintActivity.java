@@ -18,6 +18,7 @@ import java.util.List;
 public class FootprintActivity extends BaseActivity
 {
     private List<ActivityEntity> activityList = new ArrayList<>();
+    private ActivityAdapter adapter;
     private Button back;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,15 +47,22 @@ public class FootprintActivity extends BaseActivity
     protected void initView()
     {
         back = (Button) findViewById(R.id.footprint_back);
-        ActivityAdapter adapter = new ActivityAdapter(FootprintActivity.this,R.layout.layout_activity,activityList);
+        adapter = new ActivityAdapter(FootprintActivity.this,R.layout.layout_activity,activityList);
         ListView listView = (ListView) findViewById(R.id.footprint_listview);
         listView.setAdapter(adapter);
     }
     @Override
     protected void initData()
     {
-        activityList = GetData.attemptQueryMyFootprint(FootprintActivity.this);
-        if (activityList == null)
-            activityList = new ArrayList<>();
+        activityList.clear();
+        ArrayList<ActivityEntity> tmp = GetData.attemptQueryMyFootprint(FootprintActivity.this);
+        if (tmp != null)
+        {
+            for (int i = 0;i < tmp.size(); i++)
+            {
+                activityList.add(tmp.get(i));
+            }
+        }
+        adapter.notifyDataSetChanged();
     }
 }
