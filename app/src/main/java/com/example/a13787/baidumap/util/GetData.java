@@ -75,22 +75,6 @@ public class GetData
         }
     }
 
-    public static UserEntity attemptQueryInfo(Context context)
-    {
-        try {
-            String url = "http://47.103.14.204:8080/user/query/info";
-            String response = RequestUtil.getWithSession(context, url);
-            if (response == null)
-                return null;
-            else
-                return JsonUtil.jsonToUser(response);
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
-    }
-
     public static UserEntity attemptQueryUser(Context context,String email)
     {
         try {

@@ -1,6 +1,5 @@
 package com.example.a13787.baidumap.activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
@@ -16,7 +15,6 @@ import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.entity.UserEntity;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.GetData;
-import com.example.a13787.baidumap.util.UserDatabaseHelper;
 
 public class RegisterActivity extends BaseActivity
 {

@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.GetData;
-import com.example.a13787.baidumap.util.UserDatabaseHelper;
 
 /**
  * Created by 13787 on 2019/3/11.

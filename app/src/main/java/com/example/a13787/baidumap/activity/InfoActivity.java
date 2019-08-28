@@ -123,8 +123,9 @@ public class InfoActivity extends BaseActivity
                                 if (et.getText().toString().length()>0)
                                 {
                                     nickname.setText(et.getText().toString());
+                                    String response = GetData.attemptUpdateNickname(InfoActivity.this,et.getText().toString());
                                     //update nickname in database
-                                    Toast.makeText(getApplicationContext(),new String("修改成功"),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                                 }
                             }
                         })
