@@ -103,8 +103,6 @@ public class JoinActivity extends BaseActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent=new Intent(JoinActivity.this,MapActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

@@ -130,8 +130,6 @@ public class AddActivity extends BaseActivity
                 String response = GetData.attemptReleaseActivity(AddActivity.this,activityEntity);
                 //submit data to database
                 Toast.makeText(AddActivity.this,response,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AddActivity.this,MapActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -149,8 +147,6 @@ public class AddActivity extends BaseActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(AddActivity.this, MapActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

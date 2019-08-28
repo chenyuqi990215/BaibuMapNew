@@ -50,8 +50,6 @@ public class ParticipateActivity extends BaseActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent=new Intent(ParticipateActivity.this, MapActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -99,7 +97,6 @@ public class ParticipateActivity extends BaseActivity
                                 intent.putExtra("Latitude",latitude);
                                 intent.putExtra("Longitude",longitude);
                                 startActivity(intent);
-                                finish();
                             }
                         })
                          .setNegativeButton("取消",null);

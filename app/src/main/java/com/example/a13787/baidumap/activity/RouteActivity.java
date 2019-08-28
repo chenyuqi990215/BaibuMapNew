@@ -120,8 +120,6 @@ public class RouteActivity extends BaseActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(RouteActivity.this,ParticipateActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

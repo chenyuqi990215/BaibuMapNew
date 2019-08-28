@@ -33,8 +33,6 @@ public class FootprintActivity extends BaseActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent=new Intent(FootprintActivity.this, MapActivity.class);
-                startActivity(intent);
                 finish();
             }
         });

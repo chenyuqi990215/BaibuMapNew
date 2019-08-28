@@ -105,8 +105,6 @@ public class RegisterActivity extends BaseActivity
                     Toast.makeText(RegisterActivity.this,result,Toast.LENGTH_SHORT).show();
                     if (result.equals("注册成功"))
                     {
-                        Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                        startActivity(intent);
                         finish();
                     }
                     else

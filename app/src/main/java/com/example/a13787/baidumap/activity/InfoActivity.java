@@ -208,8 +208,6 @@ public class InfoActivity extends BaseActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent=new Intent(InfoActivity.this,MapActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
