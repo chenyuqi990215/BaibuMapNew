@@ -47,10 +47,11 @@ public class MapSearchActivity extends BaseActivity
     @Override
     protected void initView()
     {
-        mapUtil = new MapUtil(baiduMap,MapSearchActivity.this);
+
         mapView=(MapView)findViewById(R.id.bmapView2);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
+        mapUtil = new MapUtil(baiduMap,MapSearchActivity.this);
         mapUtil.requestLocation();
     }
     @Override

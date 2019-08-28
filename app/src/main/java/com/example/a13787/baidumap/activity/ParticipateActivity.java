@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -154,16 +155,26 @@ public class ParticipateActivity extends BaseActivity
         // 初始化类中所有数据
         if (button_me == true)
         {
-            activityList = GetData.attemptQueryMyRelease(ParticipateActivity.this);
-            if (activityList == null)
-                activityList = new ArrayList<>();
+            ArrayList<ActivityEntity> tmp;
+            tmp = GetData.attemptQueryMyRelease(ParticipateActivity.this);
+            activityList.clear();
+            if (tmp != null)
+            {
+                for (int i=0;i<tmp.size();i++)
+                    activityList.add(tmp.get(i));
+            }
             adapter.notifyDataSetChanged();
         }
-        else if (button_join)
+        else if (button_join == true)
         {
-            activityList = GetData.attemptQueryMyParticipate(ParticipateActivity.this);
-            if (activityList == null)
-                activityList = new ArrayList<>();
+            ArrayList<ActivityEntity> tmp;
+            tmp = GetData.attemptQueryMyParticipate(ParticipateActivity.this);
+            activityList.clear();
+            if (tmp != null)
+            {
+                for (int i=0;i<tmp.size();i++)
+                    activityList.add(tmp.get(i));
+            }
             adapter.notifyDataSetChanged();
         }
     }

@@ -3,6 +3,7 @@ package com.example.a13787.baidumap.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
+import android.util.Log;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class RequestUtil
         }
     }
 
-    public static String postRequest(Context context, String url, RequestBody requestBody)
+    public static String postRequestWithSession(Context context, String url, RequestBody requestBody)
     {
         try
         {
@@ -66,12 +67,16 @@ public class RequestUtil
                     penaltyLog().
                     build());
             OkHttpClient client = new OkHttpClient();
+            SharedPreferences share = context.getSharedPreferences("Session",MODE_PRIVATE);
+            String sessionid= share.getString("sessionid","null");
             Request request = new Request.Builder()
+                    .addHeader("cookie",sessionid)
                     .url(url)
                     .post(requestBody)
                     .build();
             Response response = client.newCall(request).execute();
-            String responseData = response.body().toString();
+            String responseData = response.body().string();
+            Log.d("response",responseData);
             return responseData;
         }
         catch (Exception e)
@@ -101,7 +106,7 @@ public class RequestUtil
             Response response = call.execute();
             if (response.isSuccessful())
             {
-                return response.body().toString();
+                return response.body().string();
             }
             else
             {

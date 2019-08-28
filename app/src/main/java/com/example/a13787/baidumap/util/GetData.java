@@ -1,6 +1,7 @@
 package com.example.a13787.baidumap.util;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.entity.AnnounceEntity;
@@ -30,7 +31,9 @@ public class GetData
             String response  = RequestUtil.postRequestGetSession(context,new String("http://47.103.14.204:8080/signIn"),requestBody);
             if (response == null || response.equals("1"))
                 return "登录失败";
-            else return "登陆成功";
+            else if (response.equals("0"))
+                return "登陆成功";
+            else return "服务器错误";
         }
         catch (Exception e)
         {
@@ -43,8 +46,9 @@ public class GetData
         try
         {
             MediaType type = MediaType.parse("application/json;charset=utf-8");
-            RequestBody requestBody = RequestBody.create(type,JsonUtil.userToJson(userEntity));
-            String response = RequestUtil.postRequest(context,new String("http://47.103.14.204:8080/register"),requestBody);
+            Log.d("json",JsonUtil.userToJson(userEntity));
+            RequestBody requestBody = FormBody.create(type,JsonUtil.userToJson(userEntity));
+            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/register"),requestBody);
             if (response == null)
                 return "注册失败";
             else return response;
@@ -60,6 +64,7 @@ public class GetData
         try
         {
             String response = RequestUtil.getWithSession(context,new String("http://47.103.14.204:8080/user/query/info"));
+            Log.d("response",response);
             if (response == null)
             {
                 return null;
@@ -81,6 +86,7 @@ public class GetData
             String param = String.format("%s=%s", "email", email, "utf-8");
             String url = "http://47.103.14.204:8080/user/query?" + param;
             String response = RequestUtil.getWithSession(context, url);
+            Log.d("response2",response);
             if (response == null)
                 return null;
             else
@@ -117,7 +123,7 @@ public class GetData
             RequestBody requestBody = new FormBody.Builder()
                     .add("birth",birth)
                     .build();
-            String response = RequestUtil.postRequest(context,new String("http://47.103.14.204:8080/user/update/birth"),requestBody);
+            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/user/update/birth"),requestBody);
             if (response == null)
                 return "更新失败";
             else return response;
@@ -135,7 +141,7 @@ public class GetData
             RequestBody requestBody = new FormBody.Builder()
                     .add("age",age+"")
                     .build();
-            String response = RequestUtil.postRequest(context,new String("http://47.103.14.204:8080/user/update/age"),requestBody);
+            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/user/update/age"),requestBody);
             if (response == null)
                 return "更新失败";
             else return response;
@@ -153,7 +159,7 @@ public class GetData
             RequestBody requestBody = new FormBody.Builder()
                     .add("nickname",nickname)
                     .build();
-            String response = RequestUtil.postRequest(context,new String("http://47.103.14.204:8080/user/update/nickname"),requestBody);
+            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/user/update/nickname"),requestBody);
             if (response == null)
                 return "更新失败";
             else return response;
@@ -170,6 +176,7 @@ public class GetData
         {
             String url = "http://47.103.14.204:8080/user/query/activities";
             String response = RequestUtil.getWithSession(context,url);
+            Log.d("response",response);
             if (response == null)
                 return null;
             else
@@ -187,7 +194,7 @@ public class GetData
         {
             MediaType type = MediaType.parse("application/json;charset=utf-8");
             RequestBody requestBody = RequestBody.create(type,JsonUtil.activityToJson(activityEntity));
-            String response = RequestUtil.postRequest(context,new String("http://47.103.14.204:8080/register"),requestBody);
+            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/user/release"),requestBody);
             if (response == null)
                 return "发布失败";
             else return response;
@@ -221,6 +228,7 @@ public class GetData
         {
             String url = "http://47.103.14.204:8080/user/query/my/release";
             String response = RequestUtil.getWithSession(context,url);
+            Log.d("response",response);
             if (response == null)
                 return null;
             else
@@ -252,7 +260,7 @@ public class GetData
     public static ActivityEntity attemptQueryActivity(Context context,int activityid) {
         try {
             String param = String.format("%s=%s", "activityid", activityid, "utf-8");
-            String url = "http://47.103.14.204:8080/user/query/my/activity?" + param;
+            String url = "http://47.103.14.204:8080/user/query/activity?" + param;
             String response = RequestUtil.getWithSession(context, url);
             if (response == null)
                 return null;
@@ -270,7 +278,7 @@ public class GetData
             RequestBody requestBody = new FormBody.Builder()
                     .add("activityid",activityid+"")
                     .build();
-            String response = RequestUtil.postRequest(context,new String("http://47.103.14.204:8080/user/join"),requestBody);
+            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/user/join"),requestBody);
             if (response == null)
                 return "加入失败";
             else return response;
@@ -288,7 +296,7 @@ public class GetData
             RequestBody requestBody = new FormBody.Builder()
                     .add("activityid",activityid+"")
                     .build();
-            String response = RequestUtil.postRequest(context,new String("http://47.103.14.204:8080/user/dismiss"),requestBody);
+            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/user/dismiss"),requestBody);
             if (response == null)
                 return "删除失败";
             else return response;
@@ -306,7 +314,7 @@ public class GetData
             RequestBody requestBody = new FormBody.Builder()
                     .add("activityid",activityid+"")
                     .build();
-            String response = RequestUtil.postRequest(context,new String("http://47.103.14.204:8080/user/quit"),requestBody);
+            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/user/quit"),requestBody);
             if (response == null)
                 return "删除失败";
             else return response;

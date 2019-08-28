@@ -79,10 +79,10 @@ public class RegisterActivity extends BaseActivity
                     int sexChoseId = sex.getCheckedRadioButtonId();
                     switch (sexChoseId) {
                         case R.id.mainRegisterRdBtnFemale:
-                            userEntity.setSex("Female");
+                            userEntity.setSex("女");
                             break;
                         case R.id.mainRegisterRdBtnMale:
-                            userEntity.setSex("Male");
+                            userEntity.setSex("男");
                             break;
                         default:
                             userEntity.setSex("Secret");

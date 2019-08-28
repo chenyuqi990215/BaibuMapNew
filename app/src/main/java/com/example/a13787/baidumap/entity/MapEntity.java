@@ -26,6 +26,7 @@ public class MapEntity extends ActivityEntity implements Serializable
         {
             return;
         }
+        setClickable(true);
     }
 
     public boolean isClickable() {

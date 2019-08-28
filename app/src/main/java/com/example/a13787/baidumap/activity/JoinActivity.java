@@ -40,9 +40,12 @@ public class JoinActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initData();
         if (activityEntity == null)
+        {
             Toast.makeText(JoinActivity.this,new String("活动不存在"),Toast.LENGTH_SHORT).show();
-        else initData();
+            activityEntity = new ActivityEntity();
+        }
     }
 
 

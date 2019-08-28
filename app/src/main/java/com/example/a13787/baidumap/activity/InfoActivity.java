@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,12 +54,14 @@ public class InfoActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initData();
     }
     @Override
     protected void initData()
     {
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
+        Log.d("email",email);
         if (email == null || email.length() == 0)
             userEntity = GetData.attemptQueryUser(InfoActivity.this);
         else userEntity = GetData.attemptQueryUser(InfoActivity.this,email);
@@ -67,6 +70,22 @@ public class InfoActivity extends BaseActivity
             userEntity = new UserEntity();
             Toast.makeText(InfoActivity.this,"用户不存在",Toast.LENGTH_SHORT).show();
         }
+        username.setText(userEntity.getName());
+        String nick = userEntity.getNickname();
+        if (nick == null || nick.length() == 0)
+            nick = "这个用户比较懒";
+        nickname.setText(nick);
+        String _birth = userEntity.getBirth();
+        if (_birth == null || _birth.length() == 0)
+            _birth = "保密哦！";
+        birth.setText(_birth);
+        school.setText(userEntity.getSchool());
+        department.setText(userEntity.getSchoolid());
+        sex.setText(userEntity.getSex());
+        int _age= userEntity.getAge();
+        if (_age > 0)
+            age.setText(_age+"");
+        else age.setText("保密哦！");
         //search from database by username
     }
 
@@ -102,11 +121,6 @@ public class InfoActivity extends BaseActivity
                 }
             }
         });
-        username.setText(userEntity.getName());
-        String nick = userEntity.getNickname();
-        if (nick == null || nick.length() == 0)
-            nick = "这个用户比较懒";
-        nickname.setText(nick);
         nickname.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -132,10 +146,6 @@ public class InfoActivity extends BaseActivity
                         .setNegativeButton("取消",null).show();
             }
         });
-        String _birth = userEntity.getBirth();
-        if (_birth == null || _birth.length() == 0)
-            _birth = "保密哦！";
-        birth.setText(_birth);
         birth.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -162,13 +172,6 @@ public class InfoActivity extends BaseActivity
                         .setNegativeButton("取消",null).show();
             }
         });
-        school.setText(userEntity.getSchool());
-        department.setText(userEntity.getDepartment());
-        sex.setText(userEntity.getSex());
-        int _age= userEntity.getAge();
-        if (_age > 0)
-            age.setText(_age+"");
-        else age.setText("保密哦！");
         age.setOnClickListener(new View.OnClickListener()
         {
             @Override

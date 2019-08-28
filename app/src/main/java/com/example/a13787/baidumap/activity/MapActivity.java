@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -20,6 +21,7 @@ import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.model.LatLng;
+
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.entity.MapEntity;
@@ -38,12 +40,12 @@ public class MapActivity extends BaseActivity
     private Button button = null;
     private Marker markerOnMap = null;
     private MapEntity eventOnMap = null;
-    private MapUtil mapUtil;
+    private MapUtil mapUtil = null;
     private MapView mapView;
     private BaiduMap baiduMap;
     private SwipeRefreshLayout refreshLayout;
+    private LinearLayout layout;
     private boolean isPermitted = false;
-    private ArrayList<MapEntity> mapEntities;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
@@ -52,6 +54,7 @@ public class MapActivity extends BaseActivity
     @Override
     protected void initView()
     {
+        layout=(LinearLayout)findViewById(R.id.layout_infotop);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.map_refresh);
         slideMenu = (SlideMenu) findViewById(R.id.slideMenu);
         button = (Button) findViewById(R.id.slide_enter);
@@ -77,6 +80,7 @@ public class MapActivity extends BaseActivity
             ActivityCompat.requestPermissions(MapActivity.this,permissions,1);
         }
         else{
+            mapUtil = new MapUtil(baiduMap,MapActivity.this);
             mapUtil.requestLocation();
             initData();   //模拟数据
             isPermitted = true;
@@ -91,6 +95,7 @@ public class MapActivity extends BaseActivity
     protected void initData()
     {
         baiduMap.clear();
+        layout.setVisibility(View.GONE);
         ArrayList<ActivityEntity> tmp = GetData.attempQueryActivies(MapActivity.this);
         if (tmp != null)
         {
@@ -193,6 +198,8 @@ public class MapActivity extends BaseActivity
                     MapEntity mapEntity  = new MapEntity();
                     mapEntity.setClickable(false);
                     mapEntity.setType("study");
+                    mapEntity.setLongitude(curMapEntity.getLongitude());
+                    mapEntity.setLatitude(curMapEntity.getLatitude());
                     mapUtil.updateOverlay(mapEntity,1);
                     color="#ff0000";
                 }
@@ -201,6 +208,8 @@ public class MapActivity extends BaseActivity
                     MapEntity mapEntity  = new MapEntity();
                     mapEntity.setClickable(false);
                     mapEntity.setType("food");
+                    mapEntity.setLongitude(curMapEntity.getLongitude());
+                    mapEntity.setLatitude(curMapEntity.getLatitude());
                     mapUtil.updateOverlay(mapEntity,1);
                     color="#00ff00";
                 }
@@ -209,6 +218,8 @@ public class MapActivity extends BaseActivity
                     MapEntity mapEntity  = new MapEntity();
                     mapEntity.setClickable(false);
                     mapEntity.setType("sport");
+                    mapEntity.setLongitude(curMapEntity.getLongitude());
+                    mapEntity.setLatitude(curMapEntity.getLatitude());
                     mapUtil.updateOverlay(mapEntity,1);
                     color="#0000ff";
                 }
@@ -217,6 +228,8 @@ public class MapActivity extends BaseActivity
                     MapEntity mapEntity  = new MapEntity();
                     mapEntity.setClickable(false);
                     mapEntity.setType("enjoyment");
+                    mapEntity.setLongitude(curMapEntity.getLongitude());
+                    mapEntity.setLatitude(curMapEntity.getLatitude());
                     mapUtil.updateOverlay(mapEntity,1);
                     color="#ff00ff";
                 }

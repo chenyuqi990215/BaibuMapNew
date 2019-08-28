@@ -57,7 +57,7 @@ public class ActivityEntity implements Serializable
         return time;
     }
 
-    public void setDate(String time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

@@ -22,6 +22,7 @@ public class AddActivity extends BaseActivity
     private Button confirm;
     private Button back;
     private ImageView imageView;
+    private String _location;
     private LatLng ll = null;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -73,7 +74,7 @@ public class AddActivity extends BaseActivity
                     Toast.makeText(AddActivity.this,new String("Error: Time cannot be null"),Toast.LENGTH_SHORT).show();
                     return;
                 }
-                activityEntity.setDate(tmp);
+                activityEntity.setTime(tmp);
                 final TextView location = (TextView) findViewById(R.id.add_location);
                 tmp = location.getText().toString();
                 if (tmp.length() == 0)
@@ -88,6 +89,7 @@ public class AddActivity extends BaseActivity
                 }
                 activityEntity.setLongitude(ll.longitude);
                 activityEntity.setLatitude(ll.latitude);
+                activityEntity.setLocation(_location);
                 final RadioGroup type = (RadioGroup) findViewById(R.id.add_type);
                 int typeCheck = type.getCheckedRadioButtonId();
                 switch (typeCheck)
@@ -125,9 +127,9 @@ public class AddActivity extends BaseActivity
                         activityEntity.setRestrict("男女皆可");
                 }
 
-                GetData.attemptReleaseActivity(AddActivity.this,activityEntity);
+                String response = GetData.attemptReleaseActivity(AddActivity.this,activityEntity);
                 //submit data to database
-
+                Toast.makeText(AddActivity.this,response,Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddActivity.this,MapActivity.class);
                 startActivity(intent);
                 finish();
@@ -140,8 +142,6 @@ public class AddActivity extends BaseActivity
             {
                 Intent intent = new Intent(AddActivity.this,MapSearchActivity.class);
                 startActivityForResult(intent,1);
-                finish();
-
             }
         });
         back.setOnClickListener(new View.OnClickListener()
@@ -163,12 +163,12 @@ public class AddActivity extends BaseActivity
             case 1:
                 if (resultCode == RESULT_OK)
                 {
-                    String location = data.getStringExtra("location");
+                    _location = data.getStringExtra("location");
                     double latitude = data.getDoubleExtra("latitude",0);
                     double longitude = data.getDoubleExtra("longitude",0);
                     ll = new LatLng(latitude,longitude);
                     TextView setlocation = (TextView) findViewById(R.id.add_location);
-                    setlocation.setText(location);
+                    setlocation.setText(_location);
                 }
                 break;
         }
