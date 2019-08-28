@@ -26,8 +26,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.entity.UserEntity;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.CircleImageView;
+import com.example.a13787.baidumap.util.GetData;
+import com.example.a13787.baidumap.util.RequestUtil;
 
 import java.io.FileNotFoundException;
 
@@ -43,8 +46,8 @@ public class InfoActivity extends BaseActivity
     private Button back;
     private ImageView protraint;
     private TextView change;
-    public static final int CHOOSE_PHOTO = 1;
-
+    private static final int CHOOSE_PHOTO = 1;
+    private UserEntity userEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +56,17 @@ public class InfoActivity extends BaseActivity
     @Override
     protected void initData()
     {
+        userEntity = GetData.attemptQueryUser(InfoActivity.this);
+        if (userEntity == null)
+        {
+            userEntity = new UserEntity();
+            Toast.makeText(InfoActivity.this,"用户不存在",Toast.LENGTH_SHORT).show();
+        }
         //search from database by username
     }
     @Override
     protected void initView()
     {
-
         username = (TextView) findViewById(R.id.info_user);
         nickname = (TextView) findViewById(R.id.info_nickname);
         birth = (TextView) findViewById(R.id.info_birth);
@@ -87,8 +95,11 @@ public class InfoActivity extends BaseActivity
                 }
             }
         });
-        username.setText("cyq");
-        nickname.setText("not known");
+        username.setText(userEntity.getName());
+        String nick = userEntity.getNickname();
+        if (nick == null || nick.length() == 0)
+            nick = "这个用户比较懒";
+        nickname.setText(nick);
         nickname.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -113,7 +124,10 @@ public class InfoActivity extends BaseActivity
                         .setNegativeButton("取消",null).show();
             }
         });
-        birth.setText("secret");
+        String _birth = userEntity.getBirth();
+        if (_birth == null || _birth.length() == 0)
+            _birth = "保密哦！";
+        birth.setText(_birth);
         birth.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -130,8 +144,9 @@ public class InfoActivity extends BaseActivity
                                 if (et.getText().toString().length()>0)
                                 {
                                     birth.setText(et.getText().toString());
+                                    String response = GetData.attemptUpdateBirth(InfoActivity.this,et.getText().toString());
                                     //update birth in database
-                                    Toast.makeText(getApplicationContext(),new String("修改成功"),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                                 }
 
                             }
@@ -139,10 +154,13 @@ public class InfoActivity extends BaseActivity
                         .setNegativeButton("取消",null).show();
             }
         });
-        school.setText("华东师范大学");
-        department.setText("软件工程");
-        sex.setText("男");
-        age.setText("secret");
+        school.setText(userEntity.getSchool());
+        department.setText(userEntity.getDepartment());
+        sex.setText(userEntity.getSex());
+        int _age= userEntity.getAge();
+        if (_age > 0)
+            age.setText(_age+"");
+        else age.setText("保密哦！");
         age.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -159,8 +177,9 @@ public class InfoActivity extends BaseActivity
                                 if (et.getText().toString().length()>0)
                                 {
                                     age.setText(et.getText().toString());
+                                    String response = GetData.attemptUpdateAge(InfoActivity.this,Integer.parseInt(et.getText().toString()));
                                     //update birth in database
-                                    Toast.makeText(getApplicationContext(),new String("修改成功"),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                                 }
 
                             }
@@ -272,7 +291,7 @@ public class InfoActivity extends BaseActivity
             //upload to database
         }
         else{
-            Toast.makeText(this,"failed to get image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"获取图片失败", Toast.LENGTH_SHORT).show();
         }
     }
 

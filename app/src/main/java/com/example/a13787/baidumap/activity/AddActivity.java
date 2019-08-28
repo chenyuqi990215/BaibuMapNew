@@ -14,6 +14,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.util.BaseActivity;
+import com.example.a13787.baidumap.util.GetData;
 
 public class AddActivity extends BaseActivity
 {
@@ -112,18 +113,19 @@ public class AddActivity extends BaseActivity
                 switch (sexChecked)
                 {
                     case R.id.add_male:
-                        activityEntity.setSex("male only");
+                        activityEntity.setSex("仅限男生");
                         break;
                     case R.id.add_female:
-                        activityEntity.setSex("female only");
+                        activityEntity.setSex("仅限女生");
                         break;
                     case R.id.add_all:
-                        activityEntity.setSex("all");
+                        activityEntity.setSex("男女皆可");
                         break;
                     default:
-                        activityEntity.setSex("all");
+                        activityEntity.setSex("男女皆可");
                 }
 
+                GetData.attemptReleaseActivity(AddActivity.this,activityEntity);
                 //submit data to database
 
                 Intent intent = new Intent(AddActivity.this,MapActivity.class);
@@ -138,6 +140,7 @@ public class AddActivity extends BaseActivity
             {
                 Intent intent = new Intent(AddActivity.this,MapSearchActivity.class);
                 startActivityForResult(intent,1);
+                finish();
 
             }
         });
@@ -148,6 +151,7 @@ public class AddActivity extends BaseActivity
             {
                 Intent intent = new Intent(AddActivity.this, MapActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
