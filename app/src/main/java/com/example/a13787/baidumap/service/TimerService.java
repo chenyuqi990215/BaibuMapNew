@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -15,18 +16,24 @@ import android.util.Log;
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.activity.MapActivity;
 import com.example.a13787.baidumap.activity.ParticipateActivity;
+import com.example.a13787.baidumap.entity.AnnounceEntity;
+import com.example.a13787.baidumap.util.GetData;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TimerService extends Service {
-    Timer timer;  //定时器
-    TimerTask task;//定时执行的任务
+    private ArrayList<AnnounceEntity> announceEntities;
+    private Context context;
+    private Timer timer;  //定时器
+    private TimerTask task;//定时执行的任务
     @RequiresApi(api = 26)   //可以注释掉
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
         super.onCreate();
+        context = getBaseContext();
         timer = new Timer();
         task = new TimerTask()
         {
@@ -35,41 +42,50 @@ public class TimerService extends Service {
             {
                 try
                 {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    Log.d("start","start");
+                    announceEntities = GetData.attemptQueryAnnounce(context);
+                    if (announceEntities != null)
                     {
-                        String id = "channel_1";
-                        String name = "test";
-                        NotificationManager mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-                        int importance = NotificationManager.IMPORTANCE_HIGH;
-                        NotificationChannel mChannel = new NotificationChannel(id, name, importance);
-                        mNotificationManager.createNotificationChannel(mChannel);
-                        Intent notificationIntent = new Intent(TimerService.this,ParticipateActivity.class);//点击跳转位置
-                        PendingIntent contentIntent = PendingIntent.getActivity(TimerService.this,0,notificationIntent,0);
-                        Notification notification = new Notification.Builder(TimerService.this,id)
-                                .setContentIntent(contentIntent)
-                                .setSmallIcon(R.mipmap.my_ic_launcher)
-                                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.my_ic_launcher))
-                                .setContentTitle("提醒")
-                                .setContentText("你有一个活动即将开始，请点击查看")
-                                .setAutoCancel(true)
-                                .build();
-                        mNotificationManager.notify(1, notification);
+                        for (int i=0;i<announceEntities.size();i++)
+                        {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                            {
+                                String id = "channel_1";
+                                String name = "test";
+                                NotificationManager mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                                int importance = NotificationManager.IMPORTANCE_HIGH;
+                                NotificationChannel mChannel = new NotificationChannel(id, name, importance);
+                                mNotificationManager.createNotificationChannel(mChannel);
+                                Intent notificationIntent = new Intent(TimerService.this,ParticipateActivity.class);//点击跳转位置
+                                PendingIntent contentIntent = PendingIntent.getActivity(TimerService.this,0,notificationIntent,0);
+                                Notification notification = new Notification.Builder(TimerService.this,id)
+                                        .setContentIntent(contentIntent)
+                                        .setSmallIcon(R.mipmap.my_ic_launcher)
+                                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.my_ic_launcher))
+                                        .setContentTitle(announceEntities.get(i).getTitle())
+                                        .setContentText(announceEntities.get(i).getContent())
+                                        .setAutoCancel(true)
+                                        .build();
+                                mNotificationManager.notify(1, notification);
+                            }
+                            else
+                            {
+                                NotificationManager mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                                Intent notificationIntent = new Intent(TimerService.this,ParticipateActivity.class);//点击跳转位置
+                                PendingIntent contentIntent = PendingIntent.getActivity(TimerService.this,0,notificationIntent,0);
+                                Notification.Builder builder = new Notification.Builder(TimerService.this)
+                                        .setContentIntent(contentIntent)
+                                        .setSmallIcon(R.mipmap.my_ic_launcher)
+                                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.my_ic_launcher))
+                                        .setContentTitle(announceEntities.get(i).getTitle())
+                                        .setContentText(announceEntities.get(i).getContent())
+                                        .setAutoCancel(true);
+                                Notification notification = builder.build();
+                                mNotificationManager.notify((int)System.currentTimeMillis(),notification);
+                            }
+                        }
                     }
-                    else
-                    {
-                        NotificationManager mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-                        Intent notificationIntent = new Intent(TimerService.this,ParticipateActivity.class);//点击跳转位置
-                        PendingIntent contentIntent = PendingIntent.getActivity(TimerService.this,0,notificationIntent,0);
-                        Notification.Builder builder = new Notification.Builder(TimerService.this)
-                                .setContentIntent(contentIntent)
-                                .setSmallIcon(R.mipmap.my_ic_launcher)
-                                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.my_ic_launcher))
-                                .setContentText("你有一个活动即将开始，请点击查看") //下拉通知啦内容
-                                .setContentTitle("提醒")//下拉通知栏标题
-                                .setAutoCancel(true);
-                        Notification notification = builder.build();
-                        mNotificationManager.notify((int)System.currentTimeMillis(),notification);
-                    }
+
                 }
                 catch (Exception e)
                 {
@@ -92,6 +108,7 @@ public class TimerService extends Service {
     public void onCreate()
     {
         super.onCreate();
+        context = getBaseContext();
     }
     @Override
     public void onDestroy()

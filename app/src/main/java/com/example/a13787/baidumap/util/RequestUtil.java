@@ -85,6 +85,32 @@ public class RequestUtil
         }
     }
 
+    public static String postRequestWithoutSession(String url, RequestBody requestBody)
+    {
+        try
+        {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().
+                    detectDiskReads().
+                    detectDiskWrites().
+                    detectNetwork().
+                    penaltyLog().
+                    build());
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+            Response response = client.newCall(request).execute();
+            String responseData = response.body().string();
+            Log.d("response",responseData);
+            return responseData;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+
     public static String getWithSession(Context context,String url)
     {
         try
@@ -100,6 +126,37 @@ public class RequestUtil
             String sessionid= share.getString("sessionid","null");
             Request request = new Request.Builder()
                     .addHeader("cookie",sessionid)
+                    .url(url)
+                    .build();
+            Call call = client.newCall(request);
+            Response response = call.execute();
+            if (response.isSuccessful())
+            {
+                return response.body().string();
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+
+    public static String getWithoutSession(String url)
+    {
+        try
+        {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().
+                    detectDiskReads().
+                    detectDiskWrites().
+                    detectNetwork().
+                    penaltyLog().
+                    build());
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
                     .url(url)
                     .build();
             Call call = client.newCall(request);

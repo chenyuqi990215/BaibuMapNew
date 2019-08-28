@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.icu.text.IDNA;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.ContactsContract;
@@ -31,6 +32,7 @@ import com.example.a13787.baidumap.entity.UserEntity;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.CircleImageView;
 import com.example.a13787.baidumap.util.GetData;
+import com.example.a13787.baidumap.util.ImageUtil;
 import com.example.a13787.baidumap.util.RequestUtil;
 
 import java.io.FileNotFoundException;
@@ -45,7 +47,7 @@ public class InfoActivity extends BaseActivity
     private TextView sex;
     private TextView age;
     private Button back;
-    private ImageView protraint;
+    private ImageView portrait;
     private TextView change;
     private static final int CHOOSE_PHOTO = 1;
     private UserEntity userEntity;
@@ -86,6 +88,9 @@ public class InfoActivity extends BaseActivity
         if (_age > 0)
             age.setText(_age+"");
         else age.setText("保密哦！");
+        String url = userEntity.getPortraiturl();
+        Bitmap bitmap = ImageUtil.getBitmapFromUrl(url);
+        portrait.setImageBitmap(bitmap);
         //search from database by username
     }
 
@@ -102,7 +107,7 @@ public class InfoActivity extends BaseActivity
         age = (TextView) findViewById(R.id.info_age);
         back = (Button) findViewById(R.id.info_back);
         change = (TextView) findViewById(R.id.info_change);
-        protraint = (ImageView) findViewById(R.id.info_portraint);
+        portrait = (ImageView) findViewById(R.id.info_portraint);
     }
     @Override
     protected void initListener()
@@ -265,14 +270,12 @@ public class InfoActivity extends BaseActivity
             }
         }
         else if("content".equalsIgnoreCase(uri.getScheme())){
-            //濡傛灉鏄痗ontent绫诲瀷鐨刄ri锛屽垯浣跨敤鏅€氭柟寮忓鐞?
             imagePath = getImagePath(uri,null);
         }
         else if("file".equalsIgnoreCase(uri.getScheme())){
-            //濡傛灉鏄痜ile绫诲瀷鐨刄ri,鐩存帴鑾峰彇鍥剧墖璺緞鍗冲彲
             imagePath = uri.getPath();
         }
-        displayImage(imagePath);//鏍规嵁鍥剧墖璺緞鏄剧ず鍥剧墖
+        displayImage(imagePath);
     }
 
     private void handleImageBeforeKitKat(Intent data){
@@ -298,7 +301,11 @@ public class InfoActivity extends BaseActivity
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
             bitmap = CircleImageView.work(bitmap);
             //deal image
-            protraint.setImageBitmap(bitmap);
+            portrait.setImageBitmap(bitmap);
+            String pathName = ImageUtil.saveBitmapFile(bitmap);
+            String response = GetData.attemptUpdatePortrait(InfoActivity.this,pathName);
+            Log.d("response",response);
+            Toast.makeText(InfoActivity.this,response,Toast.LENGTH_SHORT).show();
             //upload to database
         }
         else{

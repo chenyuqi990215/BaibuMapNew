@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.service.TimerService;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.GetData;
 
@@ -42,8 +43,9 @@ public class LoginActivity extends BaseActivity
         {
             Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
             Intent intoMain = new Intent(LoginActivity.this,MapActivity.class);
+            Intent service = new Intent(LoginActivity.this, TimerService.class);
+            startService(service);
             startActivity(intoMain);
-            finish();
         }
 
     }

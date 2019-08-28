@@ -101,7 +101,7 @@ public class RegisterActivity extends BaseActivity
                     userEntity.setSchool(info);
                     info = studid.getText().toString();
                     userEntity.setSchoolid(info);
-                    String result = GetData.attempRegister(RegisterActivity.this,userEntity);
+                    String result = GetData.attempRegister(userEntity);
                     Toast.makeText(RegisterActivity.this,result,Toast.LENGTH_SHORT).show();
                     if (result.equals("注册成功"))
                     {

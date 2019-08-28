@@ -7,11 +7,13 @@ import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.entity.AnnounceEntity;
 import com.example.a13787.baidumap.entity.UserEntity;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
 import okhttp3.FormBody;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 /**
@@ -41,14 +43,14 @@ public class GetData
         }
     }
 
-    public static String attempRegister(Context context, UserEntity userEntity)
+    public static String attempRegister(UserEntity userEntity)
     {
         try
         {
             MediaType type = MediaType.parse("application/json;charset=utf-8");
             Log.d("json",JsonUtil.userToJson(userEntity));
             RequestBody requestBody = FormBody.create(type,JsonUtil.userToJson(userEntity));
-            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/register"),requestBody);
+            String response = RequestUtil.postRequestWithoutSession(new String("http://47.103.14.204:8080/register"),requestBody);
             if (response == null)
                 return "注册失败";
             else return response;
@@ -329,13 +331,33 @@ public class GetData
     {
         try {
             String url = "http://47.103.14.204:8080/user/announce";
-            String response = RequestUtil.getWithSession(context, url);
+            String response = RequestUtil.getWithSession(context,url);
             if (response == null)
                 return null;
             else
                 return JsonUtil.jsonToAnnounces(response);
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    public static String attemptUpdatePortrait(Context context,String pathname)
+    {
+        try
+        {
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("file", (System.currentTimeMillis()+""),
+                            RequestBody.create(MediaType.parse("multipart/form-data"), new File(pathname)))
+                    .build();
+            String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/user/update/portrait"),requestBody);
+            if (response == null)
+                return "更新失败";
+            else return response;
+        }
+        catch (Exception e)
+        {
+            return "更新失败";
         }
     }
 
