@@ -48,6 +48,7 @@ public class InfoActivity extends BaseActivity
     private TextView change;
     private static final int CHOOSE_PHOTO = 1;
     private UserEntity userEntity;
+    private String email = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,11 @@ public class InfoActivity extends BaseActivity
     @Override
     protected void initData()
     {
-        userEntity = GetData.attemptQueryUser(InfoActivity.this);
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
+        if (email == null || email.length() == 0)
+            userEntity = GetData.attemptQueryUser(InfoActivity.this);
+        else userEntity = GetData.attemptQueryUser(InfoActivity.this,email);
         if (userEntity == null)
         {
             userEntity = new UserEntity();
@@ -64,6 +69,8 @@ public class InfoActivity extends BaseActivity
         }
         //search from database by username
     }
+
+
     @Override
     protected void initView()
     {

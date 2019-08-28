@@ -32,18 +32,18 @@ public class ActivityAdapter extends ArrayAdapter<ActivityEntity>
         View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false); //为此子项加载我么传入的布局
         TextView name = (TextView) view.findViewById(R.id.footprint_name); //获取实例的具体项目
         TextView content = (TextView) view.findViewById(R.id.footprint_content);
-        name.setText(cur.getName());
+        name.setText(cur.getUsername());
         content.setText(cur.getContent());
         TextView type = (TextView) view.findViewById(R.id.footprint_type);
         type.setText(cur.getType());
         TextView title = (TextView) view.findViewById(R.id.footprint_title);
         title.setText(cur.getTitle());
         TextView date = (TextView) view.findViewById(R.id.footprint_date);
-        date.setText(cur.getDate());
+        date.setText(cur.getTime());
         TextView school = (TextView) view.findViewById(R.id.footprint_school);
         school.setText(cur.getSchool());
         TextView sex = (TextView) view.findViewById(R.id.footprint_sex);
-        sex.setText(cur.getSex());
+        sex.setText(cur.getRestrict());
         TextView location = (TextView) view.findViewById(R.id.footprint_location);
         location.setText(cur.getLocation());
         TextView department = (TextView) view.findViewById(R.id.footprint_department);

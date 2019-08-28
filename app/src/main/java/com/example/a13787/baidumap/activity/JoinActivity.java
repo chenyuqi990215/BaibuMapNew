@@ -7,11 +7,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a13787.baidumap.adapter.JoinAdapter;
-import com.example.a13787.baidumap.entity.JoinEntity;
+import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.entity.UserEntity;
 import com.example.a13787.baidumap.util.BaseActivity;
+import com.example.a13787.baidumap.util.GetData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,20 +27,25 @@ public class JoinActivity extends BaseActivity {
     private TextView department;
     private TextView type;
     private JoinAdapter adapter;
-    TextView content;
-    TextView date;
-    TextView location;
-    TextView sex;
-    TextView title;
-    Button back;
-    Button confirm;
+    private TextView content;
+    private TextView date;
+    private TextView location;
+    private TextView sex;
+    private TextView title;
+    private Button back;
+    private Button confirm;
+    private ActivityEntity activityEntity;
 
-    private List<JoinEntity> joinList = new ArrayList<>();
+    private List<UserEntity> joinList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
+        if (activityEntity == null)
+            Toast.makeText(JoinActivity.this,new String("活动不存在"),Toast.LENGTH_SHORT).show();
+        else initData();
     }
+
+
     @Override
     protected int initLayout()
     {
@@ -63,30 +71,26 @@ public class JoinActivity extends BaseActivity {
     }
     @Override
     protected void initData() { //初始化类中所有数据
-        name.setText("cyq");
-        school.setText("华东师范大学");
-        department.setText("软件工程");
-        type.setText("Sport");
-        content.setText("I want to run in the afternoon");
-        date.setText("2019.3.15 18:00 -- 19:00");
-        location.setText("playgound");
-        sex.setText("all");
-        title.setText("run");
-        JoinEntity item1 = new JoinEntity();
-        item1.setName("cyq");
-        item1.setSchool("华东师范大学");
-        item1.setDepartment("软件工程");
-        joinList.add(item1);
-        JoinEntity item2 = new JoinEntity();
-        item2.setName("cyq");
-        item2.setSchool("华东师范大学");
-        item2.setDepartment("软件工程");
-        joinList.add(item2);
-        JoinEntity item3 = new JoinEntity();
-        item3.setName("cyq");
-        item3.setSchool("华东师范大学");
-        item3.setDepartment("软件工程");
-        joinList.add(item3);
+        Intent intent = getIntent();
+        int activityid = intent.getIntExtra("activityid",0);
+        activityEntity = GetData.attemptQueryActivity(JoinActivity.this,activityid);
+        if (activityEntity == null)
+        {
+            activityEntity = new ActivityEntity();
+            Toast.makeText(JoinActivity.this,"活动不存在",Toast.LENGTH_SHORT).show();
+        }
+        name.setText(activityEntity.getUsername());
+        school.setText(activityEntity.getSchool());
+        department.setText(activityEntity.getDepartment());
+        type.setText(activityEntity.getType());
+        content.setText(activityEntity.getContent());
+        date.setText(activityEntity.getTime());
+        location.setText(activityEntity.getLocation());
+        sex.setText(activityEntity.getRestrict());
+        title.setText(activityEntity.getTitle());
+        joinList = GetData.attemptQueryActivityParticipant(JoinActivity.this,activityEntity.getActivityid());
+        if (joinList == null)
+            joinList = new ArrayList<>();
     }
     @Override
     protected void initListener()
@@ -107,6 +111,8 @@ public class JoinActivity extends BaseActivity {
             {
                 Intent intent=new Intent(JoinActivity.this,MapActivity.class);
                 startActivity(intent);
+                String response = GetData.attemptJoinActivity(JoinActivity.this,activityEntity.getActivityid());
+                Toast.makeText(JoinActivity.this,response,Toast.LENGTH_SHORT).show();
                 //add user and activity into data;
                 finish();
             }
@@ -114,9 +120,9 @@ public class JoinActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                String username=joinList.get(pos).getName();
+                String email=joinList.get(pos).getEmail();
                 Intent intent=new Intent(JoinActivity.this,InfoActivity.class);
-                intent.putExtra("username",username);
+                intent.putExtra("email",email);
                 startActivity(intent);
                 finish();
             }

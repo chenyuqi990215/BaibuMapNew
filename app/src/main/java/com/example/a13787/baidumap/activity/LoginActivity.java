@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.util.BaseActivity;
+import com.example.a13787.baidumap.util.GetData;
 import com.example.a13787.baidumap.util.UserDatabaseHelper;
 
 /**
@@ -21,7 +22,6 @@ import com.example.a13787.baidumap.util.UserDatabaseHelper;
 
 public class LoginActivity extends BaseActivity
 {
-    private UserDatabaseHelper dbHelp = new UserDatabaseHelper(this,"Userinfo.db",null,4);
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private Button mEmailSignInButton;
@@ -36,22 +36,15 @@ public class LoginActivity extends BaseActivity
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-        String result = dbHelp.queryPasswordByEmail(email);
-        if (result.equals("Error: Email invalid") || result.equals("Error: Email not exist"))
+        String result = GetData.attemptLogin(LoginActivity.this,email,password);
+        if (result.equals("登陆失败"))
             Toast.makeText(LoginActivity.this,result,Toast.LENGTH_SHORT).show();
         else
         {
-            if (password.equals(result))
-            {
-                Toast.makeText(LoginActivity.this,"Accepted",Toast.LENGTH_SHORT).show();
-                Intent intoMain = new Intent(LoginActivity.this,MapActivity.class);
-                startActivity(intoMain);
-                finish();
-            }
-            else
-            {
-                Toast.makeText(LoginActivity.this,"Error: Password incorrect",Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
+            Intent intoMain = new Intent(LoginActivity.this,MapActivity.class);
+            startActivity(intoMain);
+            finish();
         }
 
     }

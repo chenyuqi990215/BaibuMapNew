@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.a13787.baidumap.entity.JoinEntity;
 import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.entity.UserEntity;
 
 import java.util.List;
 
@@ -16,17 +16,17 @@ import java.util.List;
  * Created by 13787 on 2019/4/5.
  */
 
-public class JoinAdapter extends ArrayAdapter<JoinEntity> { //创建自定义适配器，继承自ArrayAdapter，并将泛型指定为fruit类
+public class JoinAdapter extends ArrayAdapter<UserEntity> { //创建自定义适配器，继承自ArrayAdapter，并将泛型指定为fruit类
     private int resourceId;
 
-    public JoinAdapter(Context context, int textViewResourceId, List<JoinEntity> objects) { //重写父类构造函数，获取相关布局
+    public JoinAdapter(Context context, int textViewResourceId, List<UserEntity> objects) { //重写父类构造函数，获取相关布局
         super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) { //重写getView方法
-        JoinEntity cur = getItem(position); //获取当前实例
+        UserEntity cur = getItem(position); //获取当前实例
         View view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false); //为此子项加载我么传入的布局
         TextView name = (TextView) view.findViewById(R.id.person_name); //获取实例的具体项目
         name.setText(cur.getName());

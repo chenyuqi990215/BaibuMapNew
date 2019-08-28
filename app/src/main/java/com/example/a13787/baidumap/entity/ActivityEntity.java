@@ -8,15 +8,15 @@ import java.io.Serializable;
 
 public class ActivityEntity implements Serializable
 {
-    private int id;
-    private String name;
+    private int activityid;
+    private String username;
     private String school;
     private String type;
     private String title;
     private String content;
-    private String date;
+    private String time;
     private String location;
-    private String sex;
+    private String restrict;
     private String department;
     private double longitude;
     private double latitude;
@@ -53,12 +53,12 @@ public class ActivityEntity implements Serializable
         this.content = content;
     }
 
-    public String getDate() {
-        return date;
+    public String getTime() {
+        return time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDate(String time) {
+        this.time = time;
     }
 
     public String getLocation() {
@@ -67,22 +67,6 @@ public class ActivityEntity implements Serializable
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDepartment() {
@@ -109,11 +93,27 @@ public class ActivityEntity implements Serializable
         this.latitude = latitude;
     }
 
-    public int getId() {
-        return id;
+    public int getActivityid() {
+        return activityid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setActivityid(int activityid) {
+        this.activityid = activityid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRestrict() {
+        return restrict;
+    }
+
+    public void setRestrict(String restrict) {
+        this.restrict = restrict;
     }
 }

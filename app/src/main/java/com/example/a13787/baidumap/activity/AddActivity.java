@@ -105,7 +105,7 @@ public class AddActivity extends BaseActivity
                         activityEntity.setType("sport");
                         break;
                     default:
-                        Toast.makeText(AddActivity.this,new String("Error: Type cannot be null"),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddActivity.this,new String("请选择类型"),Toast.LENGTH_SHORT).show();
                         return;
                 }
                 final RadioGroup sex = (RadioGroup) findViewById(R.id.add_sex);
@@ -113,16 +113,16 @@ public class AddActivity extends BaseActivity
                 switch (sexChecked)
                 {
                     case R.id.add_male:
-                        activityEntity.setSex("仅限男生");
+                        activityEntity.setRestrict("仅限男生");
                         break;
                     case R.id.add_female:
-                        activityEntity.setSex("仅限女生");
+                        activityEntity.setRestrict("仅限女生");
                         break;
                     case R.id.add_all:
-                        activityEntity.setSex("男女皆可");
+                        activityEntity.setRestrict("男女皆可");
                         break;
                     default:
-                        activityEntity.setSex("男女皆可");
+                        activityEntity.setRestrict("男女皆可");
                 }
 
                 GetData.attemptReleaseActivity(AddActivity.this,activityEntity);

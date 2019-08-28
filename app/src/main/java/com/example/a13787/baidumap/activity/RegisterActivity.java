@@ -13,12 +13,13 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.entity.UserEntity;
 import com.example.a13787.baidumap.util.BaseActivity;
+import com.example.a13787.baidumap.util.GetData;
 import com.example.a13787.baidumap.util.UserDatabaseHelper;
 
 public class RegisterActivity extends BaseActivity
 {
-    private UserDatabaseHelper dbHelp = new UserDatabaseHelper(this,"Userinfo.db",null,4);  //update on 2019.3.1
     private RadioGroup sex;
     private EditText userName;
     private EditText email;
@@ -28,6 +29,7 @@ public class RegisterActivity extends BaseActivity
     private EditText schoolName;
     private EditText studid;
     private Button btn_register;
+    private UserEntity userEntity = new UserEntity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,44 +73,46 @@ public class RegisterActivity extends BaseActivity
                 String password2 = check.getText().toString();
                 if (!password1.equals(password2))
                 {
-                    Toast.makeText(RegisterActivity.this,"Error: Password not equal",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,"密码错误：密码不一致",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    ContentValues contentValues = new ContentValues();
+
                     int sexChoseId = sex.getCheckedRadioButtonId();
                     switch (sexChoseId) {
                         case R.id.mainRegisterRdBtnFemale:
-                            contentValues.put("sex", "Female");
+                            userEntity.setSex("Female");
                             break;
                         case R.id.mainRegisterRdBtnMale:
-                            contentValues.put("sex", "Male");
+                            userEntity.setSex("Male");
                             break;
                         default:
-                            contentValues.put("sex", "Default");
+                            userEntity.setSex("Secret");
                             break;
                     }
                     String info;
                     info = userName.getText().toString();
-                    contentValues.put("username", info);
+                    userEntity.setName(info);
                     info = email.getText().toString();
-                    contentValues.put("email", info);
+                    userEntity.setEmail(info);
                     info = password.getText().toString();
-                    contentValues.put("password", info);
+                    userEntity.setPassword(info);
                     info = tel.getText().toString();
-                    contentValues.put("tel", info);
+                    userEntity.setPhone(info);
                     info = schoolName.getText().toString();
-                    contentValues.put("schoolname", info);
+                    userEntity.setSchool(info);
                     info = studid.getText().toString();
-                    contentValues.put("studid", info);
-                    String result = dbHelp.addData(contentValues);
+                    userEntity.setSchoolid(info);
+                    String result = GetData.attempRegister(RegisterActivity.this,userEntity);
                     Toast.makeText(RegisterActivity.this,result,Toast.LENGTH_SHORT).show();
-                    if (result.equals("Accepted"))
+                    if (result.equals("注册成功"))
                     {
                         Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }
+                    else
+                        return;
                 }
             }
         });

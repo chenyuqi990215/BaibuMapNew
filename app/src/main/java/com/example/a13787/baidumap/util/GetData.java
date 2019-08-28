@@ -27,7 +27,7 @@ public class GetData
                     .add("username",username)
                     .add("password",password)
                     .build();
-            String response  = RequestUtil.postRequestGetSession(context,new String("http://47.103.14.204:8080/login/signIn"),requestBody);
+            String response  = RequestUtil.postRequestGetSession(context,new String("http://47.103.14.204:8080/signIn"),requestBody);
             if (response == null || response.equals("1"))
                 return "登录失败";
             else return "登陆成功";

@@ -92,9 +92,6 @@ public class MapSearchActivity extends BaseActivity
                     return;
                 if (curSearchData == null)
                     return;
-                Log.d("Confirm Key",curSearchData.getKey());
-                Log.d("Confirm longitude",curSearchData.getLongitude()+"");
-                Log.d("Confirm latitude",curSearchData.getLatitude()+"");
                 Intent intent = new Intent();
                 intent.putExtra("location",curSearchData.getKey());
                 intent.putExtra("longitude",curSearchData.getLongitude());

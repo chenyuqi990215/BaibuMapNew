@@ -21,13 +21,16 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.model.LatLng;
 import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.entity.MapEntity;
+import com.example.a13787.baidumap.util.GetData;
 import com.example.a13787.baidumap.util.SlideMenu;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.MapUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MapActivity extends BaseActivity
 {
@@ -40,6 +43,7 @@ public class MapActivity extends BaseActivity
     private BaiduMap baiduMap;
     private SwipeRefreshLayout refreshLayout;
     private boolean isPermitted = false;
+    private ArrayList<MapEntity> mapEntities;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SDKInitializer.initialize(getApplicationContext());
@@ -87,76 +91,15 @@ public class MapActivity extends BaseActivity
     protected void initData()
     {
         baiduMap.clear();
-        MapEntity mydataBase= new MapEntity();
-        mydataBase.setLongitude(121.413326);
-        mydataBase.setLatitude(31.234196);
-        mydataBase.setName("cyq");
-        mydataBase.setSchool("ECNU");
-        mydataBase.setDepartment("SE");
-        mydataBase.setClickable(true);
-        mydataBase.setType("study");
-        mydataBase.setTitle("Prepare for exam");
-        mydataBase.setLocation("ecnu library");
-        mydataBase.setContent("I want to study for my comming Examination.");
-        mydataBase.setDate("2019.3.15 15:00 - 17:00");
-        mydataBase.setSex("all");
-        mapUtil.updateOverlay(mydataBase,0);
-        mydataBase= new MapEntity();
-        mydataBase.setLongitude(121.411511);
-        mydataBase.setLatitude(31.234907);
-        mydataBase.setName("cyq");
-        mydataBase.setSchool("ECNU");
-        mydataBase.setDepartment("SE");
-        mydataBase.setClickable(true);
-        mydataBase.setType("sport");
-        mydataBase.setTitle("Running");
-        mydataBase.setLocation("ecnu playground");
-        mydataBase.setContent("I want to run for an hour.");
-        mydataBase.setDate("2019.3.15 18:00 - 19:00");
-        mydataBase.setSex("all");
-        mapUtil.updateOverlay(mydataBase,0);
-        mydataBase= new MapEntity();
-        mydataBase.setLongitude(121.411991);
-        mydataBase.setLatitude(31.23632);
-        mydataBase.setName("cyq");
-        mydataBase.setSchool("ECNU");
-        mydataBase.setDepartment("SE");
-        mydataBase.setClickable(true);
-        mydataBase.setType("sport");
-        mydataBase.setTitle("Badminton");
-        mydataBase.setLocation("ecnu activity center");
-        mydataBase.setContent("I want to run for an hour.");
-        mydataBase.setDate("2019.3.15 18:00 - 19:00");
-        mydataBase.setSex("all");
-        mapUtil.updateOverlay(mydataBase,0);
-        mydataBase= new MapEntity();
-        mydataBase.setLongitude(121.409952);
-        mydataBase.setLatitude(31.236264);
-        mydataBase.setName("cyq");
-        mydataBase.setSchool("ECNU");
-        mydataBase.setDepartment("SE");
-        mydataBase.setClickable(true);
-        mydataBase.setType("food");
-        mydataBase.setTitle("Breakfast");
-        mydataBase.setLocation("ecnu Hexi canteen");
-        mydataBase.setContent("I hope to have breakfast everyday.");
-        mydataBase.setDate("2019.3.15 6:00 - 8:00");
-        mydataBase.setSex("all");
-        mapUtil.updateOverlay(mydataBase,0);
-        mydataBase = new MapEntity();
-        mydataBase.setLongitude(121.410079);
-        mydataBase.setLatitude(31.235576);
-        mydataBase.setName("cyq");
-        mydataBase.setSchool("ECNU");
-        mydataBase.setDepartment("SE");
-        mydataBase.setClickable(true);
-        mydataBase.setType("enjoyment");
-        mydataBase.setTitle("PlayUNO");
-        mydataBase.setLocation("ecnu Fifth dorm");
-        mydataBase.setContent("Let's play UNO.");
-        mydataBase.setDate("2019.3.15 20:00 - 22:00");
-        mydataBase.setSex("all");
-        mapUtil.updateOverlay(mydataBase,0);
+        ArrayList<ActivityEntity> tmp = GetData.attempQueryActivies(MapActivity.this);
+        if (tmp != null)
+        {
+            for (int i = 0; i< tmp.size();i++)
+            {
+                MapEntity mapEntity = new MapEntity(tmp.get(i));
+                mapUtil.updateOverlay(mapEntity,0);
+            }
+        }
     }
     @Override
     protected void initListener()
@@ -189,6 +132,7 @@ public class MapActivity extends BaseActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MapActivity.this,InfoActivity.class);
+                intent.putExtra("email","");
                 startActivity(intent);
             }
         });
@@ -225,55 +169,55 @@ public class MapActivity extends BaseActivity
             @Override
             public boolean onMarkerClick(Marker marker)
             {
-                final MapEntity mydataBase = (MapEntity) marker.getExtraInfo().get("MapEntity");
-                if (mydataBase.isClickable()==false)
+                final MapEntity curMapEntity = (MapEntity) marker.getExtraInfo().get("MapEntity");
+                if (curMapEntity.isClickable()==false)
                     return true;
                 if (markerOnMap!=null)
                     markerOnMap.remove();
                 if (eventOnMap!=null)
                     mapUtil.updateOverlay(eventOnMap,0);
-                eventOnMap=mydataBase;
+                eventOnMap=curMapEntity;
                 marker.remove();
                 LinearLayout layout=(LinearLayout)findViewById(R.id.layout_infotop);
                 layout.setVisibility(View.VISIBLE);
-                LatLng ll = new LatLng(mydataBase.getLatitude(),mydataBase.getLongitude());
+                LatLng ll = new LatLng(curMapEntity.getLatitude(),curMapEntity.getLongitude());
                 TextView infoUsername = (TextView)findViewById(R.id.info_username);
-                infoUsername.setText("Name: " + mydataBase.getName());
+                infoUsername.setText("Name: " + curMapEntity.getUsername());
                 TextView infoDepartment = (TextView)findViewById(R.id.info_department);
-                infoDepartment.setText("Department: " + mydataBase.getDepartment());
+                infoDepartment.setText("Department: " + curMapEntity.getDepartment());
                 TextView infoTime = (TextView)findViewById(R.id.info_time);
-                infoTime.setText("Time: " + mydataBase.getDate());
+                infoTime.setText("Time: " + curMapEntity.getTime());
                 String color;
-                if (mydataBase.getType().equals("study"))
+                if (curMapEntity.getType().equals("study"))
                 {
-                    MapEntity temp  = new MapEntity();
-                    temp.setClickable(false);
-                    temp.setType("study");
-                    mapUtil.updateOverlay(temp,1);
+                    MapEntity mapEntity  = new MapEntity();
+                    mapEntity.setClickable(false);
+                    mapEntity.setType("study");
+                    mapUtil.updateOverlay(mapEntity,1);
                     color="#ff0000";
                 }
-                else if (mydataBase.getType().equals("food"))
+                else if (curMapEntity.getType().equals("food"))
                 {
-                    MapEntity temp  = new MapEntity();
-                    temp.setClickable(false);
-                    temp.setType("food");
-                    mapUtil.updateOverlay(temp,1);
+                    MapEntity mapEntity  = new MapEntity();
+                    mapEntity.setClickable(false);
+                    mapEntity.setType("food");
+                    mapUtil.updateOverlay(mapEntity,1);
                     color="#00ff00";
                 }
-                else if (mydataBase.getType().equals("sport"))
+                else if (curMapEntity.getType().equals("sport"))
                 {
-                    MapEntity temp  = new MapEntity();
-                    temp.setClickable(false);
-                    temp.setType("sport");
-                    mapUtil.updateOverlay(temp,1);
+                    MapEntity mapEntity  = new MapEntity();
+                    mapEntity.setClickable(false);
+                    mapEntity.setType("sport");
+                    mapUtil.updateOverlay(mapEntity,1);
                     color="#0000ff";
                 }
                 else
                 {
-                    MapEntity temp  = new MapEntity();
-                    temp.setClickable(false);
-                    temp.setType("enjoyment");
-                    mapUtil.updateOverlay(temp,1);
+                    MapEntity mapEntity  = new MapEntity();
+                    mapEntity.setClickable(false);
+                    mapEntity.setType("enjoyment");
+                    mapUtil.updateOverlay(mapEntity,1);
                     color="#ff00ff";
                 }
                 infoUsername.setTextColor(Color.parseColor(color));
@@ -282,7 +226,7 @@ public class MapActivity extends BaseActivity
                 //Add InfoWindow
                 baiduMap.hideInfoWindow();
                 Button button = new Button(getApplicationContext());
-                button.setText(mydataBase.getTitle());
+                button.setText(curMapEntity.getTitle());
                 button.setBackgroundColor(Color.parseColor("#e9eafd"));
                 button.setTextColor(Color.parseColor("#8078e0"));
                 button.setAllCaps(false);
@@ -294,7 +238,7 @@ public class MapActivity extends BaseActivity
                     public void onClick(View v)
                     {
                         Intent intent = new Intent(MapActivity.this,JoinActivity.class);
-                        intent.putExtra("ActivityEntity",mydataBase);
+                        intent.putExtra("activityid",curMapEntity.getActivityid());
                         startActivity(intent);
                     }
                 }
