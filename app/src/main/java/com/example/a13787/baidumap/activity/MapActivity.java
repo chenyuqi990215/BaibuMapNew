@@ -201,7 +201,7 @@ public class MapActivity extends BaseActivity
                     mapEntity.setType("study");
                     mapEntity.setLongitude(curMapEntity.getLongitude());
                     mapEntity.setLatitude(curMapEntity.getLatitude());
-                    mapUtil.updateOverlay(mapEntity,1);
+                    markerOnMap = mapUtil.updateOverlay(mapEntity,1);
                     color="#ff0000";
                 }
                 else if (curMapEntity.getType().equals("food"))
@@ -211,7 +211,7 @@ public class MapActivity extends BaseActivity
                     mapEntity.setType("food");
                     mapEntity.setLongitude(curMapEntity.getLongitude());
                     mapEntity.setLatitude(curMapEntity.getLatitude());
-                    mapUtil.updateOverlay(mapEntity,1);
+                    markerOnMap = mapUtil.updateOverlay(mapEntity,1);
                     color="#00ff00";
                 }
                 else if (curMapEntity.getType().equals("sport"))
@@ -221,7 +221,7 @@ public class MapActivity extends BaseActivity
                     mapEntity.setType("sport");
                     mapEntity.setLongitude(curMapEntity.getLongitude());
                     mapEntity.setLatitude(curMapEntity.getLatitude());
-                    mapUtil.updateOverlay(mapEntity,1);
+                    markerOnMap = mapUtil.updateOverlay(mapEntity,1);
                     color="#0000ff";
                 }
                 else
@@ -231,7 +231,7 @@ public class MapActivity extends BaseActivity
                     mapEntity.setType("enjoyment");
                     mapEntity.setLongitude(curMapEntity.getLongitude());
                     mapEntity.setLatitude(curMapEntity.getLatitude());
-                    mapUtil.updateOverlay(mapEntity,1);
+                    markerOnMap = mapUtil.updateOverlay(mapEntity,1);
                     color="#ff00ff";
                 }
                 infoUsername.setTextColor(Color.parseColor(color));

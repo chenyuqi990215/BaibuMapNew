@@ -39,7 +39,7 @@ public class RequestUtil
                     .post(requestBody)
                     .build();
             Response response = client.newCall(request).execute();
-            String responseData = response.body().toString();
+            String responseData = response.body().string();
             Headers headers =response.headers();
             List cookies = headers.values("Set-Cookie");
             String session = (String)cookies.get(0);

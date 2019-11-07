@@ -1,7 +1,11 @@
 package com.example.a13787.baidumap.activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -15,6 +19,7 @@ import com.example.a13787.baidumap.R;
 import com.example.a13787.baidumap.service.TimerService;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.GetData;
+import com.example.a13787.baidumap.util.ImageUtil;
 
 /**
  * Created by 13787 on 2019/3/11.
@@ -37,8 +42,9 @@ public class LoginActivity extends BaseActivity
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
         String result = GetData.attemptLogin(LoginActivity.this,email,password);
-        if (result.equals("登陆失败"))
-            Toast.makeText(LoginActivity.this,result,Toast.LENGTH_SHORT).show();
+        Log.d("result",result);
+        if (!result.equals("登陆成功"))
+            Toast.makeText(LoginActivity.this,"登陆失败",Toast.LENGTH_SHORT).show();
         else
         {
             Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
@@ -93,7 +99,6 @@ public class LoginActivity extends BaseActivity
             {
                 Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

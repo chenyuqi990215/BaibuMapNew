@@ -26,6 +26,7 @@ public class RegisterActivity extends BaseActivity
     private EditText tel;
     private EditText schoolName;
     private EditText department;
+    private EditText schoolId;
     private Button btn_register;
     private UserEntity userEntity = new UserEntity();
 
@@ -45,6 +46,7 @@ public class RegisterActivity extends BaseActivity
         check = (EditText) findViewById(R.id.register_confirm);
         tel = (EditText) findViewById(R.id.register_tel);
         schoolName = (EditText) findViewById(R.id.register_schoolname);
+        schoolId = (EditText) findViewById(R.id.register_schoolid);
         department = (EditText) findViewById(R.id.register_department);
         btn_register = (Button) findViewById(R.id.email_sign_in_button);
     }
@@ -101,6 +103,8 @@ public class RegisterActivity extends BaseActivity
                     userEntity.setSchool(info);
                     info = department.getText().toString();
                     userEntity.setDepartment(info);
+                    info = schoolId.getText().toString();
+                    userEntity.setSchoolid(info);
                     String result = GetData.attempRegister(userEntity);
                     Toast.makeText(RegisterActivity.this,result,Toast.LENGTH_SHORT).show();
                     if (result.equals("注册成功"))

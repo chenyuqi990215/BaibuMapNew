@@ -39,7 +39,7 @@ public class CircleImageView
             {
                 if ((i-w/2)*(i-w/2)+(j-h/2)*(j-h/2)>(w/2)*(h/2))
                 {
-                    bitmap.setPixel(i,j, Color.WHITE);
+                    bitmap.setPixel(i,j, Color.argb(0,255,255,255));
                 }
             }
         return bitmap;

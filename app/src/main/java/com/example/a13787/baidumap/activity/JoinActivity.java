@@ -91,9 +91,14 @@ public class JoinActivity extends BaseActivity {
         location.setText(activityEntity.getLocation());
         sex.setText(activityEntity.getRestrict());
         title.setText(activityEntity.getTitle());
-        joinList = GetData.attemptQueryActivityParticipant(JoinActivity.this,activityEntity.getActivityid());
-        if (joinList == null)
-            joinList = new ArrayList<>();
+        ArrayList<UserEntity> tmp = GetData.attemptQueryActivityParticipant(JoinActivity.this,activityEntity.getActivityid());
+        joinList.clear();
+        if (tmp != null)
+        {
+            for (int i=0;i<tmp.size();i++)
+                joinList.add(tmp.get(i));
+        }
+        adapter.notifyDataSetChanged();
     }
     @Override
     protected void initListener()

@@ -11,14 +11,14 @@ public class UserEntity
     private String email;
     private String phone;
     private String school;
-    private String schoolid;
     private String department;
     private String sex;
     private String nickname;
+    private String schoolid;
     private String password;
     private String birth;
     private int age;
-    private String portraiturl;
+    private String image;
 
 
     public int getUserid() {
@@ -109,6 +109,7 @@ public class UserEntity
         this.department = department;
     }
 
+
     public String getSchoolid() {
         return schoolid;
     }
@@ -117,11 +118,11 @@ public class UserEntity
         this.schoolid = schoolid;
     }
 
-    public String getPortraiturl() {
-        return portraiturl;
+    public String getImage() {
+        return image;
     }
 
-    public void setPortraiturl(String portraiturl) {
-        this.portraiturl = portraiturl;
+    public void setImage(String image) {
+        this.image = image;
     }
 }

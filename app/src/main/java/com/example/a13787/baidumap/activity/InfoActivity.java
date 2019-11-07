@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.entity.ImageEntity;
 import com.example.a13787.baidumap.entity.UserEntity;
 import com.example.a13787.baidumap.util.BaseActivity;
 import com.example.a13787.baidumap.util.CircleImageView;
@@ -88,9 +89,13 @@ public class InfoActivity extends BaseActivity
         if (_age > 0)
             age.setText(_age+"");
         else age.setText("保密哦！");
-        String url = userEntity.getPortraiturl();
-        Bitmap bitmap = ImageUtil.getBitmapFromUrl(url);
-        portrait.setImageBitmap(bitmap);
+        String image=userEntity.getImage();
+        Log.d("image","image"+ image);
+        if (image!=null)
+        {
+            Bitmap bitmap=ImageUtil.base64ToBitmap(image);
+            portrait.setImageBitmap(bitmap);
+        }
         //search from database by username
     }
 
@@ -300,8 +305,9 @@ public class InfoActivity extends BaseActivity
             bitmap = CircleImageView.work(bitmap);
             //deal image
             portrait.setImageBitmap(bitmap);
-            String pathName = ImageUtil.saveBitmapFile(bitmap);
-            String response = GetData.attemptUpdatePortrait(InfoActivity.this,pathName);
+            ImageEntity imageEntity = new ImageEntity();
+            imageEntity.setImage(ImageUtil.bitmapToBase64(bitmap));
+            String response = GetData.attemptUpdatePortrait(InfoActivity.this,imageEntity);
             Log.d("response",response);
             Toast.makeText(InfoActivity.this,response,Toast.LENGTH_SHORT).show();
             //upload to database

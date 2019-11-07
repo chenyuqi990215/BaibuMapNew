@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.entity.AnnounceEntity;
+import com.example.a13787.baidumap.entity.ImageEntity;
 import com.example.a13787.baidumap.entity.UserEntity;
 
 
@@ -72,6 +73,10 @@ public class JsonUtil
         return announceEntity;
     }
 
-
+    public static String imageToJson(ImageEntity imageEntity)
+    {
+        String jsonStr = JSONObject.toJSONString(imageEntity);
+        return jsonStr;
+    }
 
 }

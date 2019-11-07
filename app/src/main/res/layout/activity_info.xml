@@ -34,7 +34,7 @@
         android:layout_height="70dp"
         android:layout_gravity="center"
         android:layout_marginTop="65dp"
-        android:background="@drawable/login_portraint"
+        android:src="@drawable/footprint_portrait"
         android:id="@+id/info_portraint" />
     <TextView
         android:id="@+id/info_user"

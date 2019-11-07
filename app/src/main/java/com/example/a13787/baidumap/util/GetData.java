@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.a13787.baidumap.entity.ActivityEntity;
 import com.example.a13787.baidumap.entity.AnnounceEntity;
+import com.example.a13787.baidumap.entity.ImageEntity;
 import com.example.a13787.baidumap.entity.UserEntity;
 
 import java.io.File;
@@ -31,6 +32,7 @@ public class GetData
                     .add("password",password)
                     .build();
             String response  = RequestUtil.postRequestGetSession(context,new String("http://47.103.14.204:8080/signIn"),requestBody);
+            Log.d("response",response);
             if (response == null || response.equals("1"))
                 return "登录失败";
             else if (response.equals("0"))
@@ -309,7 +311,7 @@ public class GetData
         }
     }
 
-    public static String attemotQuitAcivity(Context context,int activityid)
+    public static String attemptQuitAcivity(Context context,int activityid)
     {
         try
         {
@@ -341,15 +343,12 @@ public class GetData
         }
     }
 
-    public static String attemptUpdatePortrait(Context context,String pathname)
+    public static String attemptUpdatePortrait(Context context, ImageEntity imageEntity)
     {
         try
         {
-            RequestBody requestBody = new MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart("file", (System.currentTimeMillis()+""),
-                            RequestBody.create(MediaType.parse("multipart/form-data"), new File(pathname)))
-                    .build();
+            MediaType type = MediaType.parse("application/json;charset=utf-8");
+            RequestBody requestBody = RequestBody.create(type,JsonUtil.imageToJson(imageEntity));
             String response = RequestUtil.postRequestWithSession(context,new String("http://47.103.14.204:8080/user/update/portrait"),requestBody);
             if (response == null)
                 return "更新失败";

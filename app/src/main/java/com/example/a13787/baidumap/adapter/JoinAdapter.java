@@ -1,14 +1,19 @@
 package com.example.a13787.baidumap.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a13787.baidumap.R;
+import com.example.a13787.baidumap.entity.ImageEntity;
 import com.example.a13787.baidumap.entity.UserEntity;
+import com.example.a13787.baidumap.util.ImageUtil;
 
 import java.util.List;
 
@@ -34,6 +39,13 @@ public class JoinAdapter extends ArrayAdapter<UserEntity> { //创建自定义适
         school.setText(cur.getSchool());
         TextView department = (TextView) view.findViewById(R.id.person_department);
         department.setText(cur.getDepartment());
+        ImageView portrait = (ImageView) view.findViewById(R.id.person_header);
+        String image=cur.getImage();
+        if (image!=null)
+        {
+            Bitmap bitmap= ImageUtil.base64ToBitmap(image);
+            portrait.setImageBitmap(bitmap);
+        }
         return view;
     }
 }
